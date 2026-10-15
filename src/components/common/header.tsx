@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
           : "bg-white border-b border-zinc-100"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 h-18 flex items-center justify-between">
         {/* Brand Logo */}
         <Logo />
 

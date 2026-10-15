@@ -5,7 +5,7 @@ import { EstateInfoCard } from "./estate-info-card";
 export const InspectionSection: React.FC = () => {
   return (
     <section id="contact" className="w-full py-16 sm:py-24 bg-[#FAFCFE] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Inspection Form (8 cols on large screens) */}
           <div className="lg:col-span-8">

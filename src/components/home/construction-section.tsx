@@ -8,7 +8,7 @@ export const ConstructionSection: React.FC = () => {
 
   return (
     <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 space-y-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-6">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
           <div className="space-y-2.5 max-w-xl">

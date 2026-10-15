@@ -6,7 +6,7 @@ import { MapPin } from "lucide-react";
 export const ProjectHero: React.FC = () => {
   return (
     <section className="w-full bg-[#0D1B3E] py-14 sm:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="max-w-3xl space-y-4">
           <span className="text-xs font-bold uppercase tracking-widest text-[#5B8DEF]">
             The Project

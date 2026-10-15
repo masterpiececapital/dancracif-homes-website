@@ -4,7 +4,7 @@ import { FileText, Download } from "lucide-react";
 export const BrochureBanner: React.FC = () => {
   return (
     <section className="w-full bg-[#FAFCFE] py-10 sm:py-14">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="w-full bg-gradient-to-r from-[#0064CF] to-[#0093ED] rounded-3xl p-6 sm:p-10 shadow-lg shadow-[#0754C6]/20 text-white flex flex-col md:flex-row md:items-center justify-between gap-6">
           {/* Left Text with Icon */}
           <div className="flex items-start gap-4 max-w-2xl">

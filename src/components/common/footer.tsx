@@ -14,7 +14,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
     <footer className={cn("w-full bg-[#07183A] text-white text-sm border-t border-white/10", className)}>
       <div
         className={cn(
-          "max-w-7xl mx-auto px-4 sm:px-6",
+          "max-w-7xl mx-auto px-2 sm:px-3",
           compact ? "py-8 sm:py-11 lg:py-10" : "py-14 sm:py-18"
         )}
       >

@@ -14,7 +14,7 @@ interface HomesSectionProps {
 export const HomesSection: React.FC<HomesSectionProps> = ({ onEnquire }) => {
   return (
     <section id="pricing" className="w-full bg-[#FAFCFE] py-14 sm:py-18 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 space-y-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-3">

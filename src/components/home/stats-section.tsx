@@ -4,7 +4,7 @@ import { STATS_DATA } from "@/constants/stats";
 export const StatsSection: React.FC = () => {
   return (
     <section className="w-full bg-[#FAFCFE] py-10 sm:py-12 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {STATS_DATA.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center">

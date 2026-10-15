@@ -33,7 +33,7 @@ const CORE_VALUES = [
 export const CoreValues: React.FC = () => {
   return (
     <section className="w-full bg-[#EAF2FE] py-16 sm:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {CORE_VALUES.map((val) => {
             const Icon = val.icon;

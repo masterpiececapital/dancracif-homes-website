@@ -39,7 +39,7 @@ const ACTION_CARDS: ActionCard[] = [
 export const ActionCardsSection: React.FC = () => {
   return (
     <section className="w-full bg-[#FAFCFE] py-12 sm:py-16 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {ACTION_CARDS.map((card) => (
             <Link

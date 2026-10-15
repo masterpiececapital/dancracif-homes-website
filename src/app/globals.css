@@ -4,17 +4,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #0754C6;
-  --color-primary-hover: #0648AB;
+  --font-sans:
+    var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
+  --container-7xl: 83rem;
+  --color-primary: #0754c6;
+  --color-primary-hover: #0648ab;
   --color-primary-dark: #043275;
-  --color-surface-soft: #FAFCFE;
-  --color-navy-dark: #05142B;
+  --color-surface-soft: #fafcfe;
+  --color-navy-dark: #05142b;
   --color-navy-card: #071939;
 }
 
 :root {
-  --background: #FAFCFE;
+  --background: #fafcfe;
   --foreground: #0f172a;
   color-scheme: light;
 }
@@ -22,8 +24,9 @@
 html,
 body {
   color: #0f172a;
-  background-color: #FAFCFE;
-  font-family: var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
+  background-color: #fafcfe;
+  font-family:
+    var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

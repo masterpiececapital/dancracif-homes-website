@@ -11,7 +11,7 @@ interface PaymentPlanProps {
 export const PaymentPlan: React.FC<PaymentPlanProps> = ({ plan }) => {
   return (
     <section className="w-full bg-white pt-16 sm:pt-20 pb-16 sm:pb-20 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Left: Payment instalments */}
           <div className="space-y-4">

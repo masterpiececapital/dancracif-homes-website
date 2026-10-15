@@ -120,7 +120,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section className="w-full bg-white py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
           {/* Main Left Column (Form and Tabs) */}
           <div className="flex-1 min-w-0 space-y-6 w-full">

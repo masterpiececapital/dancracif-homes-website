@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export const FidelisCtaCards: React.FC = () => {
   return (
     <section className="w-full bg-[#FAFCFE] py-10 sm:py-12 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-4">
         {/* Brochure Download — solid blue card */}
         <div className="w-full rounded-2xl bg-[#0754C6] px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           <div className="flex items-start gap-4">
