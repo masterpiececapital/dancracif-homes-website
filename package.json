@@ -1,0 +1,53 @@
+{
+  "name": "dancracif-homes-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
+    "migration:run": "tsx ./node_modules/typeorm/cli.js migration:run -d ./src/lib/db/data-source.ts",
+    "migration:revert": "tsx ./node_modules/typeorm/cli.js migration:revert -d ./src/lib/db/data-source.ts",
+    "migration:generate": "tsx ./node_modules/typeorm/cli.js migration:generate -d ./src/lib/db/data-source.ts",
+    "db:seed": "tsx ./src/lib/db/seed.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^3.0.31",
+    "@ai-sdk/react": "^3.0.103",
+    "@google/generative-ai": "^0.24.1",
+    "@paystack/inline-js": "^2.22.8",
+    "@types/nodemailer": "^7.0.11",
+    "ai": "^6.0.101",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.11.0",
+    "framer-motion": "^12.33.0",
+    "jose": "^6.1.3",
+    "lucide-react": "^0.564.0",
+    "next": "16.1.6",
+    "nodemailer": "^8.0.1",
+    "pg": "^8.18.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hot-toast": "^2.6.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.28"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^20.19.33",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.24",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
+}

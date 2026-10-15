@@ -1,0 +1,37 @@
+import { NavItem, UnitOption } from "@/types";
+
+export const NAV_ITEMS: NavItem[] = [
+  { label: "Fidelis Court", href: "/fidelis-court" },
+  { label: "Pricing & Plans", href: "/pricing" },
+  { label: "About Us", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
+
+export const UNIT_OPTIONS: UnitOption[] = [
+  {
+    label: "1-Bedroom Apartment — ₦53,000,000",
+    value: "1-bed",
+    priceFormatted: "₦53,000,000",
+  },
+  {
+    label: "2-Bedroom Apartment — ₦80,000,000",
+    value: "2-bed",
+    priceFormatted: "₦80,000,000",
+  },
+  {
+    label: "4-Bedroom Terrace Duplex — ₦145,000,000",
+    value: "4-bed-terrace",
+    priceFormatted: "₦145,000,000",
+  },
+];
+
+export const ESTATE_CONTACT = {
+  phone: "+234 800 000 0000",
+  email: "sales@dancracifhomes.com",
+  estateName: "Fidelis Court — Estate",
+  address: "21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria",
+  description:
+    "Fidelis Court is the estate development — site inspections are carried out there. Sales offices are available at both the estate and the developer office.",
+  inspectionHours: "Inspections hold Monday – Saturday, 9am – 5pm.",
+};
