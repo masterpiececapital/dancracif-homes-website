@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Play, Radio, ExternalLink, Youtube } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export const ConstructionSection: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<"latest" | "live">("latest");
@@ -13,10 +12,10 @@ export const ConstructionSection: React.FC = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
           <div className="space-y-2.5 max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6]">
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0754C6]">
               From the Site • YouTube
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 tracking-tight whitespace-nowrap">
               Fidelis Court construction updates
             </h2>
             <p className="text-sm text-zinc-600 leading-relaxed">
@@ -25,88 +24,73 @@ export const ConstructionSection: React.FC = () => {
           </div>
 
           <a
-            href="https://youtube.com"
+            href="https://youtu.be/4NjadeZpfN0?si=rckY9siRuMaAYjx_"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs sm:text-sm font-semibold text-zinc-800 hover:bg-zinc-50 transition-colors shadow-sm self-start md:self-auto"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-zinc-200 bg-white text-xs sm:text-sm font-semibold text-zinc-800 hover:bg-zinc-50 transition-colors shadow-sm self-start md:self-auto"
           >
-            <Youtube className="h-4 w-4 text-red-600" />
+            <Youtube className="h-4 w-4" />
             <span>YouTube channel</span>
-            <ExternalLink className="h-3.5 w-3.5 text-zinc-400" />
+            <ExternalLink className="h-4 w-4" />
           </a>
         </div>
 
         {/* Tab Controls */}
         <div className="flex items-center gap-2.5">
-          <Button
-            variant={activeTab === "latest" ? "primary" : "outline"}
-            size="sm"
+          <button
+            type="button"
             onClick={() => setActiveTab("latest")}
-            leftIcon={<Play className="h-3 w-3 fill-current" />}
+            className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${activeTab === "latest"
+              ? "bg-[#0754C6] text-white shadow-sm"
+              : "border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+              }`}
           >
+            <Play className="h-4 w-4" />
             Latest upload
-          </Button>
+          </button>
 
-          <Button
-            variant={activeTab === "live" ? "primary" : "outline"}
-            size="sm"
+          <button
+            type="button"
             onClick={() => setActiveTab("live")}
-            leftIcon={<Radio className="h-3 w-3" />}
+            className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${activeTab === "live"
+              ? "bg-[#0754C6] text-white shadow-sm"
+              : "border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+              }`}
           >
+            <Radio className="h-4 w-4" />
             Live channel
-          </Button>
+          </button>
         </div>
 
+
         {/* Video Player Showcase Frame */}
-        <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-xl flex items-center justify-center group cursor-pointer">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60 z-10" />
-
-          {/* Top Bar Details */}
-          <div className="absolute top-5 left-5 z-20 flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-full bg-[#0754C6] flex items-center justify-center font-bold text-xs text-white shadow-md">
-              DH
-            </div>
-            <div>
-              <p className="text-white font-bold text-xs sm:text-sm tracking-wide">
-                INDEPENDENCE PROMO!
-              </p>
-              <p className="text-[11px] text-zinc-400">Dancracif Homes</p>
-            </div>
-          </div>
-
-          {/* Center Play Button */}
-          <div className="relative z-20 flex flex-col items-center gap-2.5 transition-transform duration-300 group-hover:scale-105">
-            <div className="h-14 w-14 sm:h-18 sm:w-18 rounded-full bg-red-600 flex items-center justify-center text-white shadow-xl shadow-red-600/30">
-              <Play className="h-7 w-7 fill-white translate-x-0.5" />
-            </div>
-            <span className="text-xs font-semibold text-white/90 bg-black/60 px-3.5 py-1 rounded-full backdrop-blur-md">
-              1-Bedroom Shortlet, Jahi • ₦70K/Night
-            </span>
-          </div>
-
-          {/* Bottom Right Watch on YouTube */}
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute bottom-5 right-5 z-20 flex items-center gap-1.5 bg-black/70 hover:bg-black/90 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white backdrop-blur-md transition-colors"
-          >
-            <span>Watch on</span>
-            <span className="font-bold">YouTube</span>
-          </a>
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-xl">
+          <iframe
+            key={activeTab}
+            className="absolute inset-0 w-full h-full"
+            src={
+              activeTab === "latest"
+                ? "https://www.youtube.com/embed/4NjadeZpfN0"
+                : "https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
+            }
+            title="Fidelis Court construction updates"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
         </div>
 
         {/* Video Caption & External Link */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-zinc-500 gap-1.5 pt-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-sm text-zinc-500 gap-1.5 pt-1">
           <span>Latest channel upload: INDEPENDENCE PROMO!</span>
           <a
-            href="https://youtube.com"
+            href="https://youtu.be/4NjadeZpfN0?si=rckY9siRuMaAYjx_"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-semibold text-[#0754C6] hover:underline"
+            className="inline-flex  items-center gap-1 font-semibold text-[#0754C6] hover:underline"
           >
-            <span>Watch on YouTube</span>
-            <ExternalLink className="h-3.5 w-3.5" />
+            <span className="">Watch on YouTube</span>
+            <ExternalLink className="h-4 w-4" />
           </a>
         </div>
       </div>

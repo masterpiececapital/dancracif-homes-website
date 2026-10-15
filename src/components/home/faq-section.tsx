@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FAQ_DATA } from "@/constants/faq";
 import { cn } from "@/lib/utils";
 
@@ -34,23 +35,40 @@ export const FaqSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => toggleItem(index)}
-                  className="w-full flex items-center justify-between gap-4 text-left font-bold text-sm sm:text-base text-zinc-900 hover:text-[#0754C6] transition-colors cursor-pointer select-none"
+                  className="w-full flex items-center justify-between gap-4 text-left font-medium text-sm sm:text-base text-zinc-900 hover:underline underline-offset-2 transition-all cursor-pointer select-none"
                   aria-expanded={isOpen}
                 >
                   <span>{item.question}</span>
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 text-zinc-400 shrink-0 transition-transform duration-300",
-                      isOpen && "rotate-180 text-[#0754C6]"
-                    )}
-                  />
+                  <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="shrink-0"
+                  >
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-colors duration-200",
+                        isOpen ? "text-[#0754C6]" : "text-zinc-400"
+                      )}
+                    />
+                  </motion.span>
                 </button>
 
-                {isOpen && (
-                  <div className="pt-2.5 pr-6 text-xs sm:text-sm text-zinc-600 leading-relaxed animate-in fade-in-50 duration-200">
-                    <p>{item.answer}</p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div className="pt-2.5 pr-6 text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                        <p>{item.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

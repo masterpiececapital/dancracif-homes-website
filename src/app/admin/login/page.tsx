@@ -3,13 +3,16 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { adminLoginAction } from "@/app/actions/admin-auth";
 import toast from "react-hot-toast";
 
-export default function AdminLoginPage() {
+function LoginFormInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/admin";
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [rememberMe, setRememberMe] = React.useState(true);
@@ -25,7 +28,8 @@ export default function AdminLoginPage() {
       const res = await adminLoginAction({ email, password });
       if (res.success) {
         toast.success("Welcome back.");
-        router.push("/admin");
+        const safeTarget = redirectTo.startsWith("/admin") ? redirectTo : "/admin";
+        router.push(safeTarget);
         router.refresh();
       } else {
         setError(res.error || "Invalid credentials");
@@ -237,5 +241,19 @@ export default function AdminLoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-[#0754C6] border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <LoginFormInner />
+    </React.Suspense>
   );
 }

@@ -14,7 +14,7 @@ export const StatsSection: React.FC = () => {
               <span className="text-xs sm:text-sm font-medium text-zinc-600 mt-1.5">
                 {stat.label}
                 {stat.sublabel && (
-                  <span className="text-zinc-400 font-normal">
+                  <span className="text-zinc-600 font-medium">
                     {" "}
                     · {stat.sublabel}
                   </span>

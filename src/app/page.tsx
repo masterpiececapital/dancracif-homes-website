@@ -61,12 +61,13 @@ export default function HomePage() {
         {/* 9. Frequently Asked Questions (Accordion) */}
         <FaqSection />
 
-        {/* 10. 40% Payment Plan CTA Banner */}
-        <CtaBanner onCalculateClick={scrollToContact} />
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* 10. Final Viewport Section: 40% CTA Banner + Footer fitting exact height of the page */}
+      <div className="w-full min-h-[calc(100dvh-4rem)] sm:min-h-[calc(100dvh-4.5rem)] lg:h-[calc(100dvh-4.5rem)] lg:min-h-[540px] flex flex-col justify-between">
+        <CtaBanner onCalculateClick={scrollToContact} className="flex-1" />
+        <Footer compact />
+      </div>
     </div>
   );
 }

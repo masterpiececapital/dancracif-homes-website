@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Calendar,
   KeyRound,
@@ -25,7 +26,20 @@ const TABS: { id: ContactTab; label: string; icon: React.ElementType }[] = [
 ];
 
 export const ContactSection: React.FC = () => {
-  const [activeTab, setActiveTab] = React.useState<ContactTab>("reserve");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab") as ContactTab | null;
+  const validTabs: ContactTab[] = ["inspection", "reserve", "buy", "open-house"];
+  const [activeTab, setActiveTab] = React.useState<ContactTab>(
+    tabParam && validTabs.includes(tabParam) ? tabParam : "reserve"
+  );
+
+  // Sync tab if URL param changes (e.g. browser back/forward)
+  React.useEffect(() => {
+    if (tabParam && validTabs.includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabParam]);
 
   // Form states
   const [fullName, setFullName] = React.useState("");

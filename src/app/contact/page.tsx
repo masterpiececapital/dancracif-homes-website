@@ -11,7 +11,9 @@ export default function ContactPage() {
       <Header />
 
       <main className="flex-1">
-        <ContactSection />
+        <React.Suspense fallback={null}>
+          <ContactSection />
+        </React.Suspense>
       </main>
 
       <Footer />

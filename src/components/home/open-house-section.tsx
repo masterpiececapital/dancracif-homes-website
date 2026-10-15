@@ -47,7 +47,7 @@ export const OpenHouseSection: React.FC = () => {
           {/* Left Column: Event Info & Estate Image */}
           <div className="space-y-6">
             <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6]">
+              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0754C6]">
                 Ongoing Event • Fidelis Court
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight leading-tight">
@@ -72,9 +72,9 @@ export const OpenHouseSection: React.FC = () => {
             </div>
 
             {/* Estate Photo Container */}
-            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden bg-zinc-200 shadow-sm">
+            <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden bg-zinc-200 shadow-sm">
               <Image
-                src="/images/terrace-duplex.jpg"
+                src="/images/open-house.jpg"
                 alt="Fidelis Court Open House Estate"
                 fill
                 className="object-cover"
@@ -186,22 +186,22 @@ export const OpenHouseSection: React.FC = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 pt-2">
                 <button
                   type="button"
                   onClick={handleWhatsApp}
-                  className="h-11 px-6 rounded-full bg-[#0754C6] hover:bg-[#0648AB] text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm active:scale-95 transition-all cursor-pointer"
+                  className="w-full h-12 px-4 rounded-full bg-[#0754C6] hover:bg-[#0648AB] text-white font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <MessageSquare className="h-4 w-4" />
+                  <MessageSquare className="h-5 w-5 shrink-0" />
                   <span>Register via WhatsApp</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={handleEmail}
-                  className="h-11 px-6 rounded-full bg-white border border-[#0754C6] hover:bg-zinc-50 text-[#0754C6] font-semibold text-sm inline-flex items-center gap-2 shadow-sm active:scale-95 transition-all cursor-pointer"
+                  className="w-full h-12 px-4 rounded-full bg-white border border-[#0754C6] hover:bg-zinc-50 text-[#0754C6] font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-5 w-5 shrink-0" />
                   <span>Register via Email</span>
                 </button>
               </div>

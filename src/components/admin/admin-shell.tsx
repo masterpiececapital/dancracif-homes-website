@@ -15,6 +15,11 @@ import {
   ChevronRight,
   ShieldCheck,
   Building2,
+  FileText,
+  HelpCircle,
+  CalendarDays,
+  Image as ImageIcon,
+  SlidersHorizontal,
 } from "lucide-react";
 import { adminLogoutAction } from "@/app/actions/admin-auth";
 import { AdminSessionUser } from "@/lib/auth";
@@ -49,30 +54,75 @@ export function AdminShell({ user, children }: AdminShellProps) {
     }
   };
 
-  const navItems = [
+  const navGroups = [
     {
-      href: "/admin",
-      label: "Overview",
-      icon: LayoutDashboard,
-      exact: true,
+      group: "Core Management",
+      items: [
+        {
+          href: "/admin",
+          label: "Overview",
+          icon: LayoutDashboard,
+          exact: true,
+        },
+        {
+          href: "/admin/leads",
+          label: "Leads & Inquiries",
+          icon: Users,
+          exact: false,
+        },
+        {
+          href: "/admin/units",
+          label: "Estate Inventory",
+          icon: Home,
+          exact: false,
+        },
+      ],
     },
     {
-      href: "/admin/leads",
-      label: "Leads & Inquiries",
-      icon: Users,
-      exact: false,
+      group: "Website Content",
+      items: [
+        {
+          href: "/admin/blog",
+          label: "Blog & Insights",
+          icon: FileText,
+          exact: false,
+        },
+        {
+          href: "/admin/faqs",
+          label: "FAQs",
+          icon: HelpCircle,
+          exact: false,
+        },
+        {
+          href: "/admin/timeline",
+          label: "Construction Timeline",
+          icon: CalendarDays,
+          exact: false,
+        },
+        {
+          href: "/admin/site-config",
+          label: "Site Configuration",
+          icon: SlidersHorizontal,
+          exact: false,
+        },
+      ],
     },
     {
-      href: "/admin/units",
-      label: "Estate Inventory",
-      icon: Home,
-      exact: false,
-    },
-    {
-      href: "/admin/settings",
-      label: "Settings",
-      icon: Settings,
-      exact: false,
+      group: "Assets & System",
+      items: [
+        {
+          href: "/admin/media",
+          label: "Media Library",
+          icon: ImageIcon,
+          exact: false,
+        },
+        {
+          href: "/admin/settings",
+          label: "Portal Settings",
+          icon: Settings,
+          exact: false,
+        },
+      ],
     },
   ];
 
@@ -80,6 +130,11 @@ export function AdminShell({ user, children }: AdminShellProps) {
     if (pathname === "/admin") return "Executive Overview";
     if (pathname.startsWith("/admin/leads")) return "Leads & Inquiries";
     if (pathname.startsWith("/admin/units")) return "Estate Inventory";
+    if (pathname.startsWith("/admin/blog")) return "Blog & Articles";
+    if (pathname.startsWith("/admin/faqs")) return "Frequently Asked Questions";
+    if (pathname.startsWith("/admin/timeline")) return "Construction Timeline";
+    if (pathname.startsWith("/admin/site-config")) return "Site Configuration";
+    if (pathname.startsWith("/admin/media")) return "Media Library";
     if (pathname.startsWith("/admin/settings")) return "Portal Settings";
     return "Admin Portal";
   };
@@ -96,6 +151,16 @@ export function AdminShell({ user, children }: AdminShellProps) {
       return "Review, follow up, and track status for all prospect submissions.";
     if (pathname.startsWith("/admin/units"))
       return "Configure unit counts, real-time availability, and pricing.";
+    if (pathname.startsWith("/admin/blog"))
+      return "Manage published articles, news, and market insights on the website.";
+    if (pathname.startsWith("/admin/faqs"))
+      return "Manage questions and answers displayed in the public FAQ section.";
+    if (pathname.startsWith("/admin/timeline"))
+      return "Update construction milestones and development phases for Fidelis Court.";
+    if (pathname.startsWith("/admin/site-config"))
+      return "Configure key metrics, contact info, estate specs, and open house alerts.";
+    if (pathname.startsWith("/admin/media"))
+      return "Upload and organize photos, renderings, and brochure assets via Cloudinary.";
     if (pathname.startsWith("/admin/settings"))
       return "Manage executive credentials, security configuration, and preferences.";
     return "Real-time pipeline overview for Fidelis Court and customer inquiries.";
@@ -113,9 +178,8 @@ export function AdminShell({ user, children }: AdminShellProps) {
 
       {/* SIDEBAR */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white border-r border-slate-200/80 flex flex-col transition-transform duration-200 ease-in-out ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+        className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white border-r border-slate-200/80 flex flex-col transition-transform duration-200 ease-in-out ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          }`}
       >
         {/* Brand Header */}
         <div className="h-18 px-6 border-b border-slate-100 flex items-center justify-between">
@@ -143,43 +207,45 @@ export function AdminShell({ user, children }: AdminShellProps) {
         </div>
 
         {/* Navigation */}
-        <div className="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
-          <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Main Menu
-          </div>
-          {navItems.map((item) => {
-            const isActive = item.exact
-              ? pathname === item.href
-              : pathname.startsWith(item.href);
+        <div className="flex-1 py-4 px-3 space-y-5 overflow-y-auto">
+          {navGroups.map((group) => (
+            <div key={group.group} className="space-y-1">
+              <div className="px-3 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                {group.group}
+              </div>
+              {group.items.map((item) => {
+                const isActive = item.exact
+                  ? pathname === item.href
+                  : pathname.startsWith(item.href);
 
-            const Icon = item.icon;
+                const Icon = item.icon;
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all group ${
-                  isActive
-                    ? "bg-[#0754C6]/10 text-[#0754C6] font-semibold"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Icon
-                    className={`w-4 h-4 transition-colors ${
-                      isActive
-                        ? "text-[#0754C6]"
-                        : "text-slate-400 group-hover:text-slate-600"
-                    }`}
-                  />
-                  <span>{item.label}</span>
-                </div>
-                {isActive && (
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0754C6]" />
-                )}
-              </Link>
-            );
-          })}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${isActive
+                      ? "bg-[#0754C6]/10 text-[#0754C6] font-semibold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                      }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Icon
+                        className={`w-4 h-4 transition-colors ${isActive
+                          ? "text-[#0754C6]"
+                          : "text-slate-400 group-hover:text-slate-600"
+                          }`}
+                      />
+                      <span>{item.label}</span>
+                    </div>
+                    {isActive && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#0754C6]" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </div>
 
         {/* Bottom Sidebar: User & Public Link */}
@@ -239,8 +305,6 @@ export function AdminShell({ user, children }: AdminShellProps) {
 
               <div>
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0754C6] mb-1">
-                  <span>Executive Dashboard</span>
-                  <span>·</span>
                   <span>{formattedDate}</span>
                 </div>
                 <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">

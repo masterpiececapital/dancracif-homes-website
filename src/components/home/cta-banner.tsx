@@ -2,23 +2,32 @@
 
 import * as React from "react";
 
+import { cn } from "@/lib/utils";
+
 interface CtaBannerProps {
   onCalculateClick?: () => void;
+  className?: string;
 }
 
-export const CtaBanner: React.FC<CtaBannerProps> = ({ onCalculateClick }) => {
+export const CtaBanner: React.FC<CtaBannerProps> = ({ onCalculateClick, className }) => {
   return (
-    <section className="w-full bg-[#0754C6] py-16 sm:py-20 text-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center space-y-6 relative z-10">
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-2xl mx-auto leading-tight">
-          Start with just 40% and spread the rest over 12 months.
+    <section
+      className={cn(
+        "w-full bg-gradient-to-r from-[#0064CF] to-[#0093ED] py-10 sm:py-14 text-white relative overflow-hidden flex flex-col justify-center",
+        className
+      )}
+    >
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 text-center space-y-4 sm:space-y-6 relative z-10 my-auto">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[36px] font-extrabold tracking-tight max-w-2xl mx-auto leading-snug">
+          <span className="block">Start with just 40% and spread the</span>
+          <span className="block">rest over 12 months.</span>
         </h2>
 
         <div>
           <button
             type="button"
             onClick={onCalculateClick}
-            className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-white text-[#0754C6] font-bold text-xs sm:text-sm shadow-md hover:bg-zinc-50 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center px-8 py-3.5 sm:py-4 rounded-full bg-white text-[#0064CF] font-bold text-sm sm:text-base shadow-md hover:bg-zinc-50 hover:shadow-lg active:scale-95 transition-all cursor-pointer"
           >
             Calculate your payment
           </button>
