@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const PRICING_FAQS = [
@@ -29,6 +30,7 @@ const PRICING_FAQS = [
 
 export const PricingFaq: React.FC = () => {
   const [open, setOpen] = React.useState<number | null>(0);
+  const [hovered, setHovered] = React.useState<number | null>(null);
 
   return (
     <section className="w-full bg-white py-14 sm:py-18">
@@ -44,28 +46,52 @@ export const PricingFaq: React.FC = () => {
               <div key={i}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between py-4 text-left gap-4 group"
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="w-full flex items-center justify-between py-4 text-left gap-4 cursor-pointer"
                 >
                   <span
                     className={cn(
-                      "text-sm sm:text-base font-medium transition-colors",
-                      isOpen ? "text-zinc-900" : "text-zinc-700 group-hover:text-zinc-900"
+                      "text-sm sm:text-base font-medium transition-colors duration-200",
+                      isOpen ? "text-zinc-900" : "text-zinc-700"
                     )}
+                    style={{
+                      textDecoration: hovered === i ? "underline" : "none",
+                      textDecorationColor: "#000000",
+                      textUnderlineOffset: "3px",
+                    }}
                   >
                     {faq.q}
                   </span>
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 shrink-0 text-zinc-400 transition-transform duration-200",
-                      isOpen && "rotate-180"
-                    )}
-                  />
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="shrink-0 transition-transform duration-200"
+                    style={{ scale: hovered === i ? 1.1 : 1 }}
+                  >
+                    <ChevronDown
+                      className="h-4 w-4 transition-colors duration-200"
+                      style={{ color: hovered === i ? "#27272a" : "#a1a1aa" }}
+                    />
+                  </motion.div>
                 </button>
-                {isOpen && (
-                  <p className="pb-4 text-sm text-zinc-500 leading-relaxed">
-                    {faq.a}
-                  </p>
-                )}
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className="pb-4 text-sm font-medium text-gray-600 leading-relaxed">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

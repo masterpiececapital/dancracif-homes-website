@@ -155,7 +155,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
     {
       id: "welcome",
       sender: "bot",
-      text: "Hello! Welcome to Dancracif Homes. I'm your digital assistant. How can I help you regarding Fidelis Court, apartment prices, or scheduling an inspection today?",
+      text: "Hello! Welcome to Dangracif Homes. I'm your digital assistant. How can I help you regarding Fidelis Court, apartment prices, or scheduling an inspection today?",
       time: "Just now",
     },
   ]);
@@ -250,7 +250,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
               </div>
               <div>
                 <h3 className="text-sm font-bold text-white tracking-tight leading-tight">
-                  Dancracif Assistant
+                  Dangracif Assistant
                 </h3>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

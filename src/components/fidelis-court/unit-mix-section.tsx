@@ -12,17 +12,17 @@ const UNIT_MIX = [
 
 const KEY_HIGHLIGHTS = [
   {
-    icon: <Calendar className="h-5 w-5 text-[#0754C6]" />,
+    icon: <Calendar className="h-6 w-6 text-fidelis-brown" />,
     title: "14-month delivery",
     sub: "Completion: December 2027",
   },
   {
-    icon: <FileText className="h-5 w-5 text-[#0754C6]" />,
+    icon: <FileText className="h-6 w-6 text-fidelis-brown" />,
     title: "Title to buyer",
     sub: "Deed of lease",
   },
   {
-    icon: <Building2 className="h-5 w-5 text-[#0754C6]" />,
+    icon: <Building2 className="h-6 w-6 text-fidelis-brown" />,
     title: "Commercial building",
     sub: "Ground + first floor",
   },
@@ -47,25 +47,25 @@ export const UnitMixSection: React.FC<UnitMixSectionProps> = ({
           <div className="space-y-8">
             {/* Unit Mix Table */}
             <div className="space-y-3">
-              <h2 className="text-xl font-extrabold text-zinc-900 tracking-tight">
+              <h2 className="text-2xl font-extrabold text-zinc-900 tracking-tight">
                 Unit mix
               </h2>
-              <div className="divide-y divide-zinc-100 border border-zinc-100 rounded-2xl overflow-hidden">
+              <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-2xl overflow-hidden">
                 {UNIT_MIX.map((row) => (
                   <div
                     key={row.type}
-                    className="flex items-center justify-between px-5 py-3.5 bg-white hover:bg-zinc-50 transition-colors"
+                    className="flex items-center justify-between px-5 py-5 bg-white hover:bg-zinc-50 transition-colors"
                   >
-                    <span className="text-sm text-zinc-700">{row.type}</span>
-                    <span className="text-sm font-bold text-zinc-900">{row.count}</span>
+                    <span className="text-md text-zinc-700">{row.type}</span>
+                    <span className="text-md font-bold text-zinc-900">{row.count}</span>
                   </div>
                 ))}
                 {/* Total row */}
-                <div className="flex items-center justify-between px-5 py-3.5 bg-[#EBF3FC]">
-                  <span className="text-sm font-semibold text-[#0754C6]">
+                <div className="flex items-center justify-between px-5 py-3.5 bg-fidelis-brown/10">
+                  <span className="text-md font-bold text-fidelis-brown">
                     Total residential units
                   </span>
-                  <span className="text-sm font-extrabold text-[#0754C6]">{total}</span>
+                  <span className="text-md font-extrabold text-fidelis-brown">{total}</span>
                 </div>
               </div>
             </div>
@@ -75,12 +75,12 @@ export const UnitMixSection: React.FC<UnitMixSectionProps> = ({
               {KEY_HIGHLIGHTS.map((h) => (
                 <div
                   key={h.title}
-                  className="flex items-start gap-3 p-4 rounded-2xl border border-zinc-100 bg-white"
+                  className="flex items-start gap-3 p-6 rounded-3xl border border-zinc-200 bg-white"
                 >
-                  <div className="mt-0.5 shrink-0">{h.icon}</div>
                   <div>
-                    <p className="text-sm font-bold text-zinc-900">{h.title}</p>
-                    <p className="text-xs text-zinc-500 mt-0.5">{h.sub}</p>
+                    <div className="mt-0.5 mb-3 shrink-0">{h.icon}</div>
+                    <p className="text-[16px] font-semibold text-zinc-900">{h.title}</p>
+                    <p className="text-sm text-zinc-500">{h.sub}</p>
                   </div>
                 </div>
               ))}

@@ -17,7 +17,7 @@ const LOCATIONS = [
     id: "office",
     title: "Developer office",
     address:
-      "Dancracif Homes Limited\nSuite B5, Bricks 'N' More Plaza, 6th Avenue, Gwarimpa, Abuja, FCT, Nigeria",
+      "Dangracif Homes Limited\nSuite B5, Bricks 'N' More Plaza, 6th Avenue, Gwarimpa, Abuja, FCT, Nigeria",
     note: "Sales office available here.",
     mapUrl: null,
   },
@@ -33,13 +33,13 @@ export const LocationSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#0754C6]">
+          <span className={`text-xs mb-2 font-semibold uppercase tracking-[0.2em] text-fidelis-brown`}>
             Where to find us
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-zinc-900 leading-tight">
             Visit the estate or our developer office
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl">
+          <p className="text-md text-zinc-600 max-w-3xl">
             Sales offices are available at both locations. Site inspections take
             place at Fidelis Court.
           </p>
@@ -50,16 +50,16 @@ export const LocationSection: React.FC = () => {
           {LOCATIONS.map((loc) => (
             <div
               key={loc.id}
-              className="rounded-2xl border border-zinc-100 bg-white p-5 sm:p-6 space-y-3"
+              className="rounded-3xl border border-zinc-200 bg-white p-5 sm:p-6 space-y-3"
             >
-              <p className="text-sm font-extrabold text-zinc-900">{loc.title}</p>
-              <div className="flex items-start gap-2 text-xs text-zinc-500">
-                <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5 text-zinc-400" />
+              <p className="text-[16px] font-bold text-zinc-900">{loc.title}</p>
+              <div className="flex items-start gap-2 text-sm text-zinc-700">
+                <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-zinc-400" />
                 <span className="whitespace-pre-line leading-relaxed">
                   {loc.address}
                 </span>
               </div>
-              <p className="text-xs text-[#0754C6] font-medium leading-relaxed">
+              <p className="text-sm text-fidelis-brown font-medium leading-relaxed">
                 {loc.note}
               </p>
             </div>
@@ -94,10 +94,10 @@ export const LocationSection: React.FC = () => {
 
         {/* CTA buttons below map */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <Button variant="primary" size="md">
+          <Button variant="fidelis-brown" size="lg" className="!py-6">
             Book an Inspection
           </Button>
-          <Button variant="outline" size="md">
+          <Button variant="fidelis-brown-outline" size="lg">
             View Pricing
           </Button>
         </div>

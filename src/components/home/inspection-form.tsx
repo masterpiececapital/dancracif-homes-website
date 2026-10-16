@@ -40,7 +40,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
       onSubmitWhatsApp(formData);
     } else {
       // Default WhatsApp share
-      const text = `Hello Dancracif Homes, I would like to book an inspection for Fidelis Court.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nUnit: ${formData.unitType}\nDate: ${formData.preferredDate}\nMessage: ${formData.message || "N/A"}`;
+      const text = `Hello Dangracif Homes, I would like to book an inspection for Fidelis Court.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nUnit: ${formData.unitType}\nDate: ${formData.preferredDate}\nMessage: ${formData.message || "N/A"}`;
       window.open(
         `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
         "_blank"
@@ -55,7 +55,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
     } else {
       const subject = `Inspection Booking - ${formData.fullName} (Fidelis Court)`;
       const body = `Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nUnit: ${formData.unitType}\nDate: ${formData.preferredDate}\nMessage: ${formData.message || "N/A"}`;
-      window.location.href = `mailto:sales@dancracifhomes.com?subject=${encodeURIComponent(
+      window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
         subject
       )}&body=${encodeURIComponent(body)}`;
     }

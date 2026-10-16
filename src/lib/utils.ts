@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 export type ClassValue =
   | string
   | number
@@ -8,10 +10,7 @@ export type ClassValue =
   | { [key: string]: boolean | undefined | null }
   | ClassValue[];
 
-/**
- * Clean, lightweight class string utility
- */
-export function cn(...inputs: ClassValue[]): string {
+function resolveClasses(...inputs: ClassValue[]): string {
   const classes: string[] = [];
 
   for (const input of inputs) {
@@ -20,7 +19,7 @@ export function cn(...inputs: ClassValue[]): string {
     if (typeof input === "string" || typeof input === "number") {
       classes.push(String(input));
     } else if (Array.isArray(input)) {
-      const inner = cn(...input);
+      const inner = resolveClasses(...input);
       if (inner) classes.push(inner);
     } else if (typeof input === "object") {
       for (const [key, value] of Object.entries(input)) {
@@ -30,4 +29,12 @@ export function cn(...inputs: ClassValue[]): string {
   }
 
   return classes.join(" ").trim();
+}
+
+/**
+ * Merges class names with tailwind-merge so conflicting
+ * Tailwind utilities are properly resolved (last one wins).
+ */
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(resolveClasses(...inputs));
 }

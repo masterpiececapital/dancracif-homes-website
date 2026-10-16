@@ -44,7 +44,7 @@ if (typeof process !== "undefined" && process.env) {
 
 const connectionUrl =
   process.env.DATABASE_URL ||
-  "postgresql://hellosauri@localhost:5432/dancracif_homes";
+  "postgresql://hellosauri@localhost:5432/dangracif_homes";
 
 const isProduction = process.env.NODE_ENV === "production";
 const useSsl =

@@ -55,7 +55,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
   // Contact settings
   const [contact, setContact] = React.useState({
     phone: initialConfigs.contact?.phone || "+234 800 000 0000",
-    email: initialConfigs.contact?.email || "sales@dancracifhomes.com",
+    email: initialConfigs.contact?.email || "sales@dangracifhomes.com",
     whatsapp: initialConfigs.contact?.whatsapp || "2348000000000",
     inspectionHours:
       initialConfigs.contact?.inspectionHours ||

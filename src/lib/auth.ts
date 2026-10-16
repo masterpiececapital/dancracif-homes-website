@@ -3,10 +3,15 @@ import { cookies } from "next/headers";
 
 const JWT_SECRET =
   process.env.JWT_SECRET ||
-  "dancracif-secret-key-super-secure-change-in-production-2026";
+  "dangracif-secret-key-super-secure-change-in-production-2026";
 
 const secretKey = new TextEncoder().encode(JWT_SECRET);
-export const AUTH_COOKIE_NAME = "dancracif_admin_token";
+export const AUTH_COOKIE_NAME = "dangracif_admin_token";
+export const LAST_ACTIVITY_COOKIE_NAME = "dangracif_admin_last_activity";
+
+// Lifespans
+export const AUTH_TOKEN_MAX_AGE = 60 * 60 * 2; // 2 hours in seconds
+export const ADMIN_INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes in ms
 
 export interface AdminSessionUser {
   id: string;
@@ -24,7 +29,7 @@ export async function signAdminToken(user: AdminSessionUser): Promise<string> {
   })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime("2h")
     .sign(secretKey);
 }
 

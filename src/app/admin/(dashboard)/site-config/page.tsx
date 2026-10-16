@@ -2,7 +2,7 @@ import { getSiteConfigs } from "@/app/actions/admin-content";
 import { AdminSiteConfigClient } from "@/components/admin/admin-site-config-client";
 
 export const metadata = {
-  title: "Site Configuration | Dancracif Homes Admin",
+  title: "Site Configuration | Dangracif Homes Admin",
 };
 
 export default async function AdminSiteConfigPage() {

@@ -5,3 +5,5 @@ export * from "./select";
 export * from "./badge";
 export * from "./card";
 export * from "./modal";
+export { CustomSelect, type CustomSelectOption } from "./custom-select";
+export * from "./date-picker";

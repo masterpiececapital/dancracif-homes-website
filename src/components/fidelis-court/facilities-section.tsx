@@ -37,10 +37,10 @@ const FACILITIES = [
 
 export const FacilitiesSection: React.FC = () => {
   return (
-    <section className="w-full bg-[#EBF3FC] py-14 sm:py-18 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
+    <section className="w-full min-h-[93vh] bg-fidelis-brown/10 border-b border-zinc-100 flex items-center py-8">
+      <div className="w-full px-6 sm:px-10 lg:px-16 space-y-6">
         <div className="space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#0754C6]">
+          <span className="text-xs font-bold uppercase tracking-widest text-fidelis-brown">
             Facilities &amp; Services
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
@@ -48,16 +48,16 @@ export const FacilitiesSection: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {FACILITIES.map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 border border-zinc-100 hover:border-[#0754C6]/20 hover:shadow-sm transition-all"
+              className="flex items-center gap-4 bg-white rounded-2xl px-5 py-5 border border-zinc-100 hover:border-fidelis-brown/20 hover:shadow-sm transition-all"
             >
-              <div className="h-9 w-9 shrink-0 rounded-xl bg-[#0754C6] flex items-center justify-center">
-                <Icon className="h-4 w-4 text-white" />
+              <div className="h-12 w-12 shrink-0 rounded-xl bg-fidelis-brown flex items-center justify-center">
+                <Icon className="h-6 w-6 text-white" />
               </div>
-              <span className="text-sm font-medium text-zinc-800">{label}</span>
+              <span className="text-base font-medium text-zinc-800">{label}</span>
             </div>
           ))}
         </div>

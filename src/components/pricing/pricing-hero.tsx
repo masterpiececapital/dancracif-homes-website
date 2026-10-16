@@ -34,7 +34,7 @@ export const PricingHero: React.FC<PricingHeroProps> = ({
       </section>
 
       {/* Floating / Overlapping Unit Cards */}
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 -mt-20 sm:-mt-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 -mt-10 sm:-mt-14 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
           {UNIT_PLANS.map((plan) => {
             const isSelected = plan.id === selected.id;

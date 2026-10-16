@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
-    | "primary"
-    | "secondary"
-    | "outline"
-    | "ghost"
-    | "danger"
-    | "dark";
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "fidelis-brown-outline"
+  | "fidelis-brown"
+  | "ghost"
+  | "danger"
+  | "dark";
   size?: "sm" | "md" | "lg" | "icon";
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -23,9 +25,13 @@ const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
     "bg-[#0754C6] text-white hover:bg-[#0648AB] active:bg-[#043275] shadow-sm shadow-[#0754C6]/25",
   secondary:
-    "bg-white text-[#0754C6] hover:bg-[#FAFCFE] active:bg-zinc-100 shadow-sm",
+    "border border-[#0754C6] bg-white text-[#0754C6] hover:bg-[#FAFCFE] active:bg-zinc-100",
   outline:
-    "border-1.5 border-[#0754C6] bg-white dark:bg-transparent text-[#0754C6] hover:bg-blue-50/60 dark:hover:bg-blue-950/20 active:bg-blue-100/60",
+    "border border-[#0754C6] bg-white dark:bg-transparent text-[#0754C6] hover:bg-blue-50/60 dark:hover:bg-blue-950/20 active:bg-blue-100/60",
+  "fidelis-brown-outline":
+    "border border-fidelis-brown bg-white dark:bg-transparent text-fidelis-brown hover:bg-fidelis-brown/10 active:bg-fidelis-brown/20",
+  "fidelis-brown":
+    "bg-fidelis-brown text-white hover:brightness-90 active:brightness-75 shadow-sm shadow-fidelis-brown/25",
   ghost:
     "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 active:bg-zinc-200 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-100",
   danger:
@@ -66,7 +72,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled}
         className={cn(
           "relative inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 ease-out select-none cursor-pointer",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0754C6] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+          variant === "fidelis-brown" || variant === "fidelis-brown-outline"
+            ? "focus-visible:ring-fidelis-brown"
+            : "focus-visible:ring-[#0754C6]",
           "disabled:pointer-events-none disabled:opacity-50",
           variantStyles[variant],
           sizeStyles[size],

@@ -11,10 +11,16 @@ import {
   Phone,
   Mail,
   MessageSquare,
-  ChevronDown,
 } from "lucide-react";
 import { UNIT_OPTIONS, ESTATE_CONTACT } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
+import { DatePicker } from "@/components/ui/date-picker";
+import { CustomSelect } from "@/components/ui/custom-select";
+
+const PAYMENT_OPTIONS = [
+  { value: "Outright payment", label: "Outright payment" },
+  { value: "12-month payment plan", label: "12-month payment plan" },
+];
 
 type ContactTab = "inspection" | "reserve" | "buy" | "open-house";
 
@@ -38,7 +44,7 @@ export const ContactSection: React.FC = () => {
     if (tabParam && validTabs.includes(tabParam)) {
       setActiveTab(tabParam);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabParam]);
 
   // Form states
@@ -104,7 +110,7 @@ export const ContactSection: React.FC = () => {
 
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello Dancracif Homes,\n\n${details.summary}`;
+    const text = `Hello Dangracif Homes,\n\n${details.summary}`;
     window.open(
       `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
       "_blank"
@@ -113,7 +119,7 @@ export const ContactSection: React.FC = () => {
 
   const handleEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:sales@dancracifhomes.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
       details.subject
     )}&body=${encodeURIComponent(details.summary)}`;
   };
@@ -126,10 +132,10 @@ export const ContactSection: React.FC = () => {
           <div className="flex-1 min-w-0 space-y-6 w-full">
             {/* Header text */}
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6] block">
+              <span className={`text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6]`}>
                 GET IN TOUCH
               </span>
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
                 Let&apos;s get you home.
               </h1>
             </div>
@@ -220,31 +226,22 @@ export const ContactSection: React.FC = () => {
                       <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                         Unit type
                       </label>
-                      <div className="relative">
-                        <select
-                          value={unitType}
-                          onChange={(e) => setUnitType(e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-slate-200/90 px-4 py-3 pr-10 text-slate-900 text-sm bg-white focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
-                        >
-                          {UNIT_OPTIONS.map((u) => (
-                            <option key={u.value} value={u.value}>
-                              {u.label}
-                            </option>
-                          ))}
-                        </select>
-                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                      </div>
+                      <CustomSelect
+                        value={unitType}
+                        onChange={setUnitType}
+                        options={UNIT_OPTIONS}
+                        placeholder="Select a unit"
+                      />
                     </div>
 
                     <div>
                       <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                         Preferred inspection date
                       </label>
-                      <input
-                        type="date"
+                      <DatePicker
                         value={preferredDate}
-                        onChange={(e) => setPreferredDate(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200/90 px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
+                        onChange={setPreferredDate}
+                        placeholder="Pick a date"
                       />
                     </div>
                   </div>
@@ -257,20 +254,12 @@ export const ContactSection: React.FC = () => {
                       <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                         Unit type
                       </label>
-                      <div className="relative">
-                        <select
-                          value={unitType}
-                          onChange={(e) => setUnitType(e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-slate-200/90 px-4 py-3 pr-10 text-slate-900 text-sm bg-white focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
-                        >
-                          {UNIT_OPTIONS.map((u) => (
-                            <option key={u.value} value={u.value}>
-                              {u.label}
-                            </option>
-                          ))}
-                        </select>
-                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                      </div>
+                      <CustomSelect
+                        value={unitType}
+                        onChange={setUnitType}
+                        options={UNIT_OPTIONS}
+                        placeholder="Select a unit"
+                      />
                     </div>
 
                     <div>
@@ -296,20 +285,12 @@ export const ContactSection: React.FC = () => {
                         <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                           Unit type
                         </label>
-                        <div className="relative">
-                          <select
-                            value={unitType}
-                            onChange={(e) => setUnitType(e.target.value)}
-                            className="w-full appearance-none rounded-xl border border-slate-200/90 px-4 py-3 pr-10 text-slate-900 text-sm bg-white focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
-                          >
-                            {UNIT_OPTIONS.map((u) => (
-                              <option key={u.value} value={u.value}>
-                                {u.label}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                        </div>
+                        <CustomSelect
+                          value={unitType}
+                          onChange={setUnitType}
+                          options={UNIT_OPTIONS}
+                          placeholder="Select a unit"
+                        />
                       </div>
 
                       <div>
@@ -330,19 +311,12 @@ export const ContactSection: React.FC = () => {
                       <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                         Payment option
                       </label>
-                      <div className="relative">
-                        <select
-                          value={paymentOption}
-                          onChange={(e) => setPaymentOption(e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-slate-200/90 px-4 py-3 pr-10 text-slate-900 text-sm bg-white focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
-                        >
-                          <option value="Outright payment">Outright payment</option>
-                          <option value="12-month payment plan">
-                            12-month payment plan
-                          </option>
-                        </select>
-                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                      </div>
+                      <CustomSelect
+                        value={paymentOption}
+                        onChange={setPaymentOption}
+                        options={PAYMENT_OPTIONS}
+                        placeholder="Select payment option"
+                      />
                     </div>
                   </>
                 )}
@@ -354,20 +328,12 @@ export const ContactSection: React.FC = () => {
                       <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
                         Home of interest
                       </label>
-                      <div className="relative">
-                        <select
-                          value={unitType}
-                          onChange={(e) => setUnitType(e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-slate-200/90 px-4 py-3 pr-10 text-slate-900 text-sm bg-white focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors cursor-pointer"
-                        >
-                          {UNIT_OPTIONS.map((u) => (
-                            <option key={u.value} value={u.value}>
-                              {u.label}
-                            </option>
-                          ))}
-                        </select>
-                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                      </div>
+                      <CustomSelect
+                        value={unitType}
+                        onChange={setUnitType}
+                        options={UNIT_OPTIONS}
+                        placeholder="Select home of interest"
+                      />
                     </div>
 
                     <div>
@@ -437,7 +403,7 @@ export const ContactSection: React.FC = () => {
                     <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                     <div className="leading-relaxed">
                       <p className="font-semibold text-white">
-                        Dancracif Homes Limited
+                        Dangracif Homes Limited
                       </p>
                       <p className="text-slate-300 text-xs mt-0.5">
                         Suite B5, Bricks &apos;N&apos; More Plaza, 6th Avenue,

@@ -5,7 +5,13 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { getDatabaseConnection } from "@/lib/db/data-source";
 import { User, UserSchema } from "@/lib/db/entities/User";
-import { signAdminToken, AUTH_COOKIE_NAME, getAdminSession } from "@/lib/auth";
+import {
+  signAdminToken,
+  AUTH_COOKIE_NAME,
+  LAST_ACTIVITY_COOKIE_NAME,
+  AUTH_TOKEN_MAX_AGE,
+  getAdminSession,
+} from "@/lib/auth";
 
 export async function adminLoginAction(formData: {
   email?: string;
@@ -48,7 +54,15 @@ export async function adminLoginAction(formData: {
       secure: process.env.NODE_ENV === "production",
       path: "/",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: AUTH_TOKEN_MAX_AGE, // 2 hours
+    });
+
+    cookieStore.set(LAST_ACTIVITY_COOKIE_NAME, Date.now().toString(), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      sameSite: "lax",
+      maxAge: AUTH_TOKEN_MAX_AGE,
     });
 
     return {
@@ -72,6 +86,7 @@ export async function adminLoginAction(formData: {
 export async function adminLogoutAction() {
   const cookieStore = await cookies();
   cookieStore.delete(AUTH_COOKIE_NAME);
+  cookieStore.delete(LAST_ACTIVITY_COOKIE_NAME);
   return { success: true };
 }
 

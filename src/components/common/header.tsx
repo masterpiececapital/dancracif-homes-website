@@ -14,6 +14,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
   const pathname = usePathname();
+  const isFidelisCourtPage = pathname === "/fidelis-court";
   const router = useRouter();
   const [isScrolled, setIsScrolled] = React.useState(false);
 
@@ -41,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
         "sticky top-0 z-40 w-full transition-all duration-300",
         isScrolled
           ? "bg-white/80 backdrop-blur-md border-b border-zinc-200/70 shadow-sm"
-          : "bg-white border-b border-zinc-100"
+          : "bg-white border-b border-zinc-100",
       )}
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-3 h-18 flex items-center justify-between">
@@ -60,10 +61,15 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-[#0754C6]",
+                    "text-sm font-medium transition-colors",
+                    isFidelisCourtPage
+                      ? "hover:text-fidelis-brown"
+                      : "hover:text-[#0754C6]",
                     isActive
-                      ? "text-[#0754C6] font-semibold"
-                      : "text-zinc-700"
+                      ? isFidelisCourtPage
+                        ? "text-fidelis-brown font-semibold"
+                        : "text-[#0754C6] font-semibold"
+                      : "text-zinc-700",
                   )}
                 >
                   {item.label}
@@ -73,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
           </nav>
 
           <Button
-            variant="primary"
+            variant={isFidelisCourtPage ? "fidelis-brown" : "primary"}
             size="md"
             onClick={handleBookInspection}
           >

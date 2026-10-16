@@ -32,13 +32,13 @@ export interface UploadResult {
 export async function uploadMediaBuffer(
   buffer: Buffer,
   filename: string,
-  folder: string = "dancracif"
+  folder: string = "dangracif"
 ): Promise<UploadResult> {
   if (isCloudinaryConfigured) {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: `dancracif/${folder}`,
+          folder: `dangracif/${folder}`,
           resource_type: "auto",
         },
         (error, result: UploadApiResponse | undefined) => {

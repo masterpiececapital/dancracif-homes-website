@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Clock } from "lucide-react";
 import { adminLoginAction } from "@/app/actions/admin-auth";
 import toast from "react-hot-toast";
 
@@ -83,7 +83,7 @@ function LoginFormInner() {
               D
             </div>
             <span className="text-2xl font-black text-slate-900 tracking-tight">
-              Dancracif.
+              Dangracif.
             </span>
           </div>
 
@@ -96,6 +96,14 @@ function LoginFormInner() {
               Let&apos;s login to grab amazing deal
             </p>
           </div>
+
+          {/* Inactivity Notice */}
+          {redirectTo && searchParams.get("reason") === "inactivity" && !error && (
+            <div className="mb-5 p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-semibold text-center flex items-center justify-center gap-2">
+              <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>You were signed out after 30 minutes of inactivity.</span>
+            </div>
+          )}
 
           {/* Error Message */}
           {error && (
@@ -121,7 +129,7 @@ function LoginFormInner() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@dancracifhomes.com"
+                placeholder="admin@dangracifhomes.com"
                 className="w-full bg-transparent text-sm font-semibold text-slate-900 placeholder:text-slate-400 outline-none pt-0.5"
               />
             </div>
@@ -221,7 +229,7 @@ function LoginFormInner() {
             {/* Framed Image: Ready for your provided image */}
             <Image
               src="/images/admin-login-hero.jpg"
-              alt="Dancracif Homes Estate"
+              alt="Dangracif Homes Estate"
               fill
               className="object-cover object-center"
               priority

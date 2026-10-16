@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Dancracif Homes | Fidelis Court, Kubwa F01, Abuja",
+  title: "Dangracif Homes | Fidelis Court, Kubwa F01, Abuja",
   description:
     "Secure, serviced living in the heart of Kubwa. 1 & 2-bedroom apartments and 4-bedroom terraces from ₦53M.",
 };

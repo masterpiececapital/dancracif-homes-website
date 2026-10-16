@@ -28,8 +28,8 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
       </div>
 
       {/* Card Content */}
-      <div className="p-6 sm:p-7 flex flex-col flex-1">
-        <p className="text-xs text-slate-400">
+      <div className="px-4 py-3 sm:px-5 sm:py-4 flex flex-col flex-1">
+        <p className="text-xs text-slate-600">
           {post.imageCaption}
         </p>
 
@@ -37,11 +37,11 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           {post.date}
         </span>
 
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900 mt-2 tracking-tight leading-snug">
+        <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mt-2 tracking-tight leading-snug">
           {post.title}
         </h2>
 
-        <p className="text-sm text-slate-600 leading-relaxed mt-2.5">
+        <p className="text-sm text-slate-800 leading-relaxed mt-2.5">
           {post.summary}
         </p>
 
@@ -64,15 +64,15 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 
         {/* Expanded Content */}
         {isExpanded && (
-          <div className="pt-4 mt-3 border-t border-slate-100 space-y-4 animate-in fade-in duration-200">
-            <p className="text-sm text-slate-600 leading-relaxed">
+          <div className="pt-4 mt-3 border-t border-slate-300 space-y-4 animate-in fade-in duration-200">
+            <p className="text-sm text-slate-700 leading-relaxed">
               {post.expandedContent}
             </p>
 
             <div>
               <Link
                 href={post.linkHref}
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0754C6] hover:text-[#0648AB] hover:gap-2 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0754C6] hover:text-[#0648AB] hover:gap-2 transition-all cursor-pointer"
               >
                 <span>{post.linkText}</span>
                 <ArrowRight className="w-4 h-4" />

@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
           {/* Col 1: Brand & Head Office (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <h3 className="text-xl font-bold text-white tracking-tight">
-              Dancracif Homes
+              Dangracif Homes
             </h3>
             <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm">
               Building beautiful, durable and thoughtfully designed communities in Abuja.
@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-white shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-white">Dancracif Homes Limited</p>
+                  <p className="font-semibold text-white">Dangracif Homes Limited</p>
                   <p className="text-white/85 mt-0.5 leading-relaxed">
                     Suite B5, Bricks ‘N’ More Plaza, 6th Avenue, Gwarimpa, Abuja, FCT, Nigeria
                   </p>
@@ -159,7 +159,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
             compact ? "pt-5 mt-7 sm:pt-6 sm:mt-8" : "pt-8 mt-10"
           )}
         >
-          <p>© {new Date().getFullYear()} Dancracif Homes. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Dangracif Homes. All rights reserved.</p>
         </div>
       </div>
     </footer>

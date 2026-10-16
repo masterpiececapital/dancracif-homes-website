@@ -48,7 +48,7 @@ export const CoreValues: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-2">
                   {val.title}
                 </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-sm font-medium text-slate-500 leading-relaxed">
                   {val.description}
                 </p>
               </div>

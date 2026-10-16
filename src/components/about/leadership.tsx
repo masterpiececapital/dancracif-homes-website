@@ -49,7 +49,7 @@ export const Leadership: React.FC = () => {
               key={i}
               className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#0754C6] flex items-center justify-center text-white text-lg sm:text-xl font-bold tracking-wider shadow-sm">
+              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-[#0064CF] to-[#0093ED] flex items-center justify-center text-white text-lg sm:text-xl font-bold tracking-wider shadow-sm">
                 {officer.initials}
               </div>
               <p className="text-sm sm:text-base font-bold text-slate-900 mt-5 leading-snug">

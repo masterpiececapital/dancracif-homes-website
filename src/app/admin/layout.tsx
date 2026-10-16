@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Admin Portal | Dancracif Homes",
-  description: "Executive Management Portal for Fidelis Court and Dancracif Homes",
+  title: "Admin Portal | Dangracif Homes",
+  description: "Executive Management Portal for Fidelis Court and Dangracif Homes",
 };
 
 export default function AdminLayout({

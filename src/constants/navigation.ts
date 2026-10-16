@@ -28,7 +28,7 @@ export const UNIT_OPTIONS: UnitOption[] = [
 
 export const ESTATE_CONTACT = {
   phone: "+234 800 000 0000",
-  email: "sales@dancracifhomes.com",
+  email: "sales@dangracifhomes.com",
   estateName: "Fidelis Court — Estate",
   address: "21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria",
   description:

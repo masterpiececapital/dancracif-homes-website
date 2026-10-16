@@ -19,15 +19,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Hero Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/fidelis-court-hero.jpg"
+          src="/images/hero-image.jpg"
           alt="Fidelis Court Estate, Kubwa F01, Abuja"
           fill
           priority
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Dark Cinematic Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/35" />
+        {/* Deep navy overlay for contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06152f]/95 via-[#101d39]/65 to-[#182033]/45" />
       </div>
 
       {/* Hero Content */}

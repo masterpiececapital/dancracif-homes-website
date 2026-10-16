@@ -11,7 +11,7 @@ export async function runSeed() {
 
   // 1. Seed Admin User
   const userRepo = dataSource.getRepository(UserSchema);
-  const adminEmail = process.env.ADMIN_DEFAULT_EMAIL || "admin@dancracifhomes.com";
+  const adminEmail = process.env.ADMIN_DEFAULT_EMAIL || "admin@dangracifhomes.com";
   const existingAdmin = await userRepo.findOne({ where: { email: adminEmail } });
 
   if (!existingAdmin) {
@@ -20,7 +20,7 @@ export async function runSeed() {
     const admin = userRepo.create({
       email: adminEmail,
       password: hashedPassword,
-      name: "Dancracif Administrator",
+      name: "Dangracif Administrator",
       role: "admin",
       isActive: true,
     });

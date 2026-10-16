@@ -27,8 +27,8 @@ export default function FidelisCourtPage() {
 
         {/* 2. Unit mix + highlights + property images */}
         <UnitMixSection
-          exteriorImageSrc={undefined}
-          interiorImageSrc={undefined}
+          exteriorImageSrc={"/images/fidelis-court1.jpg"}
+          interiorImageSrc={"/images/fidelis-court2.jpg"}
         />
 
         {/* 3. Facilities & services */}
@@ -47,7 +47,7 @@ export default function FidelisCourtPage() {
         <LocationSection />
       </main>
 
-      <Footer />
+      <Footer className="bg-fidelis-brown" />
     </div>
   );
 }

@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { adminLogoutAction } from "@/app/actions/admin-auth";
 import { AdminSessionUser } from "@/lib/auth";
+import { AdminInactivityTracker } from "./admin-inactivity-tracker";
 import toast from "react-hot-toast";
 
 interface AdminShellProps {
@@ -168,6 +169,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex text-slate-900 font-sans antialiased">
+      <AdminInactivityTracker />
       {/* Mobile Backdrop */}
       {mobileMenuOpen && (
         <div
@@ -189,7 +191,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-sm font-bold text-slate-900 tracking-tight">
-                Dancracif Homes
+                Dangracif Homes
               </span>
               <span className="text-[10px] font-semibold text-[#0754C6] tracking-wider uppercase">
                 Admin Portal

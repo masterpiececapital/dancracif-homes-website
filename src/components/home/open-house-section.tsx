@@ -24,7 +24,7 @@ export const OpenHouseSection: React.FC = () => {
 
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello Dancracif Homes, I would like to register for the Fidelis Court Open House.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
+    const text = `Hello Dangracif Homes, I would like to register for the Fidelis Court Open House.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
     window.open(
       `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
       "_blank"
@@ -35,7 +35,7 @@ export const OpenHouseSection: React.FC = () => {
     e.preventDefault();
     const subject = `Open House Registration - ${formData.fullName}`;
     const body = `Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
-    window.location.href = `mailto:sales@dancracifhomes.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   };

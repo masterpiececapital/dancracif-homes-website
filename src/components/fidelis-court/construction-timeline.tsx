@@ -27,39 +27,39 @@ const MILESTONES = [
 
 export const ConstructionTimeline: React.FC = () => {
   return (
-    <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-100">
+    <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
         <div className="space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#0754C6]">
+          <span className={`text-xs font-semibold uppercase tracking-[0.2em] text-fidelis-brown`}>
             Construction Timeline
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
             Indicative milestones
           </h2>
-          <p className="text-sm text-zinc-500 max-w-2xl">
+          <p className="text-sm text-zinc-500 max-w-3xl">
             14-month delivery programme from October 2026 to December 2027,
             following groundbreaking in April 2026.
           </p>
         </div>
 
         {/* Timeline cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {MILESTONES.map((m) => (
             <div
               key={m.number}
-              className="rounded-2xl border border-zinc-100 bg-white p-5 space-y-2 hover:border-[#0754C6]/20 hover:shadow-sm transition-all"
+              className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-2 hover:border-fidelis-brown/20 hover:shadow-sm transition-all"
             >
-              <span className="text-xs font-bold text-[#0754C6] uppercase tracking-wider">
+              <span className="text-[13px] font-extrabold text-fidelis-brown uppercase tracking-wider">
                 {String(m.number).padStart(2, "0")} · {m.date}
               </span>
-              <p className="text-sm sm:text-base font-bold text-zinc-900 leading-snug">
+              <p className="text-sm sm:text-base font-semibold text-zinc-900 leading-snug">
                 {m.title}
               </p>
             </div>
           ))}
         </div>
 
-        <p className="text-xs text-zinc-400">
+        <p className="text-xs text-zinc-600">
           Timeline is indicative and subject to change.
         </p>
       </div>
