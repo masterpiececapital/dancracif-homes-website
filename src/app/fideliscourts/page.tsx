@@ -6,9 +6,11 @@ import { Footer } from "@/components/common/footer";
 import { ProjectHero } from "@/components/fidelis-court/project-hero";
 import { UnitMixSection } from "@/components/fidelis-court/unit-mix-section";
 import { FacilitiesSection } from "@/components/fidelis-court/facilities-section";
+import { ConstructionGallery } from "@/components/fidelis-court/construction-gallery";
 import { ConstructionTimeline } from "@/components/fidelis-court/construction-timeline";
 import { ConstructionSection } from "@/components/home/construction-section";
 import { FidelisCtaCards } from "@/components/fidelis-court/fidelis-cta-cards";
+import { FidelisInspectionSection } from "@/components/fidelis-court/fidelis-inspection-section";
 import { LocationSection } from "@/components/fidelis-court/location-section";
 
 export default function FidelisCourtPage() {
@@ -25,25 +27,31 @@ export default function FidelisCourtPage() {
         {/* 1. Project overview hero */}
         <ProjectHero />
 
-        {/* 2. Unit mix + highlights + property images */}
+        {/* 2. Unit mix + highlights + real site photos */}
         <UnitMixSection
-          exteriorImageSrc={"/images/fidelis-court1.jpg"}
-          interiorImageSrc={"/images/fidelis-court2.jpg"}
+          exteriorImageSrc={"/fidelis-court/Building Toward the Mountain Ridge.png"}
+          interiorImageSrc={"/fidelis-court/Bright Renovation Room with Window Views.png"}
         />
 
         {/* 3. Facilities & services */}
         <FacilitiesSection />
 
-        {/* 4. Construction milestones */}
+        {/* 4. Live Construction Photography Gallery */}
+        <ConstructionGallery />
+
+        {/* 5. Construction milestones */}
         <ConstructionTimeline />
 
-        {/* 5. YouTube construction updates */}
+        {/* 6. YouTube construction updates */}
         <ConstructionSection />
 
-        {/* 6. Brochure download + Become an agent */}
+        {/* 7. Brochure download + Become an agent */}
         <FidelisCtaCards />
 
-        {/* 7. Location map + office addresses */}
+        {/* 8. On-site Inspection Booking Form */}
+        <FidelisInspectionSection />
+
+        {/* 9. Location map + office addresses */}
         <LocationSection />
       </main>
 

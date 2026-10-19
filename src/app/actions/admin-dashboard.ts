@@ -178,6 +178,7 @@ export async function updatePropertyUnitAction(
 
   await unitRepo.update(id, data);
   revalidatePath("/admin");
+  revalidatePath("/fideliscourts");
   revalidatePath("/fidelis-court");
   revalidatePath("/pricing");
   return { success: true };

@@ -16,6 +16,7 @@ import { UNIT_OPTIONS, ESTATE_CONTACT } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import { DatePicker } from "@/components/ui/date-picker";
 import { CustomSelect } from "@/components/ui/custom-select";
+import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
 
 const PAYMENT_OPTIONS = [
   { value: "Outright payment", label: "Outright payment" },
@@ -108,8 +109,26 @@ export const ContactSection: React.FC = () => {
 
   const details = getSubmissionDetails();
 
+  const recordLeadInquiry = () => {
+    submitLeadInquiry({
+      type: activeTab,
+      fullName: fullName.trim() || "Website Visitor",
+      phone: phone.trim() || "N/A",
+      email: email.trim() || "N/A",
+      unitType,
+      numberOfUnits: parseInt(numberOfUnits, 10) || 1,
+      paymentOption: activeTab === "buy" ? paymentOption : undefined,
+      preferredDate: activeTab === "inspection" ? preferredDate : undefined,
+      attendees: activeTab === "open-house" ? parseInt(attendees, 10) || 1 : undefined,
+      message: message.trim() || undefined,
+    }).catch((err) => {
+      console.warn("Could not save inquiry to database:", err);
+    });
+  };
+
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLeadInquiry();
     const text = `Hello Dangracif Homes,\n\n${details.summary}`;
     window.open(
       `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
@@ -119,6 +138,7 @@ export const ContactSection: React.FC = () => {
 
   const handleEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLeadInquiry();
     window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
       details.subject
     )}&body=${encodeURIComponent(details.summary)}`;

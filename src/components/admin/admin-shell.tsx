@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -185,18 +186,15 @@ export function AdminShell({ user, children }: AdminShellProps) {
       >
         {/* Brand Header */}
         <div className="h-18 px-6 border-b border-slate-100 flex items-center justify-between">
-          <Link href="/admin" className="flex items-center gap-3 group select-none">
-            <div className="h-9 w-9 rounded-xl bg-[#0754C6] text-white flex items-center justify-center font-bold text-lg shadow-sm shadow-[#0754C6]/25 group-hover:scale-105 transition-transform">
-              D
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-bold text-slate-900 tracking-tight">
-                Dangracif Homes
-              </span>
-              <span className="text-[10px] font-semibold text-[#0754C6] tracking-wider uppercase">
-                Admin Portal
-              </span>
-            </div>
+          <Link href="/admin" className="relative h-12 w-36 block group select-none transition-transform duration-200 group-hover:scale-105">
+            <Image
+              src="/images/logo.png"
+              alt="Dangracif Homes Limited"
+              fill
+              sizes="150px"
+              className="object-contain"
+              priority
+            />
           </Link>
 
           <button

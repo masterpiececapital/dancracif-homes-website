@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Instagram, Youtube, Facebook } from "lucide-react";
 import { ESTATE_CONTACT } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
@@ -21,9 +22,17 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Col 1: Brand & Head Office (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-xl font-bold text-white tracking-tight">
-              Dangracif Homes
-            </h3>
+            <Link href="/" className="inline-block group select-none">
+              <div className="bg-white rounded-2xl px-4 py-2.5 inline-flex items-center shadow-md transition-transform duration-200 group-hover:scale-105">
+                <Image
+                  src="/images/logo.png"
+                  alt="Dangracif Homes Limited"
+                  width={160}
+                  height={108}
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
+            </Link>
             <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm">
               Building beautiful, durable and thoughtfully designed communities in Abuja.
             </p>

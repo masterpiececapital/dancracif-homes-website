@@ -14,7 +14,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
   const pathname = usePathname();
-  const isFidelisCourtPage = pathname === "/fidelis-court";
+  const isFidelisCourtPage = pathname === "/fideliscourts" || pathname === "/fidelis-court";
   const router = useRouter();
   const [isScrolled, setIsScrolled] = React.useState(false);
 
@@ -41,8 +41,8 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
       className={cn(
         "sticky top-0 z-40 w-full transition-all duration-300",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-zinc-200/70 shadow-sm"
-          : "bg-white border-b border-zinc-100",
+          ? "bg-white/90 backdrop-blur-md shadow-sm"
+          : "bg-white",
       )}
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-3 h-18 flex items-center justify-between">

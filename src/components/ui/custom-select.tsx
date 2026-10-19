@@ -17,6 +17,9 @@ interface SelectProps {
   options: SelectOption[];
   placeholder?: string;
   className?: string;
+  label?: string;
+  required?: boolean;
+  variant?: "default" | "fidelis-brown";
 }
 
 export const CustomSelect: React.FC<SelectProps> = ({
@@ -25,6 +28,9 @@ export const CustomSelect: React.FC<SelectProps> = ({
   options,
   placeholder = "Select an option",
   className,
+  label,
+  required,
+  variant = "default",
 }) => {
   const [open, setOpen] = React.useState(false);
   const [openAbove, setOpenAbove] = React.useState(false);
@@ -82,24 +88,37 @@ export const CustomSelect: React.FC<SelectProps> = ({
   }, []);
 
   return (
-    <div ref={ref} className={cn("relative w-full", className)}>
+    <div ref={ref} className={cn("relative w-full flex flex-col gap-1.5", className)}>
+      {label && (
+        <label className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
+
       {/* Trigger */}
       <button
         ref={triggerRef}
         type="button"
         onClick={handleToggle}
         className={cn(
-          "w-full flex items-center justify-between gap-2",
-          "rounded-xl border border-slate-200/90 px-4 py-3 text-sm bg-white",
-          "focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6]",
-          "transition-colors cursor-pointer text-left",
-          open && "border-[#0754C6] ring-1 ring-[#0754C6]"
+          "w-full h-11 flex items-center justify-between gap-2",
+          "rounded-xl border border-zinc-200 dark:border-zinc-700 px-3.5 text-sm bg-white dark:bg-zinc-900",
+          variant === "fidelis-brown"
+            ? "focus:outline-none focus:border-fidelis-brown focus:ring-2 focus:ring-fidelis-brown/20"
+            : "focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15",
+          "transition-all cursor-pointer text-left",
+          open && (
+            variant === "fidelis-brown"
+              ? "border-fidelis-brown ring-2 ring-fidelis-brown/20"
+              : "border-[#0754C6] ring-2 ring-[#0754C6]/15"
+          )
         )}
       >
         <span
           className={cn(
             "truncate flex-1 min-w-0 text-left",
-            selected ? "text-slate-900 font-medium" : "text-slate-400"
+            selected ? "text-slate-900 dark:text-slate-100 font-medium" : "text-zinc-400 dark:text-zinc-500"
           )}
         >
           {selected ? selected.label : placeholder}
@@ -122,7 +141,7 @@ export const CustomSelect: React.FC<SelectProps> = ({
             exit={{ opacity: 0, y: openAbove ? 6 : -6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             className={cn(
-              "absolute z-50 w-full left-0 bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 py-1.5 overflow-hidden max-h-60 overflow-y-auto",
+              "absolute z-50 w-full left-0 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-xl shadow-slate-200/60 dark:shadow-black/40 py-1.5 overflow-hidden max-h-60 overflow-y-auto",
               openAbove ? "bottom-full mb-2" : "top-full mt-2"
             )}
           >
@@ -140,13 +159,20 @@ export const CustomSelect: React.FC<SelectProps> = ({
                     "w-full flex items-center justify-between gap-2 px-4 py-2.5 text-sm text-left",
                     "transition-colors cursor-pointer",
                     isActive
-                      ? "bg-[#EAF2FE] text-[#0754C6] font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? variant === "fidelis-brown"
+                        ? "bg-fidelis-brown/10 text-fidelis-brown font-semibold"
+                        : "bg-[#EAF2FE] text-[#0754C6] font-semibold"
+                      : "text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-800/60"
                   )}
                 >
                   <span className="truncate flex-1 min-w-0">{opt.label}</span>
                   {isActive && (
-                    <Check className="h-3.5 w-3.5 shrink-0 text-[#0754C6]" />
+                    <Check
+                      className={cn(
+                        "h-3.5 w-3.5 shrink-0",
+                        variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#0754C6]"
+                      )}
+                    />
                   )}
                 </button>
               );

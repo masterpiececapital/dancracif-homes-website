@@ -3,8 +3,19 @@
 import * as React from "react";
 import { BLOG_POSTS } from "@/constants/blog";
 import { BlogCard } from "./blog-card";
+import { getPublicBlogPosts } from "@/app/actions/public-content";
 
 export const BlogHero: React.FC = () => {
+  const [posts, setPosts] = React.useState(BLOG_POSTS);
+
+  React.useEffect(() => {
+    getPublicBlogPosts().then((dbPosts) => {
+      if (dbPosts && dbPosts.length > 0) {
+        setPosts(dbPosts as any);
+      }
+    });
+  }, []);
+
   return (
     <section className="w-full bg-white py-6 sm:py-10 lg:py-14">
       <div className="max-w-7xl mx-auto px-2 sm:px-3">
@@ -20,7 +31,7 @@ export const BlogHero: React.FC = () => {
 
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-          {BLOG_POSTS.map((post) => (
+          {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}
         </div>

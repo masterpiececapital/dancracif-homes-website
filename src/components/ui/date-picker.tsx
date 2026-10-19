@@ -9,9 +9,11 @@ interface DatePickerProps {
   value: string; // "YYYY-MM-DD"
   onChange: (value: string) => void;
   label?: string;
+  required?: boolean;
   placeholder?: string;
   minDate?: Date;
   className?: string;
+  variant?: "default" | "fidelis-brown";
 }
 
 const MONTHS = [
@@ -42,9 +44,12 @@ function toYMD(date: Date): string {
 export const DatePicker: React.FC<DatePickerProps> = ({
   value,
   onChange,
+  label,
+  required,
   placeholder = "Select a date",
   minDate,
   className,
+  variant = "default",
 }) => {
   const [open, setOpen] = React.useState(false);
   const [openAbove, setOpenAbove] = React.useState(false);
@@ -154,24 +159,37 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   );
 
   return (
-    <div ref={ref} className={cn("relative w-full", className)}>
+    <div ref={ref} className={cn("relative w-full flex flex-col gap-1.5", className)}>
+      {label && (
+        <label className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
+
       {/* Trigger */}
       <button
         ref={triggerRef}
         type="button"
         onClick={handleToggle}
         className={cn(
-          "w-full flex items-center justify-between gap-2",
-          "rounded-xl border border-slate-200/90 px-4 py-3 text-sm bg-white",
-          "focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6]",
-          "transition-colors cursor-pointer text-left",
-          open && "border-[#0754C6] ring-1 ring-[#0754C6]"
+          "w-full h-11 flex items-center justify-between gap-2",
+          "rounded-xl border border-zinc-200 dark:border-zinc-700 px-3.5 text-sm bg-white dark:bg-zinc-900",
+          variant === "fidelis-brown"
+            ? "focus:outline-none focus:border-fidelis-brown focus:ring-2 focus:ring-fidelis-brown/20"
+            : "focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15",
+          "transition-all cursor-pointer text-left",
+          open && (
+            variant === "fidelis-brown"
+              ? "border-fidelis-brown ring-2 ring-fidelis-brown/20"
+              : "border-[#0754C6] ring-2 ring-[#0754C6]/15"
+          )
         )}
       >
         <span
           className={cn(
             "flex items-center gap-2 truncate flex-1 min-w-0 text-left",
-            value ? "text-slate-900 font-medium" : "text-slate-400"
+            value ? "text-slate-900 dark:text-slate-100 font-medium" : "text-zinc-400 dark:text-zinc-500"
           )}
         >
           <Calendar className="h-4 w-4 shrink-0 text-slate-400" />
@@ -191,7 +209,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             exit={{ opacity: 0, y: openAbove ? 6 : -6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             className={cn(
-              "absolute z-50 w-72 max-w-[calc(100vw-2rem)] bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-4",
+              "absolute z-50 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-xl shadow-slate-200/60 dark:shadow-black/40 p-4",
               openAbove ? "bottom-full mb-2" : "top-full mt-2",
               alignRight ? "right-0" : "left-0"
             )}
@@ -201,19 +219,19 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={prevMonth}
-                className="h-8 w-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+                className="h-8 w-8 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
               >
-                <ChevronLeft className="h-4 w-4 text-slate-600" />
+                <ChevronLeft className="h-4 w-4 text-slate-600 dark:text-zinc-400" />
               </button>
-              <span className="text-sm font-semibold text-slate-900">
+              <span className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
                 {MONTHS[viewMonth]} {viewYear}
               </span>
               <button
                 type="button"
                 onClick={nextMonth}
-                className="h-8 w-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer"
+                className="h-8 w-8 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
               >
-                <ChevronRight className="h-4 w-4 text-slate-600" />
+                <ChevronRight className="h-4 w-4 text-slate-600 dark:text-zinc-400" />
               </button>
             </div>
 
@@ -242,10 +260,22 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                     className={cn(
                       "h-9 w-full rounded-full text-sm font-medium transition-all cursor-pointer",
                       "flex items-center justify-center",
-                      disabled && "text-slate-300 cursor-not-allowed",
-                      !disabled && !sel && "text-slate-700 hover:bg-[#0754C6]/10 hover:text-[#0754C6]",
-                      tod && !sel && "font-bold text-[#0754C6]",
-                      sel && "bg-[#0754C6] text-white shadow-sm shadow-[#0754C6]/30"
+                      disabled && "text-slate-300 dark:text-zinc-600 cursor-not-allowed",
+                      !disabled && !sel && (
+                        variant === "fidelis-brown"
+                          ? "text-slate-700 dark:text-zinc-200 hover:bg-fidelis-brown/10 hover:text-fidelis-brown"
+                          : "text-slate-700 dark:text-zinc-200 hover:bg-[#0754C6]/10 hover:text-[#0754C6]"
+                      ),
+                      tod && !sel && (
+                        variant === "fidelis-brown"
+                          ? "font-bold text-fidelis-brown"
+                          : "font-bold text-[#0754C6]"
+                      ),
+                      sel && (
+                        variant === "fidelis-brown"
+                          ? "bg-fidelis-brown text-white shadow-sm shadow-fidelis-brown/30"
+                          : "bg-[#0754C6] text-white shadow-sm shadow-[#0754C6]/30"
+                      )
                     )}
                   >
                     {day}
@@ -255,7 +285,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             </div>
 
             {/* Today shortcut */}
-            <div className="mt-3 pt-3 border-t border-slate-100 flex justify-end">
+            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-zinc-800 flex justify-end">
               <button
                 type="button"
                 onClick={() => {
@@ -264,7 +294,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   setViewMonth(today.getMonth());
                   setOpen(false);
                 }}
-                className="text-xs font-semibold text-[#0754C6] hover:underline cursor-pointer"
+                className={cn(
+                  "text-xs font-semibold hover:underline cursor-pointer",
+                  variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#0754C6]"
+                )}
               >
                 Today
               </button>

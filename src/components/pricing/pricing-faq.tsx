@@ -4,6 +4,7 @@ import * as React from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { getPublicFaqs } from "@/app/actions/public-content";
 
 const PRICING_FAQS = [
   {
@@ -29,8 +30,17 @@ const PRICING_FAQS = [
 ];
 
 export const PricingFaq: React.FC = () => {
+  const [faqs, setFaqs] = React.useState(PRICING_FAQS);
   const [open, setOpen] = React.useState<number | null>(0);
   const [hovered, setHovered] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    getPublicFaqs().then((dbFaqs) => {
+      if (dbFaqs && dbFaqs.length > 0) {
+        setFaqs(dbFaqs);
+      }
+    });
+  }, []);
 
   return (
     <section className="w-full bg-white py-14 sm:py-18">
@@ -40,7 +50,7 @@ export const PricingFaq: React.FC = () => {
         </h2>
 
         <div className="divide-y divide-zinc-100">
-          {PRICING_FAQS.map((faq, i) => {
+          {faqs.map((faq, i) => {
             const isOpen = open === i;
             return (
               <div key={i}>

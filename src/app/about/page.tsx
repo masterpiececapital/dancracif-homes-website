@@ -4,8 +4,13 @@ import * as React from "react";
 import { Header } from "@/components/common/header";
 import { Footer } from "@/components/common/footer";
 import { AboutHero } from "@/components/about/about-hero";
+import { CompanyBackground } from "@/components/about/company-background";
+import { CeoProfile } from "@/components/about/ceo-profile";
+import { VisionMission } from "@/components/about/vision-mission";
 import { CoreValues } from "@/components/about/core-values";
-import { Leadership } from "@/components/about/leadership";
+import { AreasOfExpertise } from "@/components/about/areas-of-expertise";
+import { OurApproach } from "@/components/about/our-approach";
+import { BrandPromise } from "@/components/about/brand-promise";
 
 export default function AboutPage() {
   const scrollToContact = () => {
@@ -20,14 +25,29 @@ export default function AboutPage() {
       <Header onBookInspectionClick={scrollToContact} />
 
       <main className="flex-1">
-        {/* 1. Hero Section */}
-        <AboutHero />
+        {/* 1. Hero — Full-bleed dark intro with company tagline */}
+        {/* <AboutHero /> */}
 
-        {/* 2. Core Values Section */}
+        {/* 2. Company Background — Image + narrative */}
+        <CompanyBackground />
+
+        {/* 3. CEO Profile — Executive leadership */}
+        <CeoProfile />
+
+        {/* 4. Vision & Mission — Side-by-side cards */}
+        <VisionMission />
+
+        {/* 4. Core Values — 8-card grid */}
         <CoreValues />
 
-        {/* 3. Leadership / Principal Officers Section */}
-        <Leadership />
+        {/* 5. Areas of Expertise — Sticky sidebar + grid */}
+        <AreasOfExpertise />
+
+        {/* 6. Our Approach — Dark section with principles */}
+        <OurApproach />
+
+        {/* 7. Brand Promise — Gradient CTA card */}
+        <BrandPromise />
       </main>
 
       <Footer />

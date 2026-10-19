@@ -129,7 +129,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
           <ViewToggle view={view} onChange={setView} />
 
           <Link
-            href="/fidelis-court"
+            href="/fideliscourts"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-[#0754C6] text-xs font-semibold shadow-2xs transition-all"

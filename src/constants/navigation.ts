@@ -1,7 +1,7 @@
 import { NavItem, UnitOption } from "@/types";
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Fidelis Court", href: "/fidelis-court" },
+  { label: "Fidelis Court", href: "/fideliscourts" },
   { label: "Pricing & Plans", href: "/pricing" },
   { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },

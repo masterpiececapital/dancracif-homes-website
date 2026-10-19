@@ -1,23 +1,38 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import { MessageSquare, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { CustomSelect } from "@/components/ui/custom-select";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { UNIT_OPTIONS } from "@/constants/navigation";
 import { InspectionFormData } from "@/types";
+import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
 
 interface InspectionFormProps {
   onSubmitWhatsApp?: (data: InspectionFormData) => void;
   onSubmitEmail?: (data: InspectionFormData) => void;
+  buttonVariant?: "primary" | "fidelis-brown";
+  variant?: "default" | "fidelis-brown";
 }
 
 export const InspectionForm: React.FC<InspectionFormProps> = ({
   onSubmitWhatsApp,
   onSubmitEmail,
+  buttonVariant = "primary",
+  variant,
 }) => {
+  const pathname = usePathname();
+  const isFidelis =
+    variant === "fidelis-brown" ||
+    buttonVariant === "fidelis-brown" ||
+    pathname === "/fideliscourts" ||
+    pathname === "/fidelis-court";
+  const inputVariant = isFidelis ? "fidelis-brown" : "default";
+
   const [formData, setFormData] = React.useState<InspectionFormData>({
     fullName: "",
     phone: "",
@@ -34,8 +49,23 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const recordLead = () => {
+    submitLeadInquiry({
+      type: "inspection",
+      fullName: formData.fullName.trim() || "Website Visitor",
+      phone: formData.phone.trim() || "N/A",
+      email: formData.email.trim() || "N/A",
+      unitType: formData.unitType,
+      preferredDate: formData.preferredDate || undefined,
+      message: formData.message?.trim() || undefined,
+    }).catch((err) => {
+      console.warn("Could not save inspection lead:", err);
+    });
+  };
+
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLead();
     if (onSubmitWhatsApp) {
       onSubmitWhatsApp(formData);
     } else {
@@ -50,6 +80,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
 
   const handleEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLead();
     if (onSubmitEmail) {
       onSubmitEmail(formData);
     } else {
@@ -79,6 +110,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
           placeholder="e.g. John Doe"
           value={formData.fullName}
           onChange={(e) => handleChange("fullName", e.target.value)}
+          variant={inputVariant}
           required
         />
 
@@ -90,6 +122,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
             placeholder="+234..."
             value={formData.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
+            variant={inputVariant}
             required
           />
 
@@ -99,27 +132,31 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
             placeholder="name@domain.com"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
+            variant={inputVariant}
             required
           />
         </div>
 
         {/* Unit Type & Date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Select
+          <CustomSelect
             label="Unit type"
             value={formData.unitType}
-            onChange={(e) => handleChange("unitType", e.target.value)}
+            onChange={(val) => handleChange("unitType", val)}
             options={UNIT_OPTIONS.map((u) => ({
               label: u.label,
               value: u.value,
             }))}
+            variant={inputVariant}
+            required
           />
 
-          <Input
+          <DatePicker
             label="Preferred inspection date"
-            type="date"
             value={formData.preferredDate}
-            onChange={(e) => handleChange("preferredDate", e.target.value)}
+            onChange={(val) => handleChange("preferredDate", val)}
+            placeholder="Select a date"
+            variant={inputVariant}
             required
           />
         </div>
@@ -130,13 +167,14 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
           placeholder="Any specific questions or request..."
           value={formData.message}
           onChange={(e) => handleChange("message", e.target.value)}
+          variant={inputVariant}
         />
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-3.5 pt-2">
           <Button
             type="button"
-            variant="primary"
+            variant={isFidelis ? "fidelis-brown" : "primary"}
             size="md"
             onClick={handleWhatsApp}
             leftIcon={<MessageSquare className="h-4 w-4" />}
@@ -146,7 +184,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
 
           <Button
             type="button"
-            variant="outline"
+            variant={isFidelis ? "fidelis-brown-outline" : "outline"}
             size="md"
             onClick={handleEmail}
             leftIcon={<Mail className="h-4 w-4" />}

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { getPublicMilestones } from "@/app/actions/public-content";
 
 const MILESTONES = [
   {
@@ -26,6 +27,22 @@ const MILESTONES = [
 ];
 
 export const ConstructionTimeline: React.FC = () => {
+  const [milestones, setMilestones] = React.useState(MILESTONES);
+
+  React.useEffect(() => {
+    getPublicMilestones().then((dbMilestones) => {
+      if (dbMilestones && dbMilestones.length > 0) {
+        setMilestones(
+          dbMilestones.map((m: any, idx: number) => ({
+            number: String(idx + 1).padStart(2, "0"),
+            date: m.date,
+            title: m.title,
+          }))
+        );
+      }
+    });
+  }, []);
+
   return (
     <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
@@ -44,7 +61,7 @@ export const ConstructionTimeline: React.FC = () => {
 
         {/* Timeline cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {MILESTONES.map((m) => (
+          {milestones.map((m) => (
             <div
               key={m.number}
               className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-2 hover:border-fidelis-brown/20 hover:shadow-sm transition-all"

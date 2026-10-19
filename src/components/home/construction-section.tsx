@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { Play, Radio, ExternalLink, Youtube } from "lucide-react";
 
 export const ConstructionSection: React.FC = () => {
-  const isFidelisCourtPage = usePathname() === "/fidelis-court";
+  const pathname = usePathname();
+  const isFidelisCourtPage = pathname === "/fideliscourts" || pathname === "/fidelis-court";
   const [activeTab, setActiveTab] = React.useState<"latest" | "live">("latest");
 
   return (

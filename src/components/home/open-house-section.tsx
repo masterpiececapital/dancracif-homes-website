@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { Users, MapPin, MessageSquare, Mail, ChevronDown } from "lucide-react";
 import { OpenHouseFormData } from "@/types";
+import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
 
 export const OpenHouseSection: React.FC = () => {
   const [formData, setFormData] = React.useState<OpenHouseFormData>({
@@ -22,8 +23,23 @@ export const OpenHouseSection: React.FC = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const recordLead = () => {
+    submitLeadInquiry({
+      type: "open-house",
+      fullName: formData.fullName.trim() || "Website Visitor",
+      phone: formData.phone.trim() || "N/A",
+      email: formData.email.trim() || "N/A",
+      unitType: formData.homeOfInterest,
+      attendees: Number(formData.attendees) || 1,
+      message: formData.message?.trim() || undefined,
+    }).catch((err) => {
+      console.warn("Could not save open house lead:", err);
+    });
+  };
+
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLead();
     const text = `Hello Dangracif Homes, I would like to register for the Fidelis Court Open House.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
     window.open(
       `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
@@ -33,6 +49,7 @@ export const OpenHouseSection: React.FC = () => {
 
   const handleEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    recordLead();
     const subject = `Open House Registration - ${formData.fullName}`;
     const body = `Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
     window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(

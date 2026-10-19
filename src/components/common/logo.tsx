@@ -1,53 +1,31 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
-  brandColor?: "primary" | "fidelis-brown";
+  brandColor?: string;
 }
 
-export const Logo: React.FC<LogoProps> = ({
-  className,
-  brandColor = "primary",
-}) => {
+export const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
     <Link
       href="/"
-      className={cn("flex items-center gap-2.5 group select-none", className)}
+      className={cn("inline-flex items-center group select-none shrink-0", className)}
+      aria-label="Dangracif Homes"
     >
-      <div
-        className={cn(
-          "h-9 w-9 rounded-xl text-white flex items-center justify-center font-bold text-lg shadow-sm transition-transform group-hover:scale-105",
-          brandColor === "fidelis-brown"
-            ? "bg-white text-fidelis-brown shadow-black/15"
-            : "bg-[#0754C6] shadow-[#0754C6]/25"
-        )}
-      >
-        D
-      </div>
-      <div className="flex flex-col leading-tight">
-        <span
-          className={cn(
-            "text-base font-bold tracking-tight",
-            brandColor === "fidelis-brown"
-              ? "text-white"
-              : "text-zinc-900 dark:text-zinc-100"
-          )}
-        >
-          Dangracif Homes
-        </span>
-        <span
-          className={cn(
-            "text-[9.5px] font-semibold tracking-wider uppercase",
-            brandColor === "fidelis-brown"
-              ? "text-white/70"
-              : "text-zinc-400 dark:text-zinc-500"
-          )}
-        >
-          Real Estate Developer
-        </span>
+      <div className="relative h-11 sm:h-12 w-[150px] sm:w-[180px] shrink-0 scale-x-115 origin-left">
+        <Image
+          src="/images/logo.png"
+          alt="Dangracif Homes"
+          fill
+          sizes="200px"
+          className="object-contain object-left transition-transform duration-200 group-hover:scale-105"
+          priority
+        />
       </div>
     </Link>
   );
 };
+

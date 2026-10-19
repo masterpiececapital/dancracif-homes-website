@@ -77,14 +77,18 @@ function LoginFormInner() {
       <div className="w-full max-w-[1220px] mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 xl:gap-12">
         {/* ─── LEFT SIDE: Login Form (Increased to max-w-[500px]) ─── */}
         <div className="w-full max-w-[480px] lg:max-w-[500px] shrink-0">
-          {/* Brand Logo & Name: Centered */}
-          <div className="flex items-center justify-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#0754C6] text-white flex items-center justify-center font-bold text-base shadow-sm shadow-[#0754C6]/30">
-              D
+          {/* Brand Logo: Centered */}
+          <div className="flex justify-center">
+            <div className="relative w-48 sm:w-56 h-20 sm:h-24">
+              <Image
+                src="/images/logo.png"
+                alt="Dangracif Homes Limited"
+                fill
+                sizes="240px"
+                className="object-contain"
+                priority
+              />
             </div>
-            <span className="text-2xl font-black text-slate-900 tracking-tight">
-              Dangracif.
-            </span>
           </div>
 
           {/* Heading & Subtitle: Centered */}
