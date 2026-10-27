@@ -15,85 +15,44 @@ export default function BookInspectionPage() {
   const [preferredDate, setPreferredDate] = React.useState("");
   const [message, setMessage] = React.useState("");
 
-  const [submitting, setSubmitting] = React.useState<"whatsapp" | "email" | null>(null);
-  const [successMsg, setSuccessMsg] = React.useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
-
   const getActiveUnitLabel = () => {
     const found = UNIT_OPTIONS.find((u) => u.value === unitType);
     return found ? found.label : "2-Bedroom Apartment — ₦80,000,000";
   };
 
-  const recordLead = async () => {
-    try {
-      const res = await submitLeadInquiry({
-        type: "inspection",
-        fullName: fullName.trim() || "Website Visitor",
-        phone: phone.trim() || "N/A",
-        email: email.trim() || "N/A",
-        unitType,
-        preferredDate: preferredDate || undefined,
-        message: message.trim() || undefined,
-      });
-      return res;
-    } catch (err) {
+  const recordLead = () => {
+    submitLeadInquiry({
+      type: "inspection",
+      fullName: fullName.trim() || "Website Visitor",
+      phone: phone.trim() || "N/A",
+      email: email.trim() || "N/A",
+      unitType,
+      preferredDate: preferredDate || undefined,
+      message: message.trim() || undefined,
+    }).catch((err) => {
       console.warn("Could not record lead:", err);
-      return { success: false };
-    }
+    });
   };
 
-  const validateForm = () => {
-    setErrorMsg(null);
-    if (!fullName.trim()) {
-      setErrorMsg("Please enter your full name.");
-      return false;
-    }
-    if (!phone.trim() && !email.trim()) {
-      setErrorMsg("Please provide either your phone number or email.");
-      return false;
-    }
-    return true;
-  };
-
-  const handleWhatsApp = async (e: React.FormEvent) => {
+  const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
-    setSubmitting("whatsapp");
-    setSuccessMsg("Saving your inspection request...");
-    await recordLead();
-    setSubmitting(null);
-    setSuccessMsg("Your inspection request was recorded! Opening WhatsApp...");
-
-    const text = `Hello Dangracif Homes, I would like to book an inspection for Fidelis Court.\n\nFull Name: ${
-      fullName || "N/A"
-    }\nPhone: ${phone || "N/A"}\nEmail: ${email || "N/A"}\nUnit: ${getActiveUnitLabel()}\nPreferred Date: ${
-      preferredDate || "N/A"
-    }\nMessage: ${message || "N/A"}`;
-
+    recordLead();
+    const text = `Hello Dangracif Homes, I would like to book an inspection for Fidelis Court.\n\nFull Name: ${fullName || "N/A"
+      }\nPhone: ${phone || "N/A"}\nEmail: ${email || "N/A"}\nUnit: ${getActiveUnitLabel()}\nPreferred Date: ${preferredDate || "N/A"
+      }\nMessage: ${message || "N/A"}`;
     window.open(
       `https://wa.me/2348133187860?text=${encodeURIComponent(text)}`,
       "_blank"
     );
   };
 
-  const handleEmail = async (e: React.FormEvent) => {
+  const handleEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
-    setSubmitting("email");
-    setSuccessMsg("Saving your inspection request...");
-    await recordLead();
-    setSubmitting(null);
-    setSuccessMsg("Your inspection request was recorded! Opening your email app...");
-
+    recordLead();
     const subject = `Inspection Booking - ${fullName || "Fidelis Court"}`;
-    const body = `Request: Book an Inspection\n\nFull Name: ${
-      fullName || "N/A"
-    }\nPhone: ${phone || "N/A"}\nEmail: ${email || "N/A"}\nUnit: ${getActiveUnitLabel()}\nPreferred Date: ${
-      preferredDate || "N/A"
-    }\nMessage: ${message || "N/A"}`;
-
+    const body = `Request: Book an Inspection\n\nFull Name: ${fullName || "N/A"
+      }\nPhone: ${phone || "N/A"}\nEmail: ${email || "N/A"}\nUnit: ${getActiveUnitLabel()}\nPreferred Date: ${preferredDate || "N/A"
+      }\nMessage: ${message || "N/A"}`;
     window.location.href = `mailto:info@dangracif.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
@@ -103,7 +62,7 @@ export default function BookInspectionPage() {
     <div className="min-h-screen bg-[#FAFCFE] text-zinc-900 flex flex-col antialiased">
       <Header />
 
-      <main className="flex-1 w-full bg-[#FAFCFE] py-6 sm:py-8 lg:py-10">
+      <main className="flex-1 w-full bg-[#FAFCFE] py-8 sm:py-10 lg:py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           {/* Eyebrow */}
           <span className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
@@ -206,42 +165,24 @@ export default function BookInspectionPage() {
               />
             </div>
 
-            {/* Error & Success Feedback */}
-            {errorMsg && (
-              <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-medium">
-                {errorMsg}
-              </div>
-            )}
-            {successMsg && (
-              <div className="p-3.5 rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm font-medium">
-                {successMsg}
-              </div>
-            )}
-
             {/* Action buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
               <button
                 type="button"
-                disabled={submitting !== null}
                 onClick={handleWhatsApp}
-                className="w-full bg-[#0754C6] hover:bg-[#0648AB] disabled:opacity-60 text-white font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#0754C6]/20 cursor-pointer"
+                className="w-full bg-[#0754C6] hover:bg-[#0648AB] text-white font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#0754C6]/20 cursor-pointer"
               >
                 <MessageCircle className="w-5 h-5" />
-                <span>
-                  {submitting === "whatsapp" ? "Saving..." : "Send via WhatsApp"}
-                </span>
+                <span>Send via WhatsApp</span>
               </button>
 
               <button
                 type="button"
-                disabled={submitting !== null}
                 onClick={handleEmail}
-                className="w-full bg-white hover:bg-blue-50/50 disabled:opacity-60 text-[#0754C6] border-2 border-[#0754C6] font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                className="w-full bg-white hover:bg-blue-50/50 text-[#0754C6] border-2 border-[#0754C6] font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
                 <Mail className="w-5 h-5 text-[#0754C6]" />
-                <span>
-                  {submitting === "email" ? "Saving..." : "Send via Email"}
-                </span>
+                <span>Send via Email</span>
               </button>
             </div>
           </form>
