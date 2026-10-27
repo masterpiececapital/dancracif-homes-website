@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { MapPin, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -59,9 +60,6 @@ export const LocationSection: React.FC = () => {
                   {loc.address}
                 </span>
               </div>
-              <p className="text-sm text-fidelis-brown font-medium leading-relaxed">
-                {loc.note}
-              </p>
             </div>
           ))}
         </div>
@@ -94,12 +92,16 @@ export const LocationSection: React.FC = () => {
 
         {/* CTA buttons below map */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <Button variant="fidelis-brown" size="lg" className="!py-6">
-            Book an Inspection
-          </Button>
-          <Button variant="fidelis-brown-outline" size="lg">
-            View Pricing
-          </Button>
+          <Link href="/book-inspection">
+            <Button variant="fidelis-brown" size="lg" className="!py-6">
+              Book an Inspection
+            </Button>
+          </Link>
+          <Link href="/pricing">
+            <Button variant="fidelis-brown-outline" size="lg">
+              View Pricing
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

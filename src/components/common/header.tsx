@@ -32,20 +32,20 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
     if (onBookInspectionClick) {
       onBookInspectionClick();
     } else {
-      router.push("/contact");
+      router.push("/book-inspection");
     }
   };
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-300",
+        "sticky top-0 z-40 w-full border-b border-zinc-200/80 transition-all duration-300",
         isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm"
+          ? "bg-white/90 backdrop-blur-md shadow-xs"
           : "bg-white",
       )}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-22 lg:h-24 flex items-center justify-between">
         {/* Brand Logo */}
         <Logo />
 

@@ -4,13 +4,10 @@ import * as React from "react";
 import { Header } from "@/components/common/header";
 import { Footer } from "@/components/common/footer";
 import { AboutHero } from "@/components/about/about-hero";
-import { CompanyBackground } from "@/components/about/company-background";
-import { CeoProfile } from "@/components/about/ceo-profile";
 import { VisionMission } from "@/components/about/vision-mission";
 import { CoreValues } from "@/components/about/core-values";
 import { AreasOfExpertise } from "@/components/about/areas-of-expertise";
-import { OurApproach } from "@/components/about/our-approach";
-import { BrandPromise } from "@/components/about/brand-promise";
+import { CeoProfile } from "@/components/about/ceo-profile";
 
 export default function AboutPage() {
   const scrollToContact = () => {
@@ -25,29 +22,20 @@ export default function AboutPage() {
       <Header onBookInspectionClick={scrollToContact} />
 
       <main className="flex-1">
-        {/* 1. Hero — Full-bleed dark intro with company tagline */}
-        {/* <AboutHero /> */}
+        {/* 1. Hero — Dangracif Homes Limited overview + Fidelis Court image */}
+        <AboutHero />
 
-        {/* 2. Company Background — Image + narrative */}
-        <CompanyBackground />
+        {/* 2 & 3. Vision, Mission & Core Values — Soft sky blue continuous section */}
+        <section className="w-full bg-[#edf4fc] py-16 sm:py-24">
+          <VisionMission />
+          <CoreValues />
+        </section>
 
-        {/* 3. CEO Profile — Executive leadership */}
-        <CeoProfile />
-
-        {/* 4. Vision & Mission — Side-by-side cards */}
-        <VisionMission />
-
-        {/* 4. Core Values — 8-card grid */}
-        <CoreValues />
-
-        {/* 5. Areas of Expertise — Sticky sidebar + grid */}
+        {/* 4. Areas of Expertise — 6 service items + Dangracif Mall */}
         <AreasOfExpertise />
 
-        {/* 6. Our Approach — Dark section with principles */}
-        <OurApproach />
-
-        {/* 7. Brand Promise — Gradient CTA card */}
-        <BrandPromise />
+        {/* 5. Leadership — Major General Okwudili Fidelis Azinta (Rtd.) */}
+        <CeoProfile />
       </main>
 
       <Footer />

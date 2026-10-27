@@ -5,12 +5,13 @@ import { Header } from "@/components/common/header";
 import { Footer } from "@/components/common/footer";
 import { ProjectHero } from "@/components/fidelis-court/project-hero";
 import { UnitMixSection } from "@/components/fidelis-court/unit-mix-section";
+import { FidelisHomesSection } from "@/components/fidelis-court/fidelis-homes-section";
 import { FacilitiesSection } from "@/components/fidelis-court/facilities-section";
-import { ConstructionGallery } from "@/components/fidelis-court/construction-gallery";
+// import { ConstructionGallery } from "@/components/fidelis-court/construction-gallery";
 import { ConstructionTimeline } from "@/components/fidelis-court/construction-timeline";
 import { ConstructionSection } from "@/components/home/construction-section";
 import { FidelisCtaCards } from "@/components/fidelis-court/fidelis-cta-cards";
-import { FidelisInspectionSection } from "@/components/fidelis-court/fidelis-inspection-section";
+// import { FidelisInspectionSection } from "@/components/fidelis-court/fidelis-inspection-section";
 import { LocationSection } from "@/components/fidelis-court/location-section";
 
 export default function FidelisCourtPage() {
@@ -33,11 +34,14 @@ export default function FidelisCourtPage() {
           interiorImageSrc={"/fidelis-court/Bright Renovation Room with Window Views.png"}
         />
 
+        {/* 2b. Homes at Fidelis Court (Unit models with fidelis-brown branding) */}
+        <FidelisHomesSection onReserveUnit={scrollToContact} />
+
         {/* 3. Facilities & services */}
         <FacilitiesSection />
 
         {/* 4. Live Construction Photography Gallery */}
-        <ConstructionGallery />
+        {/* <ConstructionGallery /> */}
 
         {/* 5. Construction milestones */}
         <ConstructionTimeline />
@@ -49,7 +53,7 @@ export default function FidelisCourtPage() {
         <FidelisCtaCards />
 
         {/* 8. On-site Inspection Booking Form */}
-        <FidelisInspectionSection />
+        {/* <FidelisInspectionSection /> */}
 
         {/* 9. Location map + office addresses */}
         <LocationSection />

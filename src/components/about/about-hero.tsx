@@ -7,62 +7,66 @@ import { ArrowRight } from "lucide-react";
 
 export const AboutHero: React.FC = () => {
   return (
-    <section className="relative w-full min-h-[520px] lg:min-h-[600px] flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/fidelis-court1.jpg"
-          alt="Dangracif Homes development in Abuja"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#04102a]/92 via-[#081b3e]/80 to-[#0754C6]/30" />
-      </div>
+    <section className="w-full bg-white pt-10 sm:pt-14 pb-16 sm:pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Narrative & Info */}
+          <div className="lg:col-span-6 space-y-5">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+              ABOUT US
+            </span>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-3 py-20 sm:py-28 w-full">
-        <div className="max-w-[720px] space-y-6">
-          {/* Label */}
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
-            About Dangracif Homes
+            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-[#0a192f] tracking-tight leading-[1.1]">
+              Dangracif Homes
+              <br />
+              Limited
+            </h1>
+
+            <p className="text-base sm:text-lg font-bold text-[#0754C6]">
+              High quality. Affordable options. Lasting value.
+            </p>
+
+            <p className="text-slate-600 text-sm sm:text-[15px] leading-relaxed max-w-xl">
+              Dangracif Homes Limited is a Nigerian real estate development
+              company focused on creating quality, affordable housing options for
+              individuals, families and property investors. Our Abuja
+              developments combine thoughtful planning, functional design and
+              quality-conscious construction with a focus on long-term value.
+            </p>
+
+            <p className="text-xs sm:text-sm text-slate-500 font-medium pt-1">
+              Registered in Nigeria · RC-1896142
+            </p>
+
+            <div className="pt-2">
+              <Link
+                href="/fideliscourts"
+                className="group inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-sm font-semibold transition-all shadow-md hover:shadow-lg shadow-[#0754C6]/25 cursor-pointer"
+              >
+                <span>Our current project</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-white leading-[1.1] tracking-tight">
-            Building homes.{" "}
-            <span className="text-[#60a5fa]">Creating value.</span>{" "}
-            Supporting better living.
-          </h1>
-
-          {/* Description */}
-          <p className="text-base sm:text-lg text-white/85 max-w-[620px] leading-relaxed font-medium">
-            Dangracif Homes Limited is a Nigerian real estate development company focused on creating quality, affordable housing options that meet the evolving needs of individuals, families, and property investors.
-          </p>
-
-          {/* CTA */}
-          <div className="pt-2 flex flex-wrap gap-3">
-            <Link
-              href="/fideliscourts"
-              className="group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-[#0754C6] text-sm font-bold hover:bg-white/90 transition-all shadow-lg shadow-black/10 cursor-pointer"
-            >
-              Explore Fidelis Court
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border-2 border-white/30 text-white text-sm font-semibold hover:bg-white/10 transition-all cursor-pointer"
-            >
-              Contact Us
-            </Link>
+          {/* Right Column: Hero Building Image */}
+          <div className="lg:col-span-6">
+            <div className="relative w-full aspect-[16/11] sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100">
+              <Image
+                src="/images/fidelis-court1.jpg"
+                alt="Fidelis Court 4-bedroom terrace duplex development"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <p className="text-xs text-slate-500 mt-2.5 font-normal tracking-normal">
+              Artist&apos;s impression · Fidelis Court
+            </p>
           </div>
         </div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-10" />
     </section>
   );
 };

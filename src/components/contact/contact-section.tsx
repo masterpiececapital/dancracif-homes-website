@@ -109,37 +109,72 @@ export const ContactSection: React.FC = () => {
 
   const details = getSubmissionDetails();
 
-  const recordLeadInquiry = () => {
-    submitLeadInquiry({
-      type: activeTab,
-      fullName: fullName.trim() || "Website Visitor",
-      phone: phone.trim() || "N/A",
-      email: email.trim() || "N/A",
-      unitType,
-      numberOfUnits: parseInt(numberOfUnits, 10) || 1,
-      paymentOption: activeTab === "buy" ? paymentOption : undefined,
-      preferredDate: activeTab === "inspection" ? preferredDate : undefined,
-      attendees: activeTab === "open-house" ? parseInt(attendees, 10) || 1 : undefined,
-      message: message.trim() || undefined,
-    }).catch((err) => {
+  const [submitting, setSubmitting] = React.useState<"whatsapp" | "email" | null>(null);
+  const [successMsg, setSuccessMsg] = React.useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+
+  const recordLeadInquiry = async () => {
+    try {
+      const res = await submitLeadInquiry({
+        type: activeTab,
+        fullName: fullName.trim() || "Website Visitor",
+        phone: phone.trim() || "N/A",
+        email: email.trim() || "N/A",
+        unitType,
+        numberOfUnits: parseInt(numberOfUnits, 10) || 1,
+        paymentOption: activeTab === "buy" ? paymentOption : undefined,
+        preferredDate: activeTab === "inspection" ? preferredDate : undefined,
+        attendees: activeTab === "open-house" ? parseInt(attendees, 10) || 1 : undefined,
+        message: message.trim() || undefined,
+      });
+      return res;
+    } catch (err) {
       console.warn("Could not save inquiry to database:", err);
-    });
+      return { success: false };
+    }
   };
 
-  const handleWhatsApp = (e: React.FormEvent) => {
+  const validateForm = () => {
+    setErrorMsg(null);
+    if (!fullName.trim()) {
+      setErrorMsg("Please enter your full name.");
+      return false;
+    }
+    if (!phone.trim() && !email.trim()) {
+      setErrorMsg("Please provide either your phone number or email.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleWhatsApp = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLeadInquiry();
+    if (!validateForm()) return;
+
+    setSubmitting("whatsapp");
+    setSuccessMsg("Saving your inquiry...");
+    await recordLeadInquiry();
+    setSubmitting(null);
+    setSuccessMsg("Inquiry recorded successfully! Opening WhatsApp...");
+
     const text = `Hello Dangracif Homes,\n\n${details.summary}`;
     window.open(
-      `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
+      `https://wa.me/2348133187860?text=${encodeURIComponent(text)}`,
       "_blank"
     );
   };
 
-  const handleEmail = (e: React.FormEvent) => {
+  const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLeadInquiry();
-    window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
+    if (!validateForm()) return;
+
+    setSubmitting("email");
+    setSuccessMsg("Saving your inquiry...");
+    await recordLeadInquiry();
+    setSubmitting(null);
+    setSuccessMsg("Inquiry recorded successfully! Opening your email app...");
+
+    window.location.href = `mailto:info@dangracif.com?subject=${encodeURIComponent(
       details.subject
     )}&body=${encodeURIComponent(details.summary)}`;
   };
@@ -385,24 +420,42 @@ export const ContactSection: React.FC = () => {
                   />
                 </div>
 
+                {/* Error & Success Feedback */}
+                {errorMsg && (
+                  <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-medium">
+                    {errorMsg}
+                  </div>
+                )}
+                {successMsg && (
+                  <div className="p-3.5 rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm font-medium">
+                    {successMsg}
+                  </div>
+                )}
+
                 {/* Submit Buttons — Full Width with the card */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 w-full">
                   <button
                     type="button"
+                    disabled={submitting !== null}
                     onClick={handleWhatsApp}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#0754C6] hover:bg-[#0648AB] text-white text-sm font-semibold transition-colors shadow-sm cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#0754C6] hover:bg-[#0648AB] disabled:opacity-60 text-white text-sm font-semibold transition-colors shadow-sm cursor-pointer"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>{details.btnWhatsApp}</span>
+                    <span>
+                      {submitting === "whatsapp" ? "Saving..." : details.btnWhatsApp}
+                    </span>
                   </button>
 
                   <button
                     type="button"
+                    disabled={submitting !== null}
                     onClick={handleEmail}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#0754C6] bg-white hover:bg-[#0754C6]/5 text-[#0754C6] text-sm font-semibold transition-colors cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#0754C6] bg-white hover:bg-[#0754C6]/5 disabled:opacity-60 text-[#0754C6] text-sm font-semibold transition-colors cursor-pointer"
                   >
                     <Mail className="w-4 h-4" />
-                    <span>{details.btnEmail}</span>
+                    <span>
+                      {submitting === "email" ? "Saving..." : details.btnEmail}
+                    </span>
                   </button>
                 </div>
               </form>

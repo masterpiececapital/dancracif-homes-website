@@ -23,36 +23,71 @@ export const OpenHouseSection: React.FC = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const recordLead = () => {
-    submitLeadInquiry({
-      type: "open-house",
-      fullName: formData.fullName.trim() || "Website Visitor",
-      phone: formData.phone.trim() || "N/A",
-      email: formData.email.trim() || "N/A",
-      unitType: formData.homeOfInterest,
-      attendees: Number(formData.attendees) || 1,
-      message: formData.message?.trim() || undefined,
-    }).catch((err) => {
+  const [submitting, setSubmitting] = React.useState<"whatsapp" | "email" | null>(null);
+  const [successMsg, setSuccessMsg] = React.useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+
+  const recordLead = async () => {
+    try {
+      const res = await submitLeadInquiry({
+        type: "open-house",
+        fullName: formData.fullName.trim() || "Website Visitor",
+        phone: formData.phone.trim() || "N/A",
+        email: formData.email.trim() || "N/A",
+        unitType: formData.homeOfInterest,
+        attendees: Number(formData.attendees) || 1,
+        message: formData.message?.trim() || undefined,
+      });
+      return res;
+    } catch (err) {
       console.warn("Could not save open house lead:", err);
-    });
+      return { success: false };
+    }
   };
 
-  const handleWhatsApp = (e: React.FormEvent) => {
+  const validateForm = () => {
+    setErrorMsg(null);
+    if (!formData.fullName.trim()) {
+      setErrorMsg("Please enter your full name.");
+      return false;
+    }
+    if (!formData.phone.trim() && !formData.email.trim()) {
+      setErrorMsg("Please provide either your phone number or email.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleWhatsApp = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLead();
+    if (!validateForm()) return;
+
+    setSubmitting("whatsapp");
+    setSuccessMsg("Registering your open house reservation...");
+    await recordLead();
+    setSubmitting(null);
+    setSuccessMsg("Registration saved! Opening WhatsApp...");
+
     const text = `Hello Dangracif Homes, I would like to register for the Fidelis Court Open House.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
     window.open(
-      `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
+      `https://wa.me/2348133187860?text=${encodeURIComponent(text)}`,
       "_blank"
     );
   };
 
-  const handleEmail = (e: React.FormEvent) => {
+  const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLead();
+    if (!validateForm()) return;
+
+    setSubmitting("email");
+    setSuccessMsg("Registering your open house reservation...");
+    await recordLead();
+    setSubmitting(null);
+    setSuccessMsg("Registration saved! Opening your email app...");
+
     const subject = `Open House Registration - ${formData.fullName}`;
     const body = `Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nHome of interest: ${formData.homeOfInterest}\nAttendees: ${formData.attendees}\nMessage: ${formData.message || "N/A"}`;
-    window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:info@dangracif.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   };
@@ -202,24 +237,42 @@ export const OpenHouseSection: React.FC = () => {
                 />
               </div>
 
+              {/* Error & Success Feedback */}
+              {errorMsg && (
+                <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-medium">
+                  {errorMsg}
+                </div>
+              )}
+              {successMsg && (
+                <div className="p-3.5 rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm font-medium">
+                  {successMsg}
+                </div>
+              )}
+
               {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 pt-1">
                 <button
                   type="button"
+                  disabled={submitting !== null}
                   onClick={handleWhatsApp}
-                  className="w-full h-12 px-4 rounded-full bg-[#0754C6] hover:bg-[#0648AB] text-white font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  className="w-full h-12 px-4 rounded-full bg-[#0754C6] hover:bg-[#0648AB] disabled:opacity-60 text-white font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <MessageSquare className="h-5 w-5 shrink-0" />
-                  <span>Register via WhatsApp</span>
+                  <span>
+                    {submitting === "whatsapp" ? "Registering..." : "Register via WhatsApp"}
+                  </span>
                 </button>
 
                 <button
                   type="button"
+                  disabled={submitting !== null}
                   onClick={handleEmail}
-                  className="w-full h-12 px-4 rounded-full bg-white border border-[#0754C6] hover:bg-zinc-50 text-[#0754C6] font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  className="w-full h-12 px-4 rounded-full bg-white border border-[#0754C6] hover:bg-zinc-50 disabled:opacity-60 text-[#0754C6] font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <Mail className="h-5 w-5 shrink-0" />
-                  <span>Register via Email</span>
+                  <span>
+                    {submitting === "email" ? "Registering..." : "Register via Email"}
+                  </span>
                 </button>
               </div>
             </form>

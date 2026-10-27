@@ -6,7 +6,7 @@
 @theme {
   --font-sans:
     var(--font-poppins), Poppins, ui-sans-serif, system-ui, sans-serif;
-  --container-7xl: 83rem;
+  --container-6xl: 83rem;
   --color-primary: #0754c6;
   --color-primary-hover: #0648ab;
   --color-primary-dark: #043275;

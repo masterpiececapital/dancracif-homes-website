@@ -49,44 +49,53 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const recordLead = () => {
-    submitLeadInquiry({
-      type: "inspection",
-      fullName: formData.fullName.trim() || "Website Visitor",
-      phone: formData.phone.trim() || "N/A",
-      email: formData.email.trim() || "N/A",
-      unitType: formData.unitType,
-      preferredDate: formData.preferredDate || undefined,
-      message: formData.message?.trim() || undefined,
-    }).catch((err) => {
+  const [submitting, setSubmitting] = React.useState<"whatsapp" | "email" | null>(null);
+
+  const recordLead = async () => {
+    try {
+      const res = await submitLeadInquiry({
+        type: "inspection",
+        fullName: formData.fullName.trim() || "Website Visitor",
+        phone: formData.phone.trim() || "N/A",
+        email: formData.email.trim() || "N/A",
+        unitType: formData.unitType,
+        preferredDate: formData.preferredDate || undefined,
+        message: formData.message?.trim() || undefined,
+      });
+      return res;
+    } catch (err) {
       console.warn("Could not save inspection lead:", err);
-    });
+      return { success: false };
+    }
   };
 
-  const handleWhatsApp = (e: React.FormEvent) => {
+  const handleWhatsApp = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLead();
+    setSubmitting("whatsapp");
+    await recordLead();
+    setSubmitting(null);
     if (onSubmitWhatsApp) {
       onSubmitWhatsApp(formData);
     } else {
-      // Default WhatsApp share
       const text = `Hello Dangracif Homes, I would like to book an inspection for Fidelis Court.\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nUnit: ${formData.unitType}\nDate: ${formData.preferredDate}\nMessage: ${formData.message || "N/A"}`;
       window.open(
-        `https://wa.me/2348000000000?text=${encodeURIComponent(text)}`,
+        `https://wa.me/2348133187860?text=${encodeURIComponent(text)}`,
         "_blank"
       );
     }
   };
 
-  const handleEmail = (e: React.FormEvent) => {
+  const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    recordLead();
+    setSubmitting("email");
+    await recordLead();
+    setSubmitting(null);
     if (onSubmitEmail) {
       onSubmitEmail(formData);
     } else {
       const subject = `Inspection Booking - ${formData.fullName} (Fidelis Court)`;
       const body = `Name: ${formData.fullName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nUnit: ${formData.unitType}\nDate: ${formData.preferredDate}\nMessage: ${formData.message || "N/A"}`;
-      window.location.href = `mailto:sales@dangracifhomes.com?subject=${encodeURIComponent(
+      window.location.href = `mailto:info@dangracif.com?subject=${encodeURIComponent(
         subject
       )}&body=${encodeURIComponent(body)}`;
     }
