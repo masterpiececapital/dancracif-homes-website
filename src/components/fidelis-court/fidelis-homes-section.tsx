@@ -28,18 +28,18 @@ const FIDELIS_UNITS: UnitModel[] = [
       "Artist's impressions — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 32,
     price: "₦53M",
-    mainImage: "/images/apartment-1bed.jpg",
+    mainImage: "/fidelis-court/Bright Renovation Room with Window Views.png",
     galleryImages: [
       {
-        src: "/images/apartment-1bed.jpg",
-        caption: "1-Bedroom living room concept",
+        src: "/fidelis-court/Bright Renovation Room with Window Views.png",
+        caption: "1-Bedroom living area",
       },
       {
-        src: "/images/fidelis-court2.jpg",
+        src: "/fidelis-court/Bright Unfinished Room Under Construction.png",
         caption: "Open kitchen & dining layout",
       },
       {
-        src: "/fidelis-court/Bright Renovation Room with Window Views.png",
+        src: "/fidelis-court/Bright Unfinished Hallway Renovation.png",
         caption: "Bedroom suite & natural lighting",
       },
     ],
@@ -52,18 +52,18 @@ const FIDELIS_UNITS: UnitModel[] = [
       "Artist's impressions — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 48,
     price: "₦80M",
-    mainImage: "/images/apartment-2bed.jpg",
+    mainImage: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
     galleryImages: [
       {
-        src: "/images/apartment-2bed.jpg",
-        caption: "2-Bedroom living room concept",
+        src: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
+        caption: "2-Bedroom living area",
       },
       {
-        src: "/images/fidelis-court2.jpg",
+        src: "/fidelis-court/Unfinished Room Under Renovation.png",
         caption: "Dining area & interior layout",
       },
       {
-        src: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
+        src: "/fidelis-court/Bright Unfinished Room with Exposed Wiring.png",
         caption: "Master suite with corner windows",
       },
     ],
@@ -76,19 +76,19 @@ const FIDELIS_UNITS: UnitModel[] = [
       "Artist's impressions — shared project concepts, not unit-specific photographs. Terrace interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 8,
     price: "₦125M",
-    mainImage: "/images/fidelis-court1.jpg",
+    mainImage: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
     galleryImages: [
       {
-        src: "/images/fidelis-court1.jpg",
-        caption: "Terrace exterior concept",
+        src: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
+        caption: "Terrace exterior",
       },
       {
-        src: "/images/terrace-duplex.jpg",
-        caption: "Estate entrance & boulevard concept",
+        src: "/fidelis-court/Apartment Building Under Construction.png",
+        caption: "Estate street view",
       },
       {
-        src: "/images/fidelis-court2.jpg",
-        caption: "Terrace living room interior concept",
+        src: "/fidelis-court/Sunlit Building Under Construction.png",
+        caption: "Terrace block progress",
       },
     ],
   },

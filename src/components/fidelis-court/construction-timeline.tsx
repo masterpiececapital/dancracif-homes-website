@@ -45,7 +45,7 @@ export const ConstructionTimeline: React.FC = () => {
 
   return (
     <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-200">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-8">
         <div className="space-y-2">
           <span className={`text-xs font-semibold uppercase tracking-[0.2em] text-fidelis-brown`}>
             Construction Timeline

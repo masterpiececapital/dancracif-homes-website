@@ -15,7 +15,7 @@ export const UnitPricingCards: React.FC<UnitPricingCardsProps> = ({
 }) => {
   return (
     <div className="w-full bg-[#0D1B3E] pb-0">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-0 -mb-px">
           {UNIT_PLANS.map((plan) => {
             const isActive = plan.id === selected.id;
@@ -49,7 +49,7 @@ export const UnitPricingCards: React.FC<UnitPricingCardsProps> = ({
                 <p
                   className={cn(
                     "text-xl sm:text-2xl font-extrabold mt-2 tracking-tight",
-                    isActive ? "text-[#0754C6]" : "text-white"
+                    isActive ? "text-[#00ABF0]" : "text-white"
                   )}
                 >
                   {formatNaira(plan.basePrice)}

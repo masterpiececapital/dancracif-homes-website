@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
       {/* Main Grid Container */}
       <div
         className={cn(
-          "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+          "max-w-7xl mx-auto px-6 sm:px-6 lg:px-8",
           compact ? "pt-8 sm:pt-10 pb-6 sm:pb-8" : "pt-12 sm:pt-14 pb-8 sm:pb-10"
         )}
       >
@@ -35,10 +35,17 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
           {/* Col 1: Brand & Contact Info (takes 2 of 5 columns) */}
           <div className="lg:col-span-2 space-y-4">
             <div>
-              <h3 className="text-[22px] sm:text-[24px] font-bold text-white tracking-tight">
-                Dangracif Homes
-              </h3>
-              <p className="text-[13px] font-medium leading-[18px] text-[#f0f6fc] mt-1">
+              {/* Brand + RC inline on mobile */}
+              <div className="flex items-baseline gap-2.5 flex-wrap">
+                <h3 className="text-[22px] sm:text-[24px] font-bold text-white tracking-tight">
+                  Dangracif Homes
+                </h3>
+                <p className="text-[13px] font-medium leading-[18px] text-[#f0f6fc] sm:hidden">
+                  RC-1896142
+                </p>
+              </div>
+              {/* RC on its own line on sm+ */}
+              <p className="hidden sm:block text-[13px] font-medium leading-[18px] text-[#f0f6fc] mt-1">
                 RC-1896142
               </p>
             </div>
@@ -61,6 +68,35 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
                     FCT, Nigeria
                   </p>
                 </div>
+              </div>
+
+              {/* Fidelis Court Address — mobile only, after Dangracif address */}
+              <div className="flex items-start gap-2.5 text-[#f0f6fc] sm:hidden">
+                <MapPin className="h-4 w-4 text-[#f0f6fc] shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-[14px] font-semibold leading-[20px] text-[#f0f6fc]">
+                    Fidelis Court
+                  </p>
+                  <p className="text-[14px] font-normal leading-[20px] text-[#f0f6fc] mt-0.5">
+                    21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria
+                  </p>
+                </div>
+              </div>
+
+              {/* Marketed exclusively by — mobile only */}
+              <div className="sm:hidden">
+                <span className="text-[11px] font-bold text-[#f0f6fc]/60 uppercase tracking-wider block mb-1.5">
+                  MARKETED EXCLUSIVELY BY
+                </span>
+                <a
+                  href="https://www.masterpiececapitalltd.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[14px] font-normal leading-[20px] text-[#f0f6fc] hover:text-white transition-colors group"
+                >
+                  <ExternalLink className="w-3.5 h-3.5 text-[#f0f6fc] group-hover:text-white transition-colors shrink-0" />
+                  <span>Masterpiece Capital</span>
+                </a>
               </div>
 
               {/* Phone 1 */}
@@ -158,8 +194,8 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
             </ul>
           </div>
 
-          {/* Col 3: Fidelis Court & Marketing Partner (1 of 5 columns) */}
-          <div className="lg:col-span-1 space-y-3">
+          {/* Col 3: Fidelis Court & Marketing Partner — desktop only (mobile content lives in col-1) */}
+          <div className="lg:col-span-1 space-y-3 hidden sm:block">
             <h4 className="text-[15px] sm:text-[16px] font-bold text-white tracking-wide mb-4">
               Fidelis Court
             </h4>
@@ -176,7 +212,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
                 EXCLUSIVE MARKETING FIRM
               </span>
               <a
-                href="https://masterpiececapital.ng"
+                href="https://masterpiececapitalltd.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[14px] font-normal leading-[20px] text-[#f0f6fc] hover:text-white transition-colors group"
@@ -233,7 +269,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
 
       {/* Full-width Divider & Bottom Copyright */}
       <div className="w-full border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 py-4 text-center">
           <p className="text-[11px] sm:text-[12px] font-medium leading-[20px] text-[#f0f6fc]">
             © {new Date().getFullYear()} Dangracif Homes. All rights reserved.
           </p>

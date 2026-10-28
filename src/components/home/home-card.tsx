@@ -40,13 +40,13 @@ export const HomeCard: React.FC<HomeCardProps> = ({ home, onEnquire }) => {
 
         {/* Footer: Price & Enquire Pill */}
         <div className="flex items-center justify-between pt-1">
-          <span className="text-2xl font-bold tracking-tight text-[#0754C6]">
+          <span className="text-2xl font-bold tracking-tight text-[#00ABF0]">
             {home.price}
           </span>
 
           <Link
             href="/contact?tab=buy"
-            className="px-5 py-2 rounded-full bg-[#EEF5FF] hover:bg-[#E0EEFF] text-[#0754C6] font-semibold text-sm transition-colors cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700"
+            className="px-5 py-2 rounded-full bg-[#EEF5FF] hover:bg-[#E0EEFF] text-[#00ABF0] font-semibold text-sm transition-colors cursor-pointer dark:bg-zinc-800 dark:hover:bg-zinc-700"
           >
             Enquire
           </Link>

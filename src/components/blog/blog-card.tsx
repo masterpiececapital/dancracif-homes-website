@@ -33,7 +33,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           {post.imageCaption}
         </p>
 
-        <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6] mt-4 block">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#00ABF0] mt-4 block">
           {post.date}
         </span>
 
@@ -50,12 +50,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <button
             type="button"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0754C6] hover:text-[#0648AB] transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#00ABF0] hover:text-[#00ABF0]/80 transition-colors cursor-pointer group"
           >
             <span>{isExpanded ? "Read less" : "Read more"}</span>
             <ChevronDown
               className={cn(
-                "w-4 h-4 text-[#0754C6] transition-transform duration-200",
+                "w-4 h-4 text-[#00ABF0] transition-transform duration-200",
                 isExpanded && "rotate-180"
               )}
             />
@@ -72,7 +72,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
             <div>
               <Link
                 href={post.linkHref}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0754C6] hover:text-[#0648AB] hover:gap-2 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#00ABF0] hover:text-[#00ABF0]/80 hover:gap-2 transition-all cursor-pointer"
               >
                 <span>{post.linkText}</span>
                 <ArrowRight className="w-4 h-4" />

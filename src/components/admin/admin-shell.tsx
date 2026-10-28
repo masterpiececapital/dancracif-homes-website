@@ -225,14 +225,14 @@ export function AdminShell({ user, children }: AdminShellProps) {
                     key={item.href}
                     href={item.href}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${isActive
-                      ? "bg-[#0754C6]/10 text-[#0754C6] font-semibold"
+                      ? "bg-[#0754C6]/10 text-[#00ABF0] font-semibold"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                       }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <Icon
                         className={`w-4 h-4 transition-colors ${isActive
-                          ? "text-[#0754C6]"
+                          ? "text-[#00ABF0]"
                           : "text-slate-400 group-hover:text-slate-600"
                           }`}
                       />
@@ -254,13 +254,13 @@ export function AdminShell({ user, children }: AdminShellProps) {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-[#0754C6] hover:bg-white border border-slate-200/60 bg-white/60 transition-all shadow-2xs group"
+            className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-[#00ABF0] hover:bg-white border border-slate-200/60 bg-white/60 transition-all shadow-2xs group"
           >
             <div className="flex items-center gap-2">
-              <Building2 className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0754C6]" />
+              <Building2 className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#00ABF0]" />
               <span>Public Website</span>
             </div>
-            <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-[#0754C6]" />
+            <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-[#00ABF0]" />
           </Link>
 
           {/* User Profile Card */}
@@ -304,7 +304,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
               </button>
 
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0754C6] mb-1">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#00ABF0] mb-1">
                   <span>{formattedDate}</span>
                 </div>
                 <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">

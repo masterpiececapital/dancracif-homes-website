@@ -11,7 +11,7 @@ interface PaymentPlanProps {
 export const PaymentPlan: React.FC<PaymentPlanProps> = ({ plan }) => {
   return (
     <section className="w-full bg-white pt-16 sm:pt-20">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Left: Payment instalments */}
           <div className="space-y-4">
@@ -70,7 +70,7 @@ export const PaymentPlan: React.FC<PaymentPlanProps> = ({ plan }) => {
                     <p
                       className={cn(
                         charge.isTotalOwnership
-                          ? "text-lg font-bold text-[#0754C6]"
+                          ? "text-lg font-bold text-[#00ABF0]"
                           : "text-md font-semibold text-black/80"
                       )}
                     >
@@ -85,7 +85,7 @@ export const PaymentPlan: React.FC<PaymentPlanProps> = ({ plan }) => {
                   <span
                     className={cn(
                       charge.isTotalOwnership
-                        ? "text-base sm:text-lg font-extrabold text-[#0754C6] shrink-0"
+                        ? "text-base sm:text-lg font-extrabold text-[#00ABF0] shrink-0"
                         : "text-sm sm:text-base font-bold text-slate-900 shrink-0"
                     )}
                   >
@@ -110,7 +110,7 @@ export const PaymentPlan: React.FC<PaymentPlanProps> = ({ plan }) => {
               </button>
               <button
                 type="button"
-                className="inline-flex items-center justify-center px-7 py-4 rounded-full border border-[#0754C6] bg-white text-[#0754C6] text-md font-semibold hover:bg-[#0754C6]/5 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center px-7 py-4 rounded-full border border-[#00ABF0] bg-white text-[#00ABF0] text-md font-semibold hover:bg-[#00ABF0]/5 transition-colors cursor-pointer"
               >
                 Buy now
               </button>

@@ -84,7 +84,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
         {/* Profile Card */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">
           <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0754C6] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#00ABF0] flex items-center justify-center font-bold">
               <User className="w-5 h-5" />
             </div>
             <div>
@@ -122,7 +122,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                   Access Level
                 </label>
                 <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 font-semibold text-slate-900 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#0754C6]" />
+                  <ShieldCheck className="w-4 h-4 text-[#00ABF0]" />
                   <span className="capitalize">{user.role}</span>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
               Environment
             </span>
             <div className="flex items-center gap-1.5 font-bold text-slate-800">
-              <Globe className="w-3.5 h-3.5 text-[#0754C6]" />
+              <Globe className="w-3.5 h-3.5 text-[#00ABF0]" />
               <span>Live Production</span>
             </div>
             <p className="text-[11px] text-slate-500">

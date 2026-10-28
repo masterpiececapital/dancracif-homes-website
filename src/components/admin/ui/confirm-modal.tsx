@@ -47,7 +47,7 @@ export function ConfirmModal({
                 className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                   isDestructive
                     ? "bg-red-50 text-red-600 border border-red-100"
-                    : "bg-blue-50 text-[#0754C6] border border-blue-100"
+                    : "bg-blue-50 text-[#00ABF0] border border-blue-100"
                 }`}
               >
                 {isDestructive ? (

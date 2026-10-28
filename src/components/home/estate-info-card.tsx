@@ -12,7 +12,7 @@ export const EstateInfoCard: React.FC = () => {
           className="flex items-center gap-3 text-zinc-200 hover:text-white transition-colors group"
         >
           <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
-            <Phone className="h-4 w-4 text-[#0754C6]" />
+            <Phone className="h-4 w-4 text-[#00ABF0]" />
           </div>
           <span className="text-sm font-medium tracking-wide">
             {ESTATE_CONTACT.phone}
@@ -24,7 +24,7 @@ export const EstateInfoCard: React.FC = () => {
           className="flex items-center gap-3 text-zinc-200 hover:text-white transition-colors group"
         >
           <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
-            <Mail className="h-4 w-4 text-[#0754C6]" />
+            <Mail className="h-4 w-4 text-[#00ABF0]" />
           </div>
           <span className="text-sm font-medium tracking-wide">
             {ESTATE_CONTACT.email}
@@ -39,7 +39,7 @@ export const EstateInfoCard: React.FC = () => {
         </h3>
 
         <div className="flex items-start gap-3 text-zinc-300">
-          <MapPin className="h-4 w-4 text-[#0754C6] shrink-0 mt-1" />
+          <MapPin className="h-4 w-4 text-[#00ABF0] shrink-0 mt-1" />
           <p className="text-xs sm:text-sm leading-relaxed">
             {ESTATE_CONTACT.address}
           </p>

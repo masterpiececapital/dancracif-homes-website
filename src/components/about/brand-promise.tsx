@@ -7,7 +7,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 export const BrandPromise: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl bg-gradient-to-br from-[#0754C6] via-[#0B3D91] to-[#04102a] p-8 sm:p-12 lg:p-16 overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#60a5fa]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
@@ -23,7 +23,7 @@ export const BrandPromise: React.FC = () => {
             {/* Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
               High Quality.{" "}
-              <span className="text-[#60a5fa]">Affordable Options.</span>{" "}
+              <span className="text-[#00ABF0]">Affordable Options.</span>{" "}
               Lasting Value.
             </h2>
 
@@ -52,7 +52,7 @@ export const BrandPromise: React.FC = () => {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/fideliscourts"
-                className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-[#0754C6] text-sm font-bold hover:bg-white/90 transition-all shadow-lg shadow-black/10 cursor-pointer"
+                className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-[#00ABF0] text-sm font-bold hover:bg-white/90 transition-all shadow-lg shadow-black/10 cursor-pointer"
               >
                 View Our Projects
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

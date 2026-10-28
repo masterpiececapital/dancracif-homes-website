@@ -41,7 +41,7 @@ export async function runSeed() {
       description: "Compact, efficient city living with premium finishes.",
       price: "₦53,000,000",
       numericPrice: 53000000,
-      imageSrc: "/images/apartment-1bed.jpg",
+      imageSrc: "/fidelis-court/Bright Renovation Room with Window Views.png",
       status: "available",
     },
     {
@@ -52,7 +52,7 @@ export async function runSeed() {
       description: "Ideal for young families & professionals. Spacious living.",
       price: "₦80,000,000",
       numericPrice: 80000000,
-      imageSrc: "/images/apartment-2bed.jpg",
+      imageSrc: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
       status: "available",
     },
     {
@@ -63,7 +63,7 @@ export async function runSeed() {
       description: "Shell option — finish to your bespoke taste & architectural flair.",
       price: "₦125,000,000",
       numericPrice: 125000000,
-      imageSrc: "/images/terrace-duplex.jpg",
+      imageSrc: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
       status: "limited",
     },
   ];

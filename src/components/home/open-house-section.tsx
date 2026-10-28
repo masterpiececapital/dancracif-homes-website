@@ -94,12 +94,12 @@ export const OpenHouseSection: React.FC = () => {
 
   return (
     <section className="w-full bg-[#EBF3FC] py-14 sm:py-18">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Left Column: Event Info & Estate Image */}
           <div className="space-y-6">
             <div className="space-y-3">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0754C6]">
+              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#00ABF0]">
                 Ongoing Event • Fidelis Court
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight leading-tight">
@@ -112,7 +112,7 @@ export const OpenHouseSection: React.FC = () => {
 
             {/* Location Address */}
             <div className="flex items-start gap-2.5 text-zinc-700">
-              <MapPin className="h-5 w-5 text-[#0754C6] shrink-0 mt-0.5" />
+              <MapPin className="h-5 w-5 text-[#00ABF0] shrink-0 mt-0.5" />
               <div>
                 <p className="font-bold text-sm text-zinc-900">
                   Fidelis Court
@@ -126,7 +126,7 @@ export const OpenHouseSection: React.FC = () => {
             {/* Estate Photo Container */}
             <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden bg-zinc-200 shadow-sm">
               <Image
-                src="/images/open-house.jpg"
+                src="/fidelis-court/Sunlit Construction Site Under Dramatic Skies.png"
                 alt="Fidelis Court Open House Estate"
                 fill
                 className="object-cover"
@@ -138,7 +138,7 @@ export const OpenHouseSection: React.FC = () => {
           {/* Right Column: Registration Form (No White Card Box) */}
           <div className="space-y-5">
             <div className="flex items-center gap-2.5 mb-2">
-              <Users className="h-5 w-5 text-[#0754C6]" />
+              <Users className="h-5 w-5 text-[#00ABF0]" />
               <h3 className="text-xl font-bold tracking-tight text-zinc-900">
                 Open-house registration
               </h3>
@@ -159,7 +159,7 @@ export const OpenHouseSection: React.FC = () => {
                 />
               </div>
 
-              {/* Phone & Email */}
+              {/* Phone & Email - stacked on mobile, side-by-side on sm+ */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label className="block text-sm font-semibold text-zinc-900 mb-1.5">
@@ -188,7 +188,7 @@ export const OpenHouseSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Home of interest & Attendees */}
+              {/* Home of interest & Attendees - stacked on mobile, side-by-side on sm+ */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label className="block text-sm font-semibold text-zinc-900 mb-1.5">
@@ -249,8 +249,8 @@ export const OpenHouseSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-3 pt-1">
+              {/* Action Buttons - stacked on mobile */}
+              <div className="flex flex-col sm:grid sm:grid-cols-2 w-full gap-3 pt-1">
                 <button
                   type="button"
                   disabled={submitting !== null}
@@ -267,7 +267,7 @@ export const OpenHouseSection: React.FC = () => {
                   type="button"
                   disabled={submitting !== null}
                   onClick={handleEmail}
-                  className="w-full h-12 px-4 rounded-full bg-white border border-[#0754C6] hover:bg-zinc-50 disabled:opacity-60 text-[#0754C6] font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  className="w-full h-12 px-4 rounded-full bg-white border border-[#00ABF0] hover:bg-zinc-50 disabled:opacity-60 text-[#00ABF0] font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <Mail className="h-5 w-5 shrink-0" />
                   <span>

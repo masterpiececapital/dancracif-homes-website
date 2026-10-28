@@ -67,10 +67,10 @@ const CORE_VALUES: CoreValueItem[] = [
 
 export const CoreValues: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
       {/* Section Header */}
       <div className="space-y-3 mb-10">
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
           OUR CORE VALUES
         </span>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] tracking-tight">
@@ -87,7 +87,7 @@ export const CoreValues: React.FC = () => {
               key={`${val.title}-${idx}`}
               className="bg-white rounded-2xl p-7 sm:p-8 shadow-sm border border-slate-100 flex flex-col items-start hover:shadow-md transition-all duration-200"
             >
-              <div className="mb-5 text-[#0754C6]">
+              <div className="mb-5 text-[#00ABF0]">
                 <Icon className="w-6 h-6 stroke-[2]" />
               </div>
               <h3 className="text-lg font-bold text-[#0a192f] mb-2 leading-snug">

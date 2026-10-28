@@ -17,9 +17,9 @@ export const PricingHero: React.FC<PricingHeroProps> = ({
     <div className="w-full">
       {/* Dark Navy Hero Section */}
       <section className="w-full bg-[#071630] pt-16 sm:pt-20 pb-28 sm:pb-32">
-        <div className="max-w-7xl mx-auto px-2 sm:px-3">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#00ABF0]">
               PRICING
             </span>
             <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight whitespace-nowrap">
@@ -34,7 +34,7 @@ export const PricingHero: React.FC<PricingHeroProps> = ({
       </section>
 
       {/* Floating / Overlapping Unit Cards */}
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 -mt-10 sm:-mt-14 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
           {UNIT_PLANS.map((plan) => {
             const isSelected = plan.id === selected.id;
@@ -47,7 +47,7 @@ export const PricingHero: React.FC<PricingHeroProps> = ({
                   "text-left bg-white rounded-2xl p-6 sm:p-7 transition-all cursor-pointer",
                   "shadow-md hover:shadow-lg focus:outline-none",
                   isSelected
-                    ? "border border-[#0754C6]"
+                    ? "border border-[#00ABF0]"
                     : "border border-slate-200 hover:border-slate-300"
                 )}
               >
@@ -57,7 +57,7 @@ export const PricingHero: React.FC<PricingHeroProps> = ({
                 <p className="text-lg sm:text-xl font-bold text-slate-900 mt-2">
                   {plan.label}
                 </p>
-                <p className="text-2xl sm:text-3xl font-extrabold text-[#0754C6] mt-4 tracking-tight">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#00ABF0] mt-4 tracking-tight">
                   {formatNaira(plan.basePrice)}
                 </p>
                 <p className="text-xs text-slate-400 mt-1">

@@ -134,7 +134,7 @@ export function AdminMediaClient({ initialAssets }: AdminMediaClientProps) {
                 onClick={() => setSelectedFolder(f.id)}
                 className={`px-3 py-1 rounded-lg font-medium transition-all cursor-pointer whitespace-nowrap ${
                   selectedFolder === f.id
-                    ? "bg-white text-[#0754C6] shadow-2xs font-bold"
+                    ? "bg-white text-[#00ABF0] shadow-2xs font-bold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -268,7 +268,7 @@ export function AdminMediaClient({ initialAssets }: AdminMediaClientProps) {
                     onClick={() =>
                       copyToClipboard(asset.secureUrl || asset.url, asset.id)
                     }
-                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0754C6] hover:underline cursor-pointer"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#00ABF0] hover:underline cursor-pointer"
                   >
                     {copiedId === asset.id ? (
                       <>
@@ -345,7 +345,7 @@ export function AdminMediaClient({ initialAssets }: AdminMediaClientProps) {
                         onClick={() =>
                           copyToClipboard(asset.secureUrl || asset.url, asset.id)
                         }
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                         title="Copy Link"
                       >
                         {copiedId === asset.id ? (
@@ -391,7 +391,7 @@ export function AdminMediaClient({ initialAssets }: AdminMediaClientProps) {
           <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <Upload className="w-4 h-4" />
                 </div>
                 <div>

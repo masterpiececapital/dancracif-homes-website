@@ -252,7 +252,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
               <div>
                 <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-blue-50 text-[#0754C6] flex items-center justify-center text-xs font-bold shrink-0">
+                    <span className="w-6 h-6 rounded-lg bg-blue-50 text-[#00ABF0] flex items-center justify-center text-xs font-bold shrink-0">
                       Q{idx + 1}
                     </span>
                     <span
@@ -276,7 +276,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
                   </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0754C6] transition-colors leading-snug">
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#00ABF0] transition-colors leading-snug">
                   {item.question}
                 </h3>
 
@@ -288,7 +288,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
                     <button
                       type="button"
                       onClick={() => toggleCardExpand(item.id)}
-                      className="text-[11px] font-bold text-[#0754C6] hover:underline mt-1.5 cursor-pointer"
+                      className="text-[11px] font-bold text-[#00ABF0] hover:underline mt-1.5 cursor-pointer"
                     >
                       {expandedCards[item.id] ? "Show less" : "Read full answer"}
                     </button>
@@ -320,7 +320,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
                   <button
                     type="button"
                     onClick={() => openEditModal(item)}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                    className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                     title="Edit"
                   >
                     <Edit3 className="w-4 h-4" />
@@ -386,7 +386,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
                         <button
                           type="button"
                           onClick={() => openEditModal(item)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                           title="Edit"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -420,7 +420,7 @@ export function AdminFaqsClient({ initialItems }: AdminFaqsClientProps) {
           <div className="relative w-full max-w-xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <HelpCircle className="w-4 h-4" />
                 </div>
                 <div>

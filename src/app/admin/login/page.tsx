@@ -180,7 +180,7 @@ function LoginFormInner() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-300 text-[#0754C6] focus:ring-[#0754C6] cursor-pointer"
+                  className="w-4 h-4 rounded border-slate-300 text-[#00ABF0] focus:ring-[#00ABF0] cursor-pointer"
                 />
                 <span>Remember me</span>
               </label>

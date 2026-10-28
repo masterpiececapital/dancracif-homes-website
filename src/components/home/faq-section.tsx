@@ -15,10 +15,10 @@ export const FaqSection: React.FC = () => {
 
   return (
     <section id="faq" className="w-full bg-[#FAFCFE] py-14 sm:py-18 border-b border-zinc-100">
-      <div className="max-w-3xl mx-auto px-2 sm:px-3 space-y-10">
+      <div className="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8 space-y-10">
         {/* Header */}
         <div className="text-center space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#00ABF0]">
             FAQ
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900">
@@ -47,7 +47,7 @@ export const FaqSection: React.FC = () => {
                     <ChevronDown
                       className={cn(
                         "h-4 w-4 transition-colors duration-200",
-                        isOpen ? "text-[#0754C6]" : "text-zinc-400"
+                        isOpen ? "text-[#00ABF0]" : "text-zinc-400"
                       )}
                     />
                   </motion.span>

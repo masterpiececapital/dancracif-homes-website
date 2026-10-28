@@ -11,14 +11,14 @@ export const ConstructionSection: React.FC = () => {
 
   return (
     <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-100">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 space-y-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-6">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
           <div className="space-y-2.5 max-w-xl">
-            <span className={`text-sm font-semibold uppercase tracking-[0.2em] ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#0754C6]"}`}>
+            <span className={`text-sm font-semibold uppercase tracking-[0.2em] ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"}`}>
               From the Site • YouTube
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 tracking-tight whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 tracking-tight">
               Fidelis Court construction updates
             </h2>
             <p className="text-sm text-zinc-600 leading-relaxed">
@@ -90,7 +90,7 @@ export const ConstructionSection: React.FC = () => {
             href="https://youtu.be/4NjadeZpfN0?si=rckY9siRuMaAYjx_"
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1 font-semibold hover:underline ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#0754C6]"}`}
+            className={`inline-flex items-center gap-1 font-semibold hover:underline ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"}`}
           >
             <span className="">Watch on YouTube</span>
             <ExternalLink className="h-4 w-4" />

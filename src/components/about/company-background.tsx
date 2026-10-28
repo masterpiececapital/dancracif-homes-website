@@ -26,13 +26,13 @@ const HIGHLIGHTS = [
 export const CompanyBackground: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Image */}
           <div className="relative">
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src="/images/fidelis-court2.jpg"
+                src="/fidelis-court/Sunlit Construction Site Between Scaffolding.png"
                 alt="Dangracif Homes property development in Abuja"
                 fill
                 className="object-cover"
@@ -57,7 +57,7 @@ export const CompanyBackground: React.FC = () => {
 
           {/* Right: Content */}
           <div className="space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
               Our Background
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -81,7 +81,7 @@ export const CompanyBackground: React.FC = () => {
                     key={h.label}
                     className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 border border-slate-100"
                   >
-                    <Icon className="w-4.5 h-4.5 text-[#0754C6] shrink-0" />
+                    <Icon className="w-4.5 h-4.5 text-[#00ABF0] shrink-0" />
                     <span className="text-[13px] font-semibold text-slate-700">
                       {h.label}
                     </span>

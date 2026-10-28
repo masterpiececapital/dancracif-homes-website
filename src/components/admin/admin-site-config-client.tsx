@@ -102,7 +102,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
       {/* Top Banner and Save Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center font-bold">
             <SlidersHorizontal className="w-5 h-5" />
           </div>
           <div>
@@ -268,7 +268,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Total Units</span>
-                <Layers className="w-4 h-4 text-[#0754C6]" />
+                <Layers className="w-4 h-4 text-[#00ABF0]" />
               </div>
               <input
                 type="text"
@@ -285,7 +285,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Land Footprint</span>
-                <MapPin className="w-4 h-4 text-[#0754C6]" />
+                <MapPin className="w-4 h-4 text-[#00ABF0]" />
               </div>
               <input
                 type="text"
@@ -302,7 +302,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Timeline Months</span>
-                <Clock className="w-4 h-4 text-[#0754C6]" />
+                <Clock className="w-4 h-4 text-[#00ABF0]" />
               </div>
               <input
                 type="text"
@@ -319,7 +319,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Security Guard</span>
-                <Shield className="w-4 h-4 text-[#0754C6]" />
+                <Shield className="w-4 h-4 text-[#00ABF0]" />
               </div>
               <input
                 type="text"
@@ -523,7 +523,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                 <p className="text-xs font-bold">{openHouse.headline}</p>
                 <p className="text-[11px] text-white/80">{openHouse.description}</p>
               </div>
-              <span className="px-3 py-1.5 rounded-lg bg-white text-[#0754C6] text-xs font-bold self-start sm:self-center shadow-xs">
+              <span className="px-3 py-1.5 rounded-lg bg-white text-[#00ABF0] text-xs font-bold self-start sm:self-center shadow-xs">
                 RSVP Now
               </span>
             </div>

@@ -318,7 +318,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
               {/* Card Content */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div className="space-y-2">
-                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0754C6] transition-colors line-clamp-2">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#00ABF0] transition-colors line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">
@@ -351,7 +351,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     <button
                       type="button"
                       onClick={() => openEditModal(post)}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer transition-colors"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer transition-colors"
                       title="Edit Article"
                     >
                       <Edit3 className="w-4 h-4" />
@@ -437,7 +437,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                         <button
                           type="button"
                           onClick={() => openEditModal(post)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                           title="Edit"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -472,7 +472,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <FileText className="w-4 h-4" />
                 </div>
                 <div>

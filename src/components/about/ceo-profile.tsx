@@ -6,10 +6,10 @@ import Image from "next/image";
 export const CeoProfile: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 sm:py-24 border-t border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="space-y-3 mb-10 sm:mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
             LEADERSHIP
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] tracking-tight">
@@ -39,7 +39,7 @@ export const CeoProfile: React.FC = () => {
               Major General Okwudili Fidelis Azinta (Rtd.)
             </h3>
 
-            <p className="text-base sm:text-[17px] font-bold text-[#0754C6] !mb-5">
+            <p className="text-base sm:text-[17px] font-bold text-[#00ABF0] !mb-5">
               Chief Executive Officer / Managing Director
             </p>
 

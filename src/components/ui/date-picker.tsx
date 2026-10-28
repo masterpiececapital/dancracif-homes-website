@@ -264,12 +264,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                       !disabled && !sel && (
                         variant === "fidelis-brown"
                           ? "text-slate-700 dark:text-zinc-200 hover:bg-fidelis-brown/10 hover:text-fidelis-brown"
-                          : "text-slate-700 dark:text-zinc-200 hover:bg-[#0754C6]/10 hover:text-[#0754C6]"
+                          : "text-slate-700 dark:text-zinc-200 hover:bg-[#00ABF0]/10 hover:text-[#00ABF0]"
                       ),
                       tod && !sel && (
                         variant === "fidelis-brown"
                           ? "font-bold text-fidelis-brown"
-                          : "font-bold text-[#0754C6]"
+                          : "font-bold text-[#00ABF0]"
                       ),
                       sel && (
                         variant === "fidelis-brown"
@@ -296,7 +296,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 }}
                 className={cn(
                   "text-xs font-semibold hover:underline cursor-pointer",
-                  variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#0754C6]"
+                  variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#00ABF0]"
                 )}
               >
                 Today

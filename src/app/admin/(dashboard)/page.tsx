@@ -39,7 +39,7 @@ export default async function AdminOverviewPage() {
       case "buy":
         return "bg-emerald-50 text-emerald-700 border-emerald-200";
       case "inspection":
-        return "bg-blue-50 text-[#0754C6] border-blue-200";
+        return "bg-blue-50 text-[#00ABF0] border-blue-200";
       case "open-house":
         return "bg-amber-50 text-amber-700 border-amber-200";
       default:
@@ -50,7 +50,7 @@ export default async function AdminOverviewPage() {
   const getStatusBadgeClass = (status: string) => {
     switch (status) {
       case "new":
-        return "bg-blue-50 text-[#0754C6] border-blue-200 font-bold";
+        return "bg-blue-50 text-[#00ABF0] border-blue-200 font-bold";
       case "contacted":
         return "bg-amber-50 text-amber-700 border-amber-200";
       case "scheduled":
@@ -81,7 +81,7 @@ export default async function AdminOverviewPage() {
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Total Inquiries
             </span>
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0754C6] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#00ABF0] flex items-center justify-center">
               <Users className="w-5 h-5" />
             </div>
           </div>
@@ -90,7 +90,7 @@ export default async function AdminOverviewPage() {
               {stats.overview.totalLeads}
             </div>
             <div className="mt-2 flex items-center gap-2">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#0754C6] border border-blue-200/60">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#00ABF0] border border-blue-200/60">
                 {stats.overview.newLeads} new
               </span>
               <span className="text-xs text-slate-500">awaiting response</span>
@@ -186,7 +186,7 @@ export default async function AdminOverviewPage() {
           </div>
           <Link
             href="/admin/leads"
-            className="text-xs font-bold text-[#0754C6] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#00ABF0] hover:underline flex items-center gap-1"
           >
             <span>View All</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -207,7 +207,7 @@ export default async function AdminOverviewPage() {
             <span className="text-xs font-semibold text-slate-500">
               Site Inspections
             </span>
-            <div className="mt-2 text-2xl font-black text-[#0754C6]">
+            <div className="mt-2 text-2xl font-black text-[#00ABF0]">
               {stats.byType.inspections}
             </div>
           </div>
@@ -256,7 +256,7 @@ export default async function AdminOverviewPage() {
             </div>
             <Link
               href="/admin/leads"
-              className="text-xs font-bold text-[#0754C6] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#00ABF0] hover:underline flex items-center gap-1"
             >
               <span>See All Inquiries</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -314,7 +314,7 @@ export default async function AdminOverviewPage() {
                     </span>
                     <Link
                       href="/admin/leads"
-                      className="p-1.5 text-slate-400 hover:text-[#0754C6] rounded-lg hover:bg-slate-100 transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-[#00ABF0] rounded-lg hover:bg-slate-100 transition-colors"
                       title="Open in Leads"
                     >
                       <ArrowRight className="w-4 h-4" />
@@ -351,7 +351,7 @@ export default async function AdminOverviewPage() {
                     <h3 className="text-xs font-bold text-slate-900">
                       {unit.title}
                     </h3>
-                    <p className="text-xs font-bold text-[#0754C6] mt-0.5">
+                    <p className="text-xs font-bold text-[#00ABF0] mt-0.5">
                       {unit.price}
                     </p>
                   </div>

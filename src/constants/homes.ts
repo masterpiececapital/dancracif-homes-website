@@ -7,7 +7,7 @@ export const HOMES_DATA: HomeModel[] = [
     unitsCount: 32,
     description: "Compact, efficient city living",
     price: "₦53M",
-    imageSrc: "/images/apartment-1bed.jpg",
+    imageSrc: "/fidelis-court/Bright Renovation Room with Window Views.png",
   },
   {
     id: "2-bed",
@@ -15,7 +15,7 @@ export const HOMES_DATA: HomeModel[] = [
     unitsCount: 48,
     description: "Ideal for young families & professionals",
     price: "₦80M",
-    imageSrc: "/images/apartment-2bed.jpg",
+    imageSrc: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
   },
   {
     id: "4-bed-terrace",
@@ -23,6 +23,6 @@ export const HOMES_DATA: HomeModel[] = [
     unitsCount: 8,
     description: "Shell option — finish to your taste",
     price: "₦125M",
-    imageSrc: "/images/terrace-duplex.jpg",
+    imageSrc: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
   },
 ];

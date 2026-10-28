@@ -161,7 +161,7 @@ export const CustomSelect: React.FC<SelectProps> = ({
                     isActive
                       ? variant === "fidelis-brown"
                         ? "bg-fidelis-brown/10 text-fidelis-brown font-semibold"
-                        : "bg-[#EAF2FE] text-[#0754C6] font-semibold"
+                        : "bg-[#EAF2FE] text-[#00ABF0] font-semibold"
                       : "text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-800/60"
                   )}
                 >
@@ -170,7 +170,7 @@ export const CustomSelect: React.FC<SelectProps> = ({
                     <Check
                       className={cn(
                         "h-3.5 w-3.5 shrink-0",
-                        variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#0754C6]"
+                        variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#00ABF0]"
                       )}
                     />
                   )}

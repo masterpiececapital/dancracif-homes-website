@@ -18,10 +18,10 @@ const ROW_2 = [
 export const AreasOfExpertise: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="space-y-3 mb-10 sm:mb-12">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
             OUR EXPERTISE
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0a192f] tracking-tight">
@@ -35,7 +35,7 @@ export const AreasOfExpertise: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-6 border-b border-slate-200/80">
             {ROW_1.map((item) => (
               <div key={item} className="flex items-center gap-3">
-                <ArrowRight className="w-4 h-4 text-[#0754C6] shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#00ABF0] shrink-0" />
                 <span className="text-sm sm:text-[15px] font-semibold text-[#0a192f]">
                   {item}
                 </span>
@@ -47,7 +47,7 @@ export const AreasOfExpertise: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-6 border-b border-slate-200/80">
             {ROW_2.map((item) => (
               <div key={item} className="flex items-center gap-3">
-                <ArrowRight className="w-4 h-4 text-[#0754C6] shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#00ABF0] shrink-0" />
                 <span className="text-sm sm:text-[15px] font-semibold text-[#0a192f]">
                   {item}
                 </span>

@@ -63,9 +63,9 @@ export default function BookInspectionPage() {
       <Header />
 
       <main className="flex-1 w-full bg-[#FAFCFE] py-8 sm:py-10 lg:py-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
           {/* Eyebrow */}
-          <span className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+          <span className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
             FIDELIS COURT · KUBWA F01
           </span>
 
@@ -179,9 +179,9 @@ export default function BookInspectionPage() {
               <button
                 type="button"
                 onClick={handleEmail}
-                className="w-full bg-white hover:bg-blue-50/50 text-[#0754C6] border-2 border-[#0754C6] font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                className="w-full bg-white hover:bg-blue-50/50 text-[#00ABF0] border-2 border-[#00ABF0] font-semibold py-3.5 px-6 rounded-full flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
-                <Mail className="w-5 h-5 text-[#0754C6]" />
+                <Mail className="w-5 h-5 text-[#00ABF0]" />
                 <span>Send via Email</span>
               </button>
             </div>

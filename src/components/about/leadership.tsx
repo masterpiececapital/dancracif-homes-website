@@ -33,9 +33,9 @@ const PRINCIPAL_OFFICERS = [
 export const Leadership: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="space-y-2 mb-10 sm:mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0754C6] block">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#00ABF0] block">
             LEADERSHIP
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -55,7 +55,7 @@ export const Leadership: React.FC = () => {
               <p className="text-sm sm:text-base font-bold text-slate-900 mt-5 leading-snug">
                 {officer.name}
               </p>
-              <p className="text-xs sm:text-sm font-medium text-[#0754C6] mt-1 leading-snug">
+              <p className="text-xs sm:text-sm font-medium text-[#00ABF0] mt-1 leading-snug">
                 {officer.role}
               </p>
             </div>

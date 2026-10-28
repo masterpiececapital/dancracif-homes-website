@@ -52,10 +52,10 @@ const PRINCIPLES = [
 export const OurApproach: React.FC = () => {
   return (
     <section className="w-full bg-[#05142b] py-16 sm:py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#60a5fa] block mb-3">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block mb-3">
             How We Work
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
@@ -73,12 +73,12 @@ export const OurApproach: React.FC = () => {
             return (
               <div
                 key={principle.title}
-                className="group relative rounded-2xl bg-white/[0.04] border border-white/[0.08] p-7 sm:p-8 hover:bg-white/[0.08] hover:border-[#60a5fa]/30 transition-all duration-300"
+                className="group relative rounded-2xl bg-white/[0.04] border border-white/[0.08] p-7 sm:p-8 hover:bg-white/[0.08] hover:border-[#00ABF0]/30 transition-all duration-300"
               >
                 {/* Step indicator */}
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-[#0754C6]/20 flex items-center justify-center group-hover:bg-[#0754C6] transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-[#60a5fa] group-hover:text-white transition-colors duration-300" />
+                  <div className="w-10 h-10 rounded-xl bg-[#00ABF0]/20 flex items-center justify-center group-hover:bg-[#00ABF0] transition-colors duration-300">
+                    <Icon className="w-5 h-5 text-[#00ABF0] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                     Step {idx + 1}

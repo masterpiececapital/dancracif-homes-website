@@ -118,7 +118,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
       {/* Top Action Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center font-bold">
             <Milestone className="w-5 h-5" />
           </div>
           <div>
@@ -179,7 +179,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50 text-[#0754C6] text-xs font-bold border border-blue-100">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50 text-[#00ABF0] text-xs font-bold border border-blue-100">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0754C6]" />
                     Phase {m.phaseNumber}
                   </span>
@@ -188,7 +188,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                   </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0754C6] transition-colors leading-snug">
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#00ABF0] transition-colors leading-snug">
                   {m.title}
                 </h3>
 
@@ -202,7 +202,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                 <button
                   type="button"
                   onClick={() => openEditModal(m)}
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                  className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                   title="Edit Milestone"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -234,7 +234,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
             <tbody className="divide-y divide-slate-100">
               {milestones.map((m) => (
                 <tr key={m.id} className="hover:bg-slate-50/60 transition-colors">
-                  <td className="py-3.5 px-4 font-bold text-[#0754C6]">
+                  <td className="py-3.5 px-4 font-bold text-[#00ABF0]">
                     Phase {m.phaseNumber}
                   </td>
                   <td className="py-3.5 px-4 font-bold text-slate-900">
@@ -251,7 +251,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                       <button
                         type="button"
                         onClick={() => openEditModal(m)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#0754C6] hover:bg-slate-100 cursor-pointer"
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                       >
                         <Edit3 className="w-4 h-4" />
                       </button>
@@ -282,7 +282,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
           <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <CalendarDays className="w-4 h-4" />
                 </div>
                 <div>

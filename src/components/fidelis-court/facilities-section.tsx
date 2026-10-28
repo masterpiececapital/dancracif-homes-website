@@ -52,12 +52,14 @@ export const FacilitiesSection: React.FC = () => {
           {FACILITIES.map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-4 bg-white rounded-2xl px-5 py-5 border border-zinc-100 hover:border-fidelis-brown/20 hover:shadow-sm transition-all"
+              className="group flex items-center gap-4 bg-white rounded-2xl px-5 py-5 border border-zinc-100 hover:border-fidelis-brown/30 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 ease-out cursor-pointer"
             >
-              <div className="h-12 w-12 shrink-0 rounded-xl bg-fidelis-brown flex items-center justify-center">
+              <div className="h-12 w-12 shrink-0 rounded-xl bg-fidelis-brown flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm shadow-fidelis-brown/20">
                 <Icon className="h-6 w-6 text-white" />
               </div>
-              <span className="text-base font-medium text-zinc-800">{label}</span>
+              <span className="text-base font-medium text-zinc-800 group-hover:text-fidelis-brown group-hover:font-bold group-hover:scale-[1.05] origin-left inline-block transition-all duration-300">
+                {label}
+              </span>
             </div>
           ))}
         </div>

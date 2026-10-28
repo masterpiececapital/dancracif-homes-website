@@ -16,7 +16,7 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
         onClick={() => onChange("card")}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
           view === "card"
-            ? "bg-white text-[#0754C6] shadow-2xs font-bold"
+            ? "bg-white text-[#00ABF0] shadow-2xs font-bold"
             : "text-slate-600 hover:text-slate-900"
         }`}
         title="Card Grid View"
@@ -29,7 +29,7 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
         onClick={() => onChange("list")}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
           view === "list"
-            ? "bg-white text-[#0754C6] shadow-2xs font-bold"
+            ? "bg-white text-[#00ABF0] shadow-2xs font-bold"
             : "text-slate-600 hover:text-slate-900"
         }`}
         title="Table List View"

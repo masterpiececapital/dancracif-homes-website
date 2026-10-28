@@ -181,13 +181,13 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section className="w-full bg-white py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
           {/* Main Left Column (Form and Tabs) */}
           <div className="flex-1 min-w-0 space-y-6 w-full">
             {/* Header text */}
             <div className="space-y-2">
-              <span className={`text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6]`}>
+              <span className={`text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0]`}>
                 GET IN TOUCH
               </span>
               <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
@@ -208,7 +208,7 @@ export const ContactSection: React.FC = () => {
                     className={cn(
                       "w-full flex items-center justify-center gap-2 py-3 px-3 rounded-xl text-center text-sm font-semibold transition-all cursor-pointer",
                       isActive
-                        ? "bg-white text-[#0754C6] shadow-sm"
+                        ? "bg-white text-[#00ABF0] shadow-sm"
                         : "text-slate-600 hover:text-slate-900"
                     )}
                   >
@@ -450,7 +450,7 @@ export const ContactSection: React.FC = () => {
                     type="button"
                     disabled={submitting !== null}
                     onClick={handleEmail}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#0754C6] bg-white hover:bg-[#0754C6]/5 disabled:opacity-60 text-[#0754C6] text-sm font-semibold transition-colors cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#00ABF0] bg-white hover:bg-[#00ABF0]/5 disabled:opacity-60 text-[#00ABF0] text-sm font-semibold transition-colors cursor-pointer"
                   >
                     <Mail className="w-4 h-4" />
                     <span>

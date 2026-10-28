@@ -132,7 +132,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
       case "buy":
         return "bg-emerald-50 text-emerald-700 border-emerald-200";
       case "inspection":
-        return "bg-blue-50 text-[#0754C6] border-blue-200";
+        return "bg-blue-50 text-[#00ABF0] border-blue-200";
       case "open-house":
         return "bg-amber-50 text-amber-700 border-amber-200";
       default:
@@ -143,7 +143,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "new":
-        return "bg-blue-50 text-[#0754C6] border-blue-200";
+        return "bg-blue-50 text-[#00ABF0] border-blue-200";
       case "contacted":
         return "bg-amber-50 text-amber-700 border-amber-200";
       case "scheduled":
@@ -269,14 +269,14 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                     <td className="py-4 px-5 text-xs text-slate-600 space-y-1">
                       <a
                         href={`tel:${lead.phone}`}
-                        className="flex items-center gap-1.5 hover:text-[#0754C6] font-medium transition-colors"
+                        className="flex items-center gap-1.5 hover:text-[#00ABF0] font-medium transition-colors"
                       >
                         <Phone className="w-3 h-3 text-slate-400" />
                         <span>{lead.phone}</span>
                       </a>
                       <a
                         href={`mailto:${lead.email}`}
-                        className="flex items-center gap-1.5 hover:text-[#0754C6] transition-colors truncate max-w-[200px]"
+                        className="flex items-center gap-1.5 hover:text-[#00ABF0] transition-colors truncate max-w-[200px]"
                       >
                         <Mail className="w-3 h-3 text-slate-400" />
                         <span className="truncate">{lead.email}</span>
@@ -298,7 +298,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                     <td className="py-4 px-5 text-xs">
                       {lead.unitType ? (
                         <div className="font-bold text-slate-800 flex items-center gap-1">
-                          <Building className="w-3 h-3 text-[#0754C6]" />
+                          <Building className="w-3 h-3 text-[#00ABF0]" />
                           <span>{lead.unitType}</span>
                           {lead.numberOfUnits > 1 && (
                             <span className="text-slate-400 font-normal">
@@ -398,7 +398,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                   <span className="text-slate-400 block">Phone</span>
                   <a
                     href={`tel:${activeLead.phone}`}
-                    className="font-bold text-[#0754C6]"
+                    className="font-bold text-[#00ABF0]"
                   >
                     {activeLead.phone}
                   </a>
@@ -407,7 +407,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                   <span className="text-slate-400 block">Email</span>
                   <a
                     href={`mailto:${activeLead.email}`}
-                    className="font-bold text-[#0754C6] truncate block"
+                    className="font-bold text-[#00ABF0] truncate block"
                   >
                     {activeLead.email}
                   </a>

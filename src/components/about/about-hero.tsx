@@ -8,11 +8,11 @@ import { ArrowRight } from "lucide-react";
 export const AboutHero: React.FC = () => {
   return (
     <section className="w-full bg-white pt-10 sm:pt-14 pb-16 sm:pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Narrative & Info */}
           <div className="lg:col-span-6 space-y-5">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0754C6] block">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
               ABOUT US
             </span>
 
@@ -22,7 +22,7 @@ export const AboutHero: React.FC = () => {
               Limited
             </h1>
 
-            <p className="text-base sm:text-lg font-bold text-[#0754C6]">
+            <p className="text-base sm:text-lg font-bold text-[#00ABF0]">
               High quality. Affordable options. Lasting value.
             </p>
 
@@ -53,7 +53,7 @@ export const AboutHero: React.FC = () => {
           <div className="lg:col-span-6">
             <div className="relative w-full aspect-[16/11] sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100">
               <Image
-                src="/images/fidelis-court1.jpg"
+                src="/fidelis-court/WhatsApp Image 2026-10-17 at 9.57.51 PM.jpeg"
                 alt="Fidelis Court 4-bedroom terrace duplex development"
                 fill
                 priority

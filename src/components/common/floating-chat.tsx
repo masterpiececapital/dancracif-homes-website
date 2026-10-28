@@ -324,7 +324,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                           onClick={() => setIsOpen(false)}
                           className={cn(
                             "inline-flex items-center gap-1 text-xs font-bold hover:underline",
-                            isFidelisCourtPage ? "text-fidelis-brown" : "text-[#0754C6]"
+                            isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"
                           )}
                         >
                           <span>{msg.link.text}</span>
@@ -377,7 +377,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                   "inline-block text-[11px] font-medium px-2.5 py-1 rounded-full transition-colors shrink-0 cursor-pointer",
                   isFidelisCourtPage
                     ? "bg-fidelis-brown/10 hover:bg-fidelis-brown text-fidelis-brown hover:text-white"
-                    : "bg-[#EAF2FE] hover:bg-[#0754C6] text-[#0754C6] hover:text-white"
+                    : "bg-[#EAF2FE] hover:bg-[#00ABF0] text-[#00ABF0] hover:text-white"
                 )}
               >
                 {prompt}

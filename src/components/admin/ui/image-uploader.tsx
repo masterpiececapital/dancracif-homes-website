@@ -95,7 +95,7 @@ export function ImageUploader({
           <button
             type="button"
             onClick={() => setShowUrlInput(!showUrlInput)}
-            className="text-[11px] font-semibold text-[#0754C6] hover:underline cursor-pointer flex items-center gap-1"
+            className="text-[11px] font-semibold text-[#00ABF0] hover:underline cursor-pointer flex items-center gap-1"
           >
             <LinkIcon className="w-3 h-3" />
             <span>{showUrlInput ? "Upload File" : "Paste URL"}</span>
@@ -192,7 +192,7 @@ export function ImageUploader({
           />
 
           <div className="flex flex-col items-center justify-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#0754C6] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
               {isUploading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
