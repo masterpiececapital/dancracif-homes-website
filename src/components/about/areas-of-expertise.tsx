@@ -30,9 +30,9 @@ export const AreasOfExpertise: React.FC = () => {
         </div>
 
         {/* 2-Row / 3-Column Grid with Horizontal Dividers */}
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {/* Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-6 border-b border-slate-200/80">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-0 md:pb-6 border-b-0 md:border-b md:border-slate-200/80">
             {ROW_1.map((item) => (
               <div key={item} className="flex items-center gap-3">
                 <ArrowRight className="w-4 h-4 text-[#00ABF0] shrink-0" />
@@ -44,7 +44,7 @@ export const AreasOfExpertise: React.FC = () => {
           </div>
 
           {/* Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-6 border-b border-slate-200/80">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-0 md:pb-6 border-b-0 md:border-b md:border-slate-200/80">
             {ROW_2.map((item) => (
               <div key={item} className="flex items-center gap-3">
                 <ArrowRight className="w-4 h-4 text-[#00ABF0] shrink-0" />
@@ -57,7 +57,7 @@ export const AreasOfExpertise: React.FC = () => {
         </div>
 
         {/* Commercial Development · Dangracif Mall */}
-        <div className="mt-12 sm:mt-14 max-w-4xl space-y-3">
+        <div className="mt-6 sm:mt-8 max-w-4xl space-y-3">
           <h3 className="text-lg sm:text-xl font-bold text-[#0a192f]">
             Commercial development · Dangracif Mall
           </h3>
@@ -68,6 +68,10 @@ export const AreasOfExpertise: React.FC = () => {
             commercial value.
           </p>
         </div>
+        <p className="text-slate-600 text-sm sm:text-[15px] leading-relaxed pt-3">
+          Our development work is supported by outsourced built-environment
+          professionals and partners.
+        </p>
       </div>
     </section>
   );

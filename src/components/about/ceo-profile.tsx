@@ -66,11 +66,6 @@ export const CeoProfile: React.FC = () => {
               He established the General Azinta Foundation after retirement to
               support communities and less-privileged people.
             </p>
-
-            <p className="text-xs sm:text-sm text-slate-500 font-medium pt-3">
-              Our development work is supported by outsourced built-environment
-              professionals and partners.
-            </p>
           </div>
         </div>
       </div>

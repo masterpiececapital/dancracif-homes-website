@@ -5,7 +5,8 @@ export type InquiryType =
   | "reserve"
   | "buy"
   | "open-house"
-  | "contact";
+  | "contact"
+  | "agent";
 
 export type InquiryStatus =
   | "new"

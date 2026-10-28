@@ -80,7 +80,7 @@ export class ContentSchema1729000000000 implements MigrationInterface {
     await queryRunner.query(`
       INSERT INTO "site_config" ("key", "value") VALUES
         ('stats', '{"units":"88","sqm":"9,900","months":"14","security":"24/7"}'),
-        ('contact', '{"phone":"+234 800 000 0000","email":"sales@dangracifhomes.com","whatsapp":"2348000000000","inspectionHours":"Inspections hold Monday – Saturday, 9am – 5pm."}'),
+        ('contact', '{"phone":"+234 813 318 7860","email":"sales@dangracifhomes.com","whatsapp":"2348000000000","inspectionHours":"Inspections hold Monday – Saturday, 9am – 5pm."}'),
         ('estate', '{"name":"Fidelis Court","address":"21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria","description":"A gated residential community on approximately 9,900 sqm.","deliveryDate":"December 2027","youtubeUrl":"https://youtube.com"}'),
         ('open_house', '{"enabled":true,"status":"Ongoing Event","headline":"Fidelis Court Open House","description":"Visit the estate, meet our sales team and explore your next home."}')
       ON CONFLICT ("key") DO NOTHING;

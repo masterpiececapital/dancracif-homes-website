@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <section
-      className="relative w-full flex items-end sm:items-center overflow-hidden sm:min-h-[590px] lg:min-h-[682px]"
+      className="relative w-full flex items-center overflow-hidden min-h-[580px] sm:min-h-[620px] lg:min-h-[680px]"
       style={{ minHeight: "87dvh" }}
     >
       {/* Background Hero Image */}
@@ -26,23 +26,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           alt="Fidelis Court Estate, Kubwa F01, Abuja"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-[center_35%] sm:object-[center_30%]"
           sizes="100vw"
         />
         {/* Deep navy overlay for contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06152f]/95 via-[#101d39]/65 to-[#182033]/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06152f]/95 via-[#101d39]/70 to-[#182033]/50" />
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pb-14 sm:pb-0 sm:py-24 w-full lg:translate-y-14">
-        <div className="max-w-[660px] space-y-5">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 w-full">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-[720px] space-y-4 sm:space-y-5">
           {/* Tag Pill */}
-          <div className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-5 py-1.5 text-[12px] font-semibold uppercase tracking-wide text-white/90 backdrop-blur-md">
+          <div className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 sm:px-5 py-1.5 text-[11px] sm:text-[12px] font-semibold uppercase tracking-wide text-white/90 backdrop-blur-md">
             <span>Now Selling · Kubwa F01, Abuja</span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-[38px] sm:text-5xl lg:text-[60px] font-light text-white tracking-tight leading-[1.1]">
+          <h1 className="text-[32px] sm:text-4xl md:text-[44px] lg:text-[52px] font-light text-white tracking-tight leading-[1.18]">
             <span className="font-extrabold tracking-wide text-white">
               Fidelis Court.
             </span>{" "}
@@ -50,7 +50,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
 
           {/* Subtitle */}
-          <p className="text-[15px] sm:text-lg font-medium text-white max-w-xl leading-relaxed">
+          <p className="text-[14px] sm:text-base lg:text-[17px] font-medium text-slate-200 max-w-xl leading-relaxed">
             1 & 2-bedroom apartments and 4-bedroom terraces from ₦53M, with a
             flexible 12-month payment plan.
           </p>

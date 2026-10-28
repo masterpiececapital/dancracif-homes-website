@@ -86,7 +86,7 @@ function getBotReply(userQuery: string): {
     q.includes("office")
   ) {
     return {
-      text: "Fidelis Court Estate is located at 21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT.\n\nOur Developer Head Office is at Suite B5, Bricks 'N' More Plaza, 6th Avenue, Gwarimpa, Abuja. Phone: +234 800 000 0000.",
+      text: "Fidelis Court Estate is located at 21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT.\n\nOur Developer Head Office is at Suite B5, Bricks 'N' More Plaza, 6th Avenue, Gwarimpa, Abuja. Phone: +234 813 318 7860.",
       link: { text: "View map & contact info", href: "/contact" },
     };
   }
@@ -311,8 +311,8 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                       isBot
                         ? "bg-white text-slate-800 border border-slate-200/80 rounded-tl-sm whitespace-pre-line"
                         : isFidelisCourtPage
-                        ? "bg-fidelis-brown text-white rounded-tr-sm"
-                        : "bg-[#0754C6] text-white rounded-tr-sm"
+                          ? "bg-fidelis-brown text-white rounded-tr-sm"
+                          : "bg-[#0754C6] text-white rounded-tr-sm"
                     )}
                   >
                     {msg.text}

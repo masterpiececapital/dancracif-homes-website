@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
 
     handleScroll();
@@ -59,10 +59,12 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b border-zinc-200/80 transition-all duration-300",
-        isOpen || isScrolled
-          ? "bg-white shadow-xs"
-          : "bg-white",
+        "sticky top-0 z-40 w-full transition-all duration-300",
+        isOpen
+          ? "bg-white border-b border-zinc-200 shadow-sm"
+          : isScrolled
+          ? "bg-white/80 backdrop-blur-md border-b border-zinc-200/60 shadow-xs"
+          : "bg-white border-b border-zinc-200/80"
       )}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 h-20 sm:h-22 lg:h-24 flex items-center justify-between">

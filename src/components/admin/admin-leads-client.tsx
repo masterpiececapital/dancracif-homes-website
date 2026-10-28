@@ -135,6 +135,8 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
         return "bg-blue-50 text-[#00ABF0] border-blue-200";
       case "open-house":
         return "bg-amber-50 text-amber-700 border-amber-200";
+      case "agent":
+        return "bg-sky-50 text-[#00ABF0] border-sky-200 font-semibold";
       default:
         return "bg-slate-50 text-slate-700 border-slate-200";
     }
@@ -182,6 +184,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
             </span>
             {[
               { id: "all", label: "All" },
+              { id: "agent", label: "Agent Applications" },
               { id: "reserve", label: "Reservations" },
               { id: "inspection", label: "Inspections" },
               { id: "buy", label: "Buy Requests" },

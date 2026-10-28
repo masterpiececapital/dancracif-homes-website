@@ -57,8 +57,8 @@ export default function HomePage() {
           <BrochureBanner />
         </div>
 
-        {/* 6. 40% CTA Banner — desktop: order-10 | mobile: order-5 (after Brochure) */}
-        <div className="order-[5] sm:order-[10] w-full">
+        {/* 6. 40% CTA Banner — mobile only at order-5 (on desktop it sits above the footer) */}
+        <div className="order-[5] sm:hidden w-full">
           <CtaBanner onCalculateClick={scrollToContact} />
         </div>
 

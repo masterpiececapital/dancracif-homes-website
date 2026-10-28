@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   title: "Dangracif Homes | Fidelis Court, Kubwa F01, Abuja",
   description:
     "Secure, serviced living in the heart of Kubwa. 1 & 2-bedroom apartments and 4-bedroom terraces from ₦53M.",
+  icons: {
+    icon: [
+      { url: "/images/logo.png" },
+      { url: "/icon.png" },
+    ],
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({

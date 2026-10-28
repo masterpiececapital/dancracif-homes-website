@@ -54,9 +54,9 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
 
   // Contact settings
   const [contact, setContact] = React.useState({
-    phone: initialConfigs.contact?.phone || "+234 800 000 0000",
+    phone: initialConfigs.contact?.phone || "+234 813 318 7860",
     email: initialConfigs.contact?.email || "sales@dangracifhomes.com",
-    whatsapp: initialConfigs.contact?.whatsapp || "2348000000000",
+    whatsapp: initialConfigs.contact?.whatsapp || "2348133187860",
     inspectionHours:
       initialConfigs.contact?.inspectionHours ||
       "Inspections hold Monday – Saturday, 9am – 5pm.",
@@ -139,11 +139,10 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                isActive
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${isActive
                   ? "bg-[#0754C6] text-white shadow-2xs"
                   : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/70"
-              }`}
+                }`}
             >
               <Icon className="w-4 h-4" />
               <span>{tab.label}</span>

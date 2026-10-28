@@ -27,7 +27,7 @@ export const UNIT_OPTIONS: UnitOption[] = [
 ];
 
 export const ESTATE_CONTACT = {
-  phone: "+234 800 000 0000",
+  phone: "+234 813 318 7860",
   email: "sales@dangracifhomes.com",
   estateName: "Fidelis Court — Estate",
   address: "21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria",

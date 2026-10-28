@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -23,9 +24,11 @@ export const FidelisCtaCards: React.FC = () => {
               </p>
             </div>
           </div>
-          <Button variant="fidelis-brown" size="lg" className="shrink-0 font-bold cursor-pointer">
-            Apply now
-          </Button>
+          <Link href="/become-an-agent">
+            <Button variant="fidelis-brown" size="lg" className="shrink-0 font-bold cursor-pointer">
+              Apply now
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

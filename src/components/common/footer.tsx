@@ -177,7 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
               </li>
               <li>
                 <Link
-                  href="/contact?tab=agent"
+                  href="/become-an-agent"
                   className="hover:text-white transition-colors block"
                 >
                   Become an Agent
@@ -231,7 +231,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
             <ul className="space-y-3 text-[14px] font-normal leading-[20px] text-[#f0f6fc]">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/dangracifhomes?rpxt=dWxueWs1MXYzcnUy&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
@@ -242,7 +242,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
               </li>
               <li>
                 <a
-                  href="https://youtube.com"
+                  href="https://youtube.com/@dangracifhomesabuja?si=WeanGoaxK_SB5EAg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
@@ -253,7 +253,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
               </li>
               <li>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61595924164485"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
