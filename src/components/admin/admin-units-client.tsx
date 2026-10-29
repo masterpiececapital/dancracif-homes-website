@@ -3,14 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import {
-  Home,
-  Building2,
   Edit3,
   Save,
-  X,
   ExternalLink,
-  CheckCircle2,
-  AlertTriangle,
   RefreshCw,
 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -72,16 +67,6 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
     }
   };
 
-  const totalInventory = units.reduce(
-    (acc, u) => acc + (u.unitsCount || 0),
-    0
-  );
-  const availableInventory = units.reduce(
-    (acc, u) => acc + (u.availableUnits || 0),
-    0
-  );
-  const soldInventory = Math.max(0, totalInventory - availableInventory);
-
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "available":
@@ -119,9 +104,8 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
   return (
     <div className="space-y-8">
       {/* Controls Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-lg border border-slate-200/80 shadow-2xs">
         <div>
-          <h2 className="text-sm font-bold text-slate-900">Estate Unit Inventory</h2>
           <p className="text-xs text-slate-500">Live pricing and stock availability</p>
         </div>
 
@@ -132,7 +116,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
             href="/fideliscourts"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-[#00ABF0] text-xs font-semibold shadow-2xs transition-all"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-[#00ABF0] text-xs font-semibold shadow-2xs transition-all"
           >
             <span>Live Page</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -141,65 +125,13 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-semibold shadow-2xs transition-all cursor-pointer"
           >
             <RefreshCw
               className={`w-3.5 h-3.5 ${isRefreshing ? "animate-spin" : ""}`}
             />
             <span>Refresh</span>
           </button>
-        </div>
-      </div>
-
-      {/* Summary KPI Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Total Units Built
-            </span>
-            <div className="text-2xl font-black text-slate-900 mt-1">
-              {totalInventory} Units
-            </div>
-            <span className="text-[11px] text-slate-500">Across 4 unit types</span>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#00ABF0] flex items-center justify-center font-bold">
-            <Building2 className="w-5 h-5" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Available Units
-            </span>
-            <div className="text-2xl font-black text-emerald-600 mt-1">
-              {availableInventory} Units Left
-            </div>
-            <span className="text-[11px] text-slate-500">
-              Open for immediate purchase
-            </span>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-            <CheckCircle2 className="w-5 h-5" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
-          <div>
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Sold &amp; Reserved
-            </span>
-            <div className="text-2xl font-black text-slate-700 mt-1">
-              {soldInventory} Units
-            </div>
-            <span className="text-[11px] text-slate-500">
-              {Math.round((soldInventory / (totalInventory || 1)) * 100)}% Allocation rate
-            </span>
-          </div>
-          <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-            <Home className="w-5 h-5" />
-          </div>
         </div>
       </div>
 
@@ -215,7 +147,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
             return (
               <div
                 key={unit.id}
-                className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col justify-between hover:border-slate-300 transition-all"
+                className="bg-white rounded-lg border border-slate-200/80 shadow-xs overflow-hidden flex flex-col justify-between hover:border-slate-300 transition-all"
               >
                 <div className="p-6 space-y-4">
                   {/* Header with Title and Status */}
@@ -237,7 +169,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
 
                   {/* Edit Form or Read-Only State */}
                   {isEditing ? (
-                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-3.5 text-xs">
+                    <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-3.5 text-xs">
                       <div>
                         <label className="block font-bold text-slate-700 mb-1">
                           Price Display String
@@ -251,7 +183,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                               price: e.target.value,
                             }))
                           }
-                          className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                          className="w-full p-2.5 rounded-md border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                         />
                       </div>
 
@@ -271,7 +203,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                                 availableUnits: Number(e.target.value),
                               }))
                             }
-                            className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                            className="w-full p-2.5 rounded-md border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                           />
                         </div>
                         <div>
@@ -287,7 +219,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                                 unitsCount: Number(e.target.value),
                               }))
                             }
-                            className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                            className="w-full p-2.5 rounded-md border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                           />
                         </div>
                       </div>
@@ -304,7 +236,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                               status: e.target.value,
                             }))
                           }
-                          className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                          className="w-full p-2.5 rounded-md border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                         >
                           <option value="available">Available</option>
                           <option value="limited">Limited</option>
@@ -322,7 +254,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                         <button
                           onClick={() => handleSave(unit.id)}
                           disabled={isSaving}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer"
                         >
                           <Save className="w-3.5 h-3.5" />
                           <span>{isSaving ? "Saving..." : "Save Changes"}</span>
@@ -342,7 +274,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                       </div>
 
                       {/* Progress */}
-                      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                      <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-100 space-y-2">
                         <div className="flex items-center justify-between text-xs">
                           <span className="font-semibold text-slate-700">
                             {unit.availableUnits} Available
@@ -367,7 +299,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
 
                       <button
                         onClick={() => startEdit(unit)}
-                        className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0754C6] hover:text-white text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer group"
+                        className="w-full py-2.5 px-4 rounded-lg bg-slate-100 hover:bg-[#0754C6] hover:text-white text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer group"
                       >
                         <Edit3 className="w-3.5 h-3.5 text-slate-500 group-hover:text-white" />
                         <span>Edit Unit Pricing &amp; Stock</span>
@@ -381,7 +313,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
         </div>
       ) : (
         /* TABLE LIST VIEW */
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs overflow-hidden">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50/75 border-b border-slate-200/80 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
               <tr>
@@ -417,7 +349,7 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                         setView("card");
                         startEdit(unit);
                       }}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
+                      className="p-1.5 rounded-md text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                       title="Edit Stock & Pricing"
                     >
                       <Edit3 className="w-4 h-4" />

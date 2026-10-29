@@ -16,7 +16,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
   const pathname = usePathname();
-  const isFidelisCourtPage = pathname === "/fideliscourts" || pathname === "/fidelis-court";
   const router = useRouter();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -83,14 +82,9 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "text-sm font-medium transition-colors",
-                    isFidelisCourtPage
-                      ? "hover:text-fidelis-brown"
-                      : "hover:text-[#00ABF0]",
+                    "text-sm font-medium transition-colors hover:text-[#00ABF0]",
                     isActive
-                      ? isFidelisCourtPage
-                        ? "text-fidelis-brown font-semibold"
-                        : "text-[#00ABF0] font-semibold"
+                      ? "text-[#00ABF0] font-semibold"
                       : "text-zinc-700",
                   )}
                 >
@@ -101,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
           </nav>
 
           <Button
-            variant={isFidelisCourtPage ? "fidelis-brown" : "primary"}
+            variant="primary"
             size="md"
             onClick={handleBookInspection}
           >
@@ -149,9 +143,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
                       className={cn(
                         "text-[17px] font-medium tracking-tight py-1",
                         isActive
-                          ? isFidelisCourtPage
-                            ? "text-fidelis-brown"
-                            : "text-[#00ABF0]"
+                          ? "text-[#00ABF0]"
                           : "text-zinc-900 hover:text-[#00ABF0]",
                       )}
                     >
@@ -163,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookInspectionClick }) => {
 
               <div className="mt-6 pt-1">
                 <Button
-                  variant={isFidelisCourtPage ? "fidelis-brown" : "primary"}
+                  variant="primary"
                   size="lg"
                   className="w-full text-base font-semibold rounded-full h-12 shadow-sm"
                   onClick={handleBookInspection}

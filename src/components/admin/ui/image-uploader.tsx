@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Upload, X, Loader2, Image as ImageIcon, Link as LinkIcon, CheckCircle2 } from "lucide-react";
+import { Upload, X, Loader2, Link as LinkIcon, CheckCircle2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface ImageUploaderProps {
@@ -46,7 +46,6 @@ export function ImageUploader({
       const formData = new FormData();
       formData.append("file", file);
       formData.append("folder", folder);
-      formData.append("name", file.name);
 
       const res = await fetch("/api/admin/upload", {
         method: "POST",
@@ -54,14 +53,17 @@ export function ImageUploader({
       });
 
       const data = await res.json();
-      if (!res.ok || !data.success) {
+      if (!res.ok || !data.success || typeof data.url !== "string") {
         throw new Error(data.error || "Failed to upload image");
       }
 
-      onChange(data.asset.secureUrl || data.asset.url);
+      onChange(data.url);
       toast.success("Image uploaded successfully!", { id: toastId });
-    } catch (err: any) {
-      toast.error(err.message || "Upload failed", { id: toastId });
+    } catch (err: unknown) {
+      toast.error(
+        err instanceof Error ? err.message : "Upload failed",
+        { id: toastId }
+      );
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -103,55 +105,79 @@ export function ImageUploader({
         </div>
       )}
 
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/png,image/jpeg,image/webp,image/gif"
+        onChange={(e) => {
+          if (e.target.files?.[0]) handleUploadFile(e.target.files[0]);
+        }}
+        className="hidden"
+      />
+
       {showUrlInput ? (
         <div className="flex gap-2">
           <input
             type="url"
             value={urlDraft}
             onChange={(e) => setUrlDraft(e.target.value)}
-            placeholder="https://..."
-            className="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+            placeholder="https://res.cloudinary.com/..."
+            className="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
           />
           <button
             type="button"
             onClick={() => {
-              if (urlDraft.trim()) {
-                onChange(urlDraft.trim());
-                setShowUrlInput(false);
-                setUrlDraft("");
-                toast.success("Image URL applied");
+              const url = urlDraft.trim();
+              const isLocalPath = url.startsWith("/") && !url.startsWith("//");
+              let isCloudinaryUrl = false;
+              try {
+                const parsedUrl = new URL(url);
+                isCloudinaryUrl =
+                  parsedUrl.protocol === "https:" &&
+                  parsedUrl.hostname === "res.cloudinary.com";
+              } catch {
+                isCloudinaryUrl = false;
               }
+
+              if (!isLocalPath && !isCloudinaryUrl) {
+                toast.error("Enter a Cloudinary URL or a path from this website.");
+                return;
+              }
+
+              onChange(url);
+              setShowUrlInput(false);
+              setUrlDraft("");
+              toast.success("Image URL applied");
             }}
-            className="px-3.5 py-2 bg-[#0754C6] text-white text-xs font-semibold rounded-xl hover:bg-[#0648AB] cursor-pointer"
+            className="px-3.5 py-2 bg-[#0754C6] text-white text-xs font-semibold rounded-lg hover:bg-[#0648AB] cursor-pointer"
           >
             Apply
           </button>
         </div>
       ) : value ? (
-        <div className="relative rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 group">
+        <div className="relative rounded-lg border border-slate-200 overflow-hidden bg-slate-50 group">
           <div className="relative h-44 w-full bg-slate-100 flex items-center justify-center">
             {/* Image Preview */}
-            <img
+            <Image
               src={value}
               alt="Uploaded preview"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                // If broken image, fallback
-                (e.target as HTMLElement).style.display = "none";
-              }}
+              fill
+              sizes="(max-width: 640px) 100vw, 480px"
+              className="object-cover"
+              unoptimized
             />
             <div className="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3 py-1.5 rounded-lg bg-white/90 text-slate-900 text-xs font-bold hover:bg-white shadow-xs cursor-pointer"
+                className="px-3 py-1.5 rounded-md bg-white/90 text-slate-900 text-xs font-bold hover:bg-white shadow-xs cursor-pointer"
               >
                 Change Image
               </button>
               <button
                 type="button"
                 onClick={() => onChange("")}
-                className="p-1.5 rounded-lg bg-red-600/90 text-white hover:bg-red-600 shadow-xs cursor-pointer"
+                className="p-1.5 rounded-md bg-red-600/90 text-white hover:bg-red-600 shadow-xs cursor-pointer"
                 title="Remove Image"
               >
                 <X className="w-4 h-4" />
@@ -173,26 +199,14 @@ export function ImageUploader({
           onDragOver={handleDrag}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all ${
+          className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all ${
             dragActive
               ? "border-[#0754C6] bg-blue-50/50"
               : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/50"
           }`}
         >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/png,image/jpeg,image/webp,image/gif"
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                handleUploadFile(e.target.files[0]);
-              }
-            }}
-            className="hidden"
-          />
-
           <div className="flex flex-col items-center justify-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
               {isUploading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (

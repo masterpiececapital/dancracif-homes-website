@@ -177,7 +177,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
   return (
     <div className="space-y-6">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-lg border border-slate-200/80 shadow-2xs">
         <div className="flex flex-wrap items-center gap-3 flex-1 min-w-0">
           {/* Search Box */}
           <div className="relative flex-1 min-w-[200px] max-w-md">
@@ -187,16 +187,16 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search articles by title or summary..."
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200/70 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200/70 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white transition-all"
             />
           </div>
 
           {/* Status Filter */}
-          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200/60 text-xs">
+          <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg border border-slate-200/60 text-xs">
             <button
               type="button"
               onClick={() => setFilterStatus("all")}
-              className={`px-2.5 py-1 rounded-lg font-medium transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                 filterStatus === "all"
                   ? "bg-white text-slate-900 shadow-2xs font-bold"
                   : "text-slate-600 hover:text-slate-900"
@@ -207,7 +207,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
             <button
               type="button"
               onClick={() => setFilterStatus("published")}
-              className={`px-2.5 py-1 rounded-lg font-medium transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                 filterStatus === "published"
                   ? "bg-white text-emerald-700 shadow-2xs font-bold"
                   : "text-slate-600 hover:text-slate-900"
@@ -218,7 +218,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
             <button
               type="button"
               onClick={() => setFilterStatus("draft")}
-              className={`px-2.5 py-1 rounded-lg font-medium transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                 filterStatus === "draft"
                   ? "bg-white text-amber-700 shadow-2xs font-bold"
                   : "text-slate-600 hover:text-slate-900"
@@ -234,7 +234,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
           <button
             type="button"
             onClick={openCreateModal}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>New Article</span>
@@ -250,8 +250,8 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
           <ListSkeletonTable rows={6} />
         )
       ) : filteredPosts.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-12 text-center">
-          <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+        <div className="bg-white rounded-lg border border-dashed border-slate-300 p-12 text-center">
+          <div className="w-12 h-12 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
             <FileText className="w-6 h-6" />
           </div>
           <h3 className="text-sm font-bold text-slate-800">No blog articles found</h3>
@@ -263,7 +263,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
           <button
             type="button"
             onClick={openCreateModal}
-            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0754C6] text-white text-xs font-bold hover:bg-[#0648AB] cursor-pointer"
+            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] text-white text-xs font-bold hover:bg-[#0648AB] cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Create Article</span>
@@ -275,7 +275,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
           {filteredPosts.map((post) => (
             <div
               key={post.id}
-              className="bg-white rounded-2xl border border-slate-200/80 hover:border-slate-300 hover:shadow-md transition-all flex flex-col overflow-hidden group"
+              className="bg-white rounded-lg border border-slate-200/80 hover:border-slate-300 hover:shadow-md transition-all flex flex-col overflow-hidden group"
             >
               {/* Card Image */}
               <div className="relative h-44 w-full bg-slate-100 overflow-hidden">
@@ -351,7 +351,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     <button
                       type="button"
                       onClick={() => openEditModal(post)}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer transition-colors"
+                      className="p-1.5 rounded-md text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer transition-colors"
                       title="Edit Article"
                     >
                       <Edit3 className="w-4 h-4" />
@@ -359,7 +359,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     <button
                       type="button"
                       onClick={() => setDeleteTarget(post)}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer transition-colors"
+                      className="p-1.5 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer transition-colors"
                       title="Delete Article"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -372,7 +372,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
         </div>
       ) : (
         /* LIST VIEW */
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50/75 border-b border-slate-200/80 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
@@ -388,7 +388,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                   <tr key={post.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-10 rounded-lg bg-slate-100 overflow-hidden shrink-0">
+                        <div className="w-12 h-10 rounded-md bg-slate-100 overflow-hidden shrink-0">
                           {post.imageSrc ? (
                             <img
                               src={post.imageSrc}
@@ -437,7 +437,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                         <button
                           type="button"
                           onClick={() => openEditModal(post)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
+                          className="p-1.5 rounded-md text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                           title="Edit"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -445,7 +445,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                         <button
                           type="button"
                           onClick={() => setDeleteTarget(post)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                          className="p-1.5 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -468,11 +468,11 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
             onClick={() => !isSaving && setIsFormOpen(false)}
           />
 
-          <div className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden z-10 flex flex-col animate-in fade-in zoom-in-95 duration-150">
+          <div className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden z-10 flex flex-col animate-in fade-in zoom-in-95 duration-150">
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-md bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <FileText className="w-4 h-4" />
                 </div>
                 <div>
@@ -489,7 +489,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                 type="button"
                 onClick={() => setIsFormOpen(false)}
                 disabled={isSaving}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -509,7 +509,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     setFormDraft((prev) => ({ ...prev, title: e.target.value }))
                   }
                   placeholder="e.g. Why Fidelis Court is Abuja's Premier Smart Estate"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
 
@@ -525,7 +525,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                       setFormDraft((prev) => ({ ...prev, date: e.target.value }))
                     }
                     placeholder="e.g. Oct 14, 2026"
-                    className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                    className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                   />
                 </div>
                 <div>
@@ -539,7 +539,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                       setFormDraft((prev) => ({ ...prev, linkText: e.target.value }))
                     }
                     placeholder="Read Article"
-                    className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                    className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                   />
                 </div>
               </div>
@@ -567,7 +567,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                       setFormDraft((prev) => ({ ...prev, imageAlt: e.target.value }))
                     }
                     placeholder="Architectural rendering of Fidelis Court"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                   />
                 </div>
                 <div>
@@ -581,7 +581,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                       setFormDraft((prev) => ({ ...prev, imageCaption: e.target.value }))
                     }
                     placeholder="Phase 1 Structure Progress"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                   />
                 </div>
               </div>
@@ -597,7 +597,7 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     setFormDraft((prev) => ({ ...prev, summary: e.target.value }))
                   }
                   placeholder="Short engaging excerpt shown on card preview..."
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-none"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-none"
                 />
               </div>
 
@@ -615,12 +615,12 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                     }))
                   }
                   placeholder="Complete article body text or markdown details..."
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-y"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-y"
                 />
               </div>
 
               {/* Published Switch */}
-              <div className="pt-2 flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div className="pt-2 flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-200/80">
                 <div>
                   <p className="text-xs font-bold text-slate-900">Publish immediately</p>
                   <p className="text-[11px] text-slate-500">
@@ -646,14 +646,14 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
                   type="button"
                   onClick={() => setIsFormOpen(false)}
                   disabled={isSaving}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer disabled:opacity-60"
+                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer disabled:opacity-60"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>{editingPost ? "Update Article" : "Publish Article"}</span>

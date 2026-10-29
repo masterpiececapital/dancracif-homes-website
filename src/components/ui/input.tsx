@@ -11,7 +11,7 @@ export interface InputProps
   error?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  variant?: "default" | "fidelis-brown";
+  variant?: "default" | "primary";
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -79,8 +79,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "w-full h-11 px-3.5 text-sm rounded-xl transition-all duration-200 outline-none",
               "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100",
               "placeholder:text-zinc-400 dark:placeholder:text-zinc-500",
-              variant === "fidelis-brown"
-                ? "focus:border-fidelis-brown dark:focus:border-fidelis-brown focus:ring-2 focus:ring-fidelis-brown/20"
+              variant === "primary"
+                ? "focus:border-[#00ABF0] dark:focus:border-[#00ABF0] focus:ring-2 focus:ring-[#0754C6]/20"
                 : "focus:border-[#0754C6] dark:focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15",
               "disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-zinc-50 dark:disabled:bg-zinc-800/50",
               leftIcon ? "pl-10" : undefined,

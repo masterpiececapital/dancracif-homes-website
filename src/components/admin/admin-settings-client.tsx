@@ -5,9 +5,7 @@ import {
   ShieldCheck,
   User,
   KeyRound,
-  Lock,
   CheckCircle2,
-  AlertCircle,
   Clock,
   Globe,
   Save,
@@ -68,23 +66,13 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
   };
 
   return (
-    <div className="space-y-8 max-w-4xl">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-          Portal Settings &amp; Security
-        </h1>
-        <p className="text-xs text-slate-500 mt-1">
-          Manage your executive credentials, security configuration, and portal preferences.
-        </p>
-      </div>
-
+    <div className="space-y-6 max-w-4xl">
       {/* Grid of Profile & Security */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">
+        <div className="bg-white rounded-lg p-6 border border-slate-200/80 shadow-xs space-y-6">
           <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#00ABF0] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-lg bg-blue-50 text-[#00ABF0] flex items-center justify-center font-bold">
               <User className="w-5 h-5" />
             </div>
             <div>
@@ -102,7 +90,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
               <label className="block text-slate-400 font-medium mb-1">
                 Full Name
               </label>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 font-semibold text-slate-900">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/70 font-semibold text-slate-900">
                 {user.name}
               </div>
             </div>
@@ -111,7 +99,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
               <label className="block text-slate-400 font-medium mb-1">
                 Email Address
               </label>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 font-semibold text-slate-900">
+              <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/70 font-semibold text-slate-900">
                 {user.email}
               </div>
             </div>
@@ -121,7 +109,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                 <label className="block text-slate-400 font-medium mb-1">
                   Access Level
                 </label>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 font-semibold text-slate-900 flex items-center gap-2">
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/70 font-semibold text-slate-900 flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#00ABF0]" />
                   <span className="capitalize">{user.role}</span>
                 </div>
@@ -131,7 +119,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                 <label className="block text-slate-400 font-medium mb-1">
                   Session Status
                 </label>
-                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200/60 font-semibold text-emerald-700 flex items-center gap-1.5">
+                <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200/60 font-semibold text-emerald-700 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>Active</span>
                 </div>
@@ -141,9 +129,9 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
         </div>
 
         {/* Change Password Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">
+        <div className="bg-white rounded-lg p-6 border border-slate-200/80 shadow-xs space-y-6">
           <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
               <KeyRound className="w-5 h-5" />
             </div>
             <div>
@@ -167,7 +155,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                   placeholder="Enter current password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
                 />
               </div>
             </div>
@@ -181,7 +169,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                 placeholder="At least 6 characters"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full p-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
               />
             </div>
 
@@ -194,14 +182,14 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
                 placeholder="Repeat new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full p-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isChangingPassword}
-              className="w-full mt-2 py-2.5 px-4 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full mt-2 py-2.5 px-4 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>{isChangingPassword ? "Updating..." : "Update Password"}</span>
@@ -210,53 +198,7 @@ export function AdminSettingsClient({ user }: AdminSettingsClientProps) {
         </div>
       </div>
 
-      {/* System Preferences & Operational Info */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
-        <h3 className="text-sm font-bold text-slate-900">
-          Executive Portal Operational Details
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-            <span className="text-slate-400 font-semibold block uppercase text-[10px] tracking-wider">
-              Environment
-            </span>
-            <div className="flex items-center gap-1.5 font-bold text-slate-800">
-              <Globe className="w-3.5 h-3.5 text-[#00ABF0]" />
-              <span>Live Production</span>
-            </div>
-            <p className="text-[11px] text-slate-500">
-              Fidelis Court Real-Time Data
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-            <span className="text-slate-400 font-semibold block uppercase text-[10px] tracking-wider">
-              Timezone Reference
-            </span>
-            <div className="flex items-center gap-1.5 font-bold text-slate-800">
-              <Clock className="w-3.5 h-3.5 text-indigo-600" />
-              <span>West Africa Time (GMT+1)</span>
-            </div>
-            <p className="text-[11px] text-slate-500">
-              Lagos, Nigeria Headquarters
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-            <span className="text-slate-400 font-semibold block uppercase text-[10px] tracking-wider">
-              Portal Security
-            </span>
-            <div className="flex items-center gap-1.5 font-bold text-emerald-700">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Encrypted Session Tokens</span>
-            </div>
-            <p className="text-[11px] text-slate-500">
-              HTTP-only secure cookie standard
-            </p>
-          </div>
-        </div>
-      </div>
+   
     </div>
   );
 }

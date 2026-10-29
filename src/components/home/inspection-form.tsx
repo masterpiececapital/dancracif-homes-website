@@ -15,8 +15,8 @@ import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
 interface InspectionFormProps {
   onSubmitWhatsApp?: (data: InspectionFormData) => void;
   onSubmitEmail?: (data: InspectionFormData) => void;
-  buttonVariant?: "primary" | "fidelis-brown";
-  variant?: "default" | "fidelis-brown";
+  buttonVariant?: "primary" | "secondary";
+  variant?: "default" | "primary";
 }
 
 export const InspectionForm: React.FC<InspectionFormProps> = ({
@@ -27,11 +27,11 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
 }) => {
   const pathname = usePathname();
   const isFidelis =
-    variant === "fidelis-brown" ||
-    buttonVariant === "fidelis-brown" ||
+    variant === "primary" ||
+    buttonVariant === "primary" ||
     pathname === "/fideliscourts" ||
     pathname === "/fidelis-court";
-  const inputVariant = isFidelis ? "fidelis-brown" : "default";
+  const inputVariant = "default";
 
   const [formData, setFormData] = React.useState<InspectionFormData>({
     fullName: "",
@@ -183,7 +183,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
         <div className="flex flex-wrap items-center gap-3.5 pt-2">
           <Button
             type="button"
-            variant={isFidelis ? "fidelis-brown" : "primary"}
+            variant={"primary"}
             size="md"
             onClick={handleWhatsApp}
             leftIcon={<MessageSquare className="h-4 w-4" />}
@@ -193,7 +193,7 @@ export const InspectionForm: React.FC<InspectionFormProps> = ({
 
           <Button
             type="button"
-            variant={isFidelis ? "fidelis-brown-outline" : "outline"}
+            variant={"secondary"}
             size="md"
             onClick={handleEmail}
             leftIcon={<Mail className="h-4 w-4" />}

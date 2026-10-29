@@ -116,9 +116,9 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
   return (
     <div className="space-y-6">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-lg border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center font-bold">
             <Milestone className="w-5 h-5" />
           </div>
           <div>
@@ -136,7 +136,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
           <button
             type="button"
             onClick={openCreateModal}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add Phase</span>
@@ -152,8 +152,8 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
           <ListSkeletonTable rows={4} />
         )
       ) : milestones.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-12 text-center">
-          <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+        <div className="bg-white rounded-lg border border-dashed border-slate-300 p-12 text-center">
+          <div className="w-12 h-12 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
             <CalendarDays className="w-6 h-6" />
           </div>
           <h3 className="text-sm font-bold text-slate-800">No milestones yet</h3>
@@ -163,7 +163,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
           <button
             type="button"
             onClick={openCreateModal}
-            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0754C6] text-white text-xs font-bold hover:bg-[#0648AB] cursor-pointer"
+            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] text-white text-xs font-bold hover:bg-[#0648AB] cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add Phase 1</span>
@@ -175,11 +175,11 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
           {milestones.map((m, index) => (
             <div
               key={m.id}
-              className="bg-white rounded-2xl border border-slate-200/80 hover:border-slate-300 hover:shadow-xs transition-all p-5 flex flex-col justify-between relative group"
+              className="bg-white rounded-lg border border-slate-200/80 hover:border-slate-300 hover:shadow-xs transition-all p-5 flex flex-col justify-between relative group"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50 text-[#00ABF0] text-xs font-bold border border-blue-100">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-[#00ABF0] text-xs font-bold border border-blue-100">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0754C6]" />
                     Phase {m.phaseNumber}
                   </span>
@@ -192,7 +192,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                   {m.title}
                 </h3>
 
-                <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                   <Calendar className="w-3.5 h-3.5 text-slate-400" />
                   <span>{m.date}</span>
                 </div>
@@ -202,7 +202,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                 <button
                   type="button"
                   onClick={() => openEditModal(m)}
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
+                  className="p-1.5 rounded-md text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                   title="Edit Milestone"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -210,7 +210,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                 <button
                   type="button"
                   onClick={() => setDeleteTarget(m)}
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                  className="p-1.5 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
                   title="Delete Milestone"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -221,7 +221,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
         </div>
       ) : (
         /* LIST VIEW */
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs overflow-hidden">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50/75 border-b border-slate-200/80 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
               <tr>
@@ -251,14 +251,14 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                       <button
                         type="button"
                         onClick={() => openEditModal(m)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
+                        className="p-1.5 rounded-md text-slate-500 hover:text-[#00ABF0] hover:bg-slate-100 cursor-pointer"
                       >
                         <Edit3 className="w-4 h-4" />
                       </button>
                       <button
                         type="button"
                         onClick={() => setDeleteTarget(m)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
+                        className="p-1.5 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 cursor-pointer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -279,10 +279,10 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
             onClick={() => !isSaving && setIsFormOpen(false)}
           />
 
-          <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
+          <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-md bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
                   <CalendarDays className="w-4 h-4" />
                 </div>
                 <div>
@@ -299,7 +299,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                 type="button"
                 onClick={() => setIsFormOpen(false)}
                 disabled={isSaving}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -321,7 +321,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                       phaseNumber: parseInt(e.target.value, 10) || 1,
                     }))
                   }
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
 
@@ -337,7 +337,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                     setFormDraft((prev) => ({ ...prev, title: e.target.value }))
                   }
                   placeholder="e.g. Groundbreaking & Foundation"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
 
@@ -353,7 +353,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                     setFormDraft((prev) => ({ ...prev, date: e.target.value }))
                   }
                   placeholder="e.g. Q4 2026 or Dec 2026"
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
 
@@ -362,14 +362,14 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
                   type="button"
                   onClick={() => setIsFormOpen(false)}
                   disabled={isSaving}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer disabled:opacity-60"
+                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold shadow-xs cursor-pointer disabled:opacity-60"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>{editingItem ? "Update Phase" : "Save Phase"}</span>

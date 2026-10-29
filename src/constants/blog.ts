@@ -16,7 +16,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "groundbreaking-fidelis-court",
     imageSrc: "/fidelis-court/Skyward Construction Site.png",
     imageAlt: "Groundbreaking at Fidelis Court estate in Kubwa",
-    imageCaption: "Artist's impression",
+    imageCaption: "Actual site photos",
     date: "APRIL 2026",
     title: "Groundbreaking at Fidelis Court",
     summary:
@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "12-month-payment-plan",
     imageSrc: "/fidelis-court/Renovation in Progress_ Bright Unfinished Interior.png",
     imageAlt: "Interior living room of apartment showing flexible payment plan",
-    imageCaption: "Artist's impression",
+    imageCaption: "Actual site photos",
     date: "SEPTEMBER 2026",
     title: "How our 12-month payment plan works",
     summary:
@@ -44,7 +44,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: "join-open-house",
     imageSrc: "/fidelis-court/Urban Construction Under Dramatic Skies.png",
     imageAlt: "Terrace duplex units during Fidelis Court open house",
-    imageCaption: "Artist's impression",
+    imageCaption: "Actual site photos",
     date: "OCTOBER 2026",
     title: "Join our open house at the estate",
     summary:

@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { Camera, Eye, X, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSiteImageResolver } from "@/components/common/site-images-provider";
 
 interface PhotoItem {
   src: string;
@@ -171,6 +172,7 @@ const GALLERY_PHOTOS: PhotoItem[] = [
 ];
 
 export const ConstructionGallery: React.FC = () => {
+  const getSiteImage = useSiteImageResolver();
   const [selectedFilter, setSelectedFilter] = React.useState<"all" | "exterior" | "interior">("all");
   const [activePhotoIndex, setActivePhotoIndex] = React.useState<number | null>(null);
   const [showAll, setShowAll] = React.useState(false);
@@ -206,7 +208,7 @@ export const ConstructionGallery: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fidelis-brown/10 text-fidelis-brown text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ABF0]/10 text-[#00ABF0] text-xs font-bold tracking-wide">
               <Camera className="w-3.5 h-3.5" />
               <span>Live Site Documentation • 22 Verified Photos</span>
             </div>
@@ -224,8 +226,8 @@ export const ConstructionGallery: React.FC = () => {
               onClick={() => { setSelectedFilter("all"); setShowAll(false); }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 selectedFilter === "all"
-                  ? "bg-fidelis-brown text-white shadow-xs font-bold"
-                  : "text-slate-600 hover:text-fidelis-brown"
+                  ? "bg-[#0754C6] text-white shadow-xs font-bold"
+                  : "text-slate-600 hover:text-[#00ABF0]"
               }`}
             >
               All Photos ({GALLERY_PHOTOS.length})
@@ -234,8 +236,8 @@ export const ConstructionGallery: React.FC = () => {
               onClick={() => { setSelectedFilter("exterior"); setShowAll(false); }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 selectedFilter === "exterior"
-                  ? "bg-fidelis-brown text-white shadow-xs font-bold"
-                  : "text-slate-600 hover:text-fidelis-brown"
+                  ? "bg-[#0754C6] text-white shadow-xs font-bold"
+                  : "text-slate-600 hover:text-[#00ABF0]"
               }`}
             >
               Exterior &amp; Superstructure ({exteriorCount})
@@ -244,8 +246,8 @@ export const ConstructionGallery: React.FC = () => {
               onClick={() => { setSelectedFilter("interior"); setShowAll(false); }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 selectedFilter === "interior"
-                  ? "bg-fidelis-brown text-white shadow-xs font-bold"
-                  : "text-slate-600 hover:text-fidelis-brown"
+                  ? "bg-[#0754C6] text-white shadow-xs font-bold"
+                  : "text-slate-600 hover:text-[#00ABF0]"
               }`}
             >
               Interior &amp; MEP ({interiorCount})
@@ -263,7 +265,7 @@ export const ConstructionGallery: React.FC = () => {
             >
               <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-200">
                 <Image
-                  src={photo.src}
+                  src={getSiteImage(photo.src)}
                   alt={photo.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -271,7 +273,7 @@ export const ConstructionGallery: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <span className="p-3 rounded-full bg-white/90 text-slate-900 shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
-                    <Eye className="w-5 h-5 text-fidelis-brown" />
+                    <Eye className="w-5 h-5 text-[#00ABF0]" />
                   </span>
                 </div>
                 <div className="absolute top-3 left-3 bg-slate-950/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
@@ -280,7 +282,7 @@ export const ConstructionGallery: React.FC = () => {
               </div>
 
               <div className="p-4.5 flex-1 flex flex-col justify-between space-y-1 bg-white">
-                <h3 className="text-sm font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-fidelis-brown transition-colors">
+                <h3 className="text-sm font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-[#00ABF0] transition-colors">
                   {photo.title}
                 </h3>
                 <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
@@ -295,7 +297,7 @@ export const ConstructionGallery: React.FC = () => {
         {filteredPhotos.length > 8 && (
           <div className="flex justify-center pt-2">
             <Button
-              variant="fidelis-brown-outline"
+              variant="secondary"
               size="lg"
               onClick={() => setShowAll(!showAll)}
               className="px-8 py-5 text-sm font-bold cursor-pointer"
@@ -308,7 +310,7 @@ export const ConstructionGallery: React.FC = () => {
         {/* Inspection CTA Strip */}
         <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-fidelis-brown text-white flex items-center justify-center shrink-0 shadow-sm shadow-fidelis-brown/30">
+            <div className="w-12 h-12 rounded-2xl bg-[#0754C6] text-white flex items-center justify-center shrink-0 shadow-sm shadow-[#0754C6]/30">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -321,7 +323,7 @@ export const ConstructionGallery: React.FC = () => {
             </div>
           </div>
           <Button
-            variant="fidelis-brown"
+            variant="primary"
             size="lg"
             onClick={scrollToContact}
             className="shrink-0 font-bold"
@@ -372,7 +374,7 @@ export const ConstructionGallery: React.FC = () => {
             {/* Big photo */}
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-black">
               <Image
-                src={filteredPhotos[activePhotoIndex].src}
+                src={getSiteImage(filteredPhotos[activePhotoIndex].src)}
                 alt={filteredPhotos[activePhotoIndex].title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1024px"
@@ -387,7 +389,7 @@ export const ConstructionGallery: React.FC = () => {
                 <h3 className="text-lg font-bold text-white">
                   {filteredPhotos[activePhotoIndex].title}
                 </h3>
-                <span className="px-3 py-1 rounded-full bg-fidelis-brown text-white text-xs font-semibold">
+                <span className="px-3 py-1 rounded-full bg-[#0754C6] text-white text-xs font-semibold">
                   {filteredPhotos[activePhotoIndex].stage}
                 </span>
               </div>

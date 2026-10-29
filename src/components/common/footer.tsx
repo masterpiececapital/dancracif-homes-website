@@ -35,19 +35,15 @@ export const Footer: React.FC<FooterProps> = ({ compact = false, className }) =>
           {/* Col 1: Brand & Contact Info (takes 2 of 5 columns) */}
           <div className="lg:col-span-2 space-y-4">
             <div>
-              {/* Brand + RC inline on mobile */}
+              {/* Brand mobile */}
               <div className="flex items-baseline gap-2.5 flex-wrap">
                 <h3 className="text-[22px] sm:text-[24px] font-bold text-white tracking-tight">
                   Dangracif Homes
                 </h3>
-                <p className="text-[13px] font-medium leading-[18px] text-[#f0f6fc] sm:hidden">
+                <p className="text-[13px] font-medium leading-[18px] text-[#f0f6fc]">
                   RC-1896142
                 </p>
               </div>
-              {/* RC on its own line on sm+ */}
-              <p className="hidden sm:block text-[13px] font-medium leading-[18px] text-[#f0f6fc] mt-1">
-                RC-1896142
-              </p>
             </div>
 
             <p className="text-[14px] font-normal leading-[20px] text-[#f0f6fc] max-w-sm">

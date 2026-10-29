@@ -2,11 +2,15 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { useSiteImage } from "@/components/common/site-images-provider";
 import { Users, MapPin, MessageSquare, Mail, ChevronDown } from "lucide-react";
 import { OpenHouseFormData } from "@/types";
 import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
 
 export const OpenHouseSection: React.FC = () => {
+  const openHouseImage = useSiteImage(
+    "/fidelis-court/Sunlit Construction Site Under Dramatic Skies.png"
+  );
   const [formData, setFormData] = React.useState<OpenHouseFormData>({
     fullName: "",
     phone: "",
@@ -126,7 +130,7 @@ export const OpenHouseSection: React.FC = () => {
             {/* Estate Photo Container */}
             <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden bg-zinc-200 shadow-sm">
               <Image
-                src="/fidelis-court/Sunlit Construction Site Under Dramatic Skies.png"
+                src={openHouseImage}
                 alt="Fidelis Court Open House Estate"
                 fill
                 className="object-cover"

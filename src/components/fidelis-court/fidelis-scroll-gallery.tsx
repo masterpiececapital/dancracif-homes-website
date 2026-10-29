@@ -9,6 +9,7 @@ import {
   X,
   Sparkles,
 } from "lucide-react";
+import { useSiteImageResolver } from "@/components/common/site-images-provider";
 
 interface GalleryPhoto {
   src: string;
@@ -86,6 +87,7 @@ const SCROLL_PHOTOS: GalleryPhoto[] = [
 ];
 
 export const FidelisScrollGallery: React.FC = () => {
+  const getSiteImage = useSiteImageResolver();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = React.useState(0);
   const [activePhoto, setActivePhoto] = React.useState<GalleryPhoto | null>(
@@ -120,7 +122,7 @@ export const FidelisScrollGallery: React.FC = () => {
         {/* Gallery Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-fidelis-brown/10 text-fidelis-brown text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00ABF0]/10 text-[#00ABF0] text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Live Site Showcase • Scroll &amp; Explore</span>
             </div>
@@ -139,7 +141,7 @@ export const FidelisScrollGallery: React.FC = () => {
               onClick={() => scrollByAmount("left")}
               disabled={!canScrollLeft}
               aria-label="Scroll left"
-              className="w-11 h-11 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-fidelis-brown hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center justify-center text-zinc-700 shadow-xs cursor-pointer"
+              className="w-11 h-11 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-[#00ABF0] hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center justify-center text-zinc-700 shadow-xs cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -147,7 +149,7 @@ export const FidelisScrollGallery: React.FC = () => {
               onClick={() => scrollByAmount("right")}
               disabled={!canScrollRight}
               aria-label="Scroll right"
-              className="w-11 h-11 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-fidelis-brown hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center justify-center text-zinc-700 shadow-xs cursor-pointer"
+              className="w-11 h-11 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 hover:border-[#00ABF0] hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center justify-center text-zinc-700 shadow-xs cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -157,7 +159,7 @@ export const FidelisScrollGallery: React.FC = () => {
         {/* Scroll Progress Bar */}
         <div className="w-full h-1.5 bg-zinc-200/80 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-fidelis-brown to-[#7a3e1b] rounded-full transition-all duration-150 ease-out"
+            className="h-full bg-gradient-to-r from-[#0754C6] to-[#00ABF0] rounded-full transition-all duration-150 ease-out"
             style={{ width: `${Math.max(8, scrollProgress)}%` }}
           />
         </div>
@@ -178,7 +180,7 @@ export const FidelisScrollGallery: React.FC = () => {
               {/* Photo Frame with Hover Zoom */}
               <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900">
                 <Image
-                  src={photo.src}
+                  src={getSiteImage(photo.src)}
                   alt={photo.title}
                   fill
                   sizes="(max-width: 640px) 85vw, 440px"
@@ -192,7 +194,7 @@ export const FidelisScrollGallery: React.FC = () => {
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] font-bold text-white uppercase tracking-wider border border-white/15">
                     {photo.category}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-fidelis-brown/90 backdrop-blur-md text-[11px] font-bold text-white shadow-xs">
+                  <span className="px-3 py-1 rounded-full bg-[#0754C6]/90 backdrop-blur-md text-[11px] font-bold text-white shadow-xs">
                     {photo.stage}
                   </span>
                 </div>
@@ -200,7 +202,7 @@ export const FidelisScrollGallery: React.FC = () => {
                 {/* Expand icon on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                   <span className="p-3.5 rounded-full bg-white/90 backdrop-blur-md text-zinc-900 shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <Maximize2 className="w-5 h-5 text-fidelis-brown" />
+                    <Maximize2 className="w-5 h-5 text-[#00ABF0]" />
                   </span>
                 </div>
 
@@ -217,9 +219,9 @@ export const FidelisScrollGallery: React.FC = () => {
                 <p className="text-xs sm:text-sm text-zinc-600 line-clamp-2 leading-relaxed group-hover:text-zinc-900 transition-colors">
                   {photo.description}
                 </p>
-                <div className="pt-2 flex items-center justify-between text-xs text-zinc-400 group-hover:text-fidelis-brown font-semibold transition-colors">
+                <div className="pt-2 flex items-center justify-between text-xs text-zinc-400 group-hover:text-[#00ABF0] font-semibold transition-colors">
                   <span>Click to view full photo</span>
-                  <span className="w-2 h-2 rounded-full bg-fidelis-brown transform group-hover:scale-125 transition-transform" />
+                  <span className="w-2 h-2 rounded-full bg-[#0754C6] transform group-hover:scale-125 transition-transform" />
                 </div>
               </div>
             </div>
@@ -251,7 +253,7 @@ export const FidelisScrollGallery: React.FC = () => {
             {/* Photo Preview */}
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-black">
               <Image
-                src={activePhoto.src}
+                src={getSiteImage(activePhoto.src)}
                 alt={activePhoto.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 1024px"
@@ -266,7 +268,7 @@ export const FidelisScrollGallery: React.FC = () => {
                 <h3 className="text-lg font-bold text-white">
                   {activePhoto.title}
                 </h3>
-                <span className="px-3 py-1 rounded-full bg-fidelis-brown text-white text-xs font-bold">
+                <span className="px-3 py-1 rounded-full bg-[#0754C6] text-white text-xs font-bold">
                   {activePhoto.stage}
                 </span>
               </div>

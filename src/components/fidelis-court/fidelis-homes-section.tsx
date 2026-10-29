@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Images, Maximize2, X } from "lucide-react";
+import { useSiteImageResolver } from "@/components/common/site-images-provider";
 
 interface UnitModel {
   id: string;
@@ -25,7 +26,7 @@ const FIDELIS_UNITS: UnitModel[] = [
     title: "1-Bedroom Apartment",
     subtitle: "Compact, efficient city living",
     disclaimer:
-      "Artist's impressions — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
+      "Actual site photos — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 32,
     price: "₦53M",
     mainImage: "/fidelis-court/Bright Renovation Room with Window Views.png",
@@ -49,7 +50,7 @@ const FIDELIS_UNITS: UnitModel[] = [
     title: "2-Bedroom Apartment",
     subtitle: "Ideal for young families & professionals",
     disclaimer:
-      "Artist's impressions — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
+      "Actual site photos — shared project concepts, not unit-specific photographs. Apartment interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 48,
     price: "₦80M",
     mainImage: "/fidelis-court/Sunlit Unfinished Room Renovation.png",
@@ -73,7 +74,7 @@ const FIDELIS_UNITS: UnitModel[] = [
     title: "4-Bedroom Terrace (Shell)",
     subtitle: "Shell option — finish to your taste",
     disclaimer:
-      "Artist's impressions — shared project concepts, not unit-specific photographs. Terrace interiors illustrate possible finishing, not the shell specification.",
+      "Actual site photos — shared project concepts, not unit-specific photographs. Terrace interiors illustrate possible finishing, not the shell specification.",
     unitsCount: 8,
     price: "₦125M",
     mainImage: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
@@ -101,6 +102,7 @@ interface FidelisHomesSectionProps {
 export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
   onReserveUnit,
 }) => {
+  const getSiteImage = useSiteImageResolver();
   const [activeGallery, setActiveGallery] = React.useState<{
     unitIndex: number;
     photoIndex: number;
@@ -193,7 +195,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-fidelis-brown block">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#00ABF0] block">
               CHOOSE YOUR HOME
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900">
@@ -203,7 +205,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
 
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-fidelis-brown hover:text-fidelis-brown/80 transition-colors group cursor-pointer self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#00ABF0] hover:text-[#00ABF0]/80 transition-colors group cursor-pointer self-start sm:self-auto"
           >
             <span>Pricing &amp; payment plan</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -223,7 +225,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
                 onClick={() => openGallery(idx, 0)}
               >
                 <Image
-                  src={unit.mainImage}
+                  src={getSiteImage(unit.mainImage)}
                   alt={unit.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -236,7 +238,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
                   title="View photo gallery"
                 >
                   <Maximize2 className="w-3.5 h-3.5 text-zinc-600" />
-                  <Images className="w-3.5 h-3.5 text-fidelis-brown" />
+                  <Images className="w-3.5 h-3.5 text-[#00ABF0]" />
                   <span>{unit.galleryImages.length}</span>
                 </div>
               </div>
@@ -245,7 +247,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
               <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between gap-6">
                 <div className="space-y-1">
                   <span className="text-[11px] sm:text-xs font-medium text-zinc-500 tracking-wide block">
-                    Artist&apos;s impressions · Shared project concepts
+                    Actual site photos · Shared project concepts
                   </span>
                   <h3 className="text-xl sm:text-[22px] font-bold text-zinc-900 tracking-tight">
                     {unit.title}
@@ -255,7 +257,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
                   </p>
 
                   <div className="pt-3">
-                    <p className="text-3xl sm:text-[34px] font-extrabold tracking-tight text-fidelis-brown">
+                    <p className="text-3xl sm:text-[34px] font-extrabold tracking-tight text-[#00ABF0]">
                       {unit.price}
                     </p>
                     <p className="text-xs text-zinc-500 font-medium mt-1">
@@ -269,16 +271,16 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
                   <button
                     type="button"
                     onClick={() => openGallery(idx, 0)}
-                    className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-2xl border border-zinc-200 bg-white hover:border-fidelis-brown hover:text-fidelis-brown text-zinc-700 text-xs sm:text-sm font-semibold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-2xl border border-zinc-200 bg-white hover:border-[#00ABF0] hover:text-[#00ABF0] text-zinc-700 text-xs sm:text-sm font-semibold transition-all shadow-xs cursor-pointer"
                   >
-                    <Images className="w-4 h-4 shrink-0 text-fidelis-brown" />
+                    <Images className="w-4 h-4 shrink-0 text-[#00ABF0]" />
                     <span>View gallery</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handleReserve(unit)}
-                    className="flex items-center justify-center px-3 sm:px-4 py-2.5 rounded-2xl bg-fidelis-brown hover:brightness-90 active:brightness-75 text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-fidelis-brown/25 cursor-pointer"
+                    className="flex items-center justify-center px-3 sm:px-4 py-2.5 rounded-2xl bg-[#0754C6] hover:brightness-90 active:brightness-75 text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-[#0754C6]/25 cursor-pointer"
                   >
                     <span>Reserve a unit</span>
                   </button>
@@ -326,7 +328,7 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
             {/* Main Image Viewport with soft light blue border frame */}
             <div className="mt-4 sm:mt-5 relative w-full aspect-[16/10] sm:aspect-[16/9.5] rounded-2xl overflow-hidden bg-[#eaf2fc] border border-sky-100/80">
               <Image
-                src={activePhoto.src}
+                src={getSiteImage(activePhoto.src)}
                 alt={activePhoto.caption}
                 fill
                 sizes="(max-width: 1024px) 100vw, 920px"
@@ -375,14 +377,13 @@ export const FidelisHomesSection: React.FC<FidelisHomesSectionProps> = ({
                         photoIndex: pIdx,
                       })
                     }
-                    className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                      isActive
-                        ? "border-fidelis-brown ring-2 ring-fidelis-brown/30 scale-105"
-                        : "border-slate-200 opacity-60 hover:opacity-100"
-                    }`}
+                    className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${isActive
+                      ? "border-[#00ABF0] ring-2 ring-[#00ABF0]/30 scale-105"
+                      : "border-slate-200 opacity-60 hover:opacity-100"
+                      }`}
                   >
                     <Image
-                      src={img.src}
+                      src={getSiteImage(img.src)}
                       alt={img.caption}
                       fill
                       className="object-cover"

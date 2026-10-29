@@ -2,8 +2,11 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 export const CeoProfile: React.FC = () => {
+  const portrait = useSiteImage("/images/ceo.jpg");
+
   return (
     <section className="w-full bg-white py-16 sm:py-24 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -23,7 +26,7 @@ export const CeoProfile: React.FC = () => {
           <div className="w-full max-w-[250px] sm:max-w-[260px] lg:max-w-[290px] shrink-0">
             <div className="relative w-full aspect-[3/3.9] rounded-md sm:rounded-3xl overflow-hidden">
               <Image
-                src="/images/ceo.jpg"
+                src={portrait}
                 alt="Major General Okwudili Fidelis Azinta (Rtd.) — CEO, Dangracif Homes Limited"
                 fill
                 priority

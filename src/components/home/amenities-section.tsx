@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Zap, Wifi, Droplets, ArrowRight } from "lucide-react";
 import { AMENITIES_DATA, AmenityItem } from "@/constants/amenities";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 const iconMap: Record<AmenityItem["icon"], React.ReactNode> = {
   security: <ShieldCheck className="h-7 w-7 text-[#00ABF0]" />,
@@ -14,6 +15,10 @@ const iconMap: Record<AmenityItem["icon"], React.ReactNode> = {
 };
 
 export const AmenitiesSection: React.FC = () => {
+  const amenitiesImage = useSiteImage(
+    "/fidelis-court/Building Under Scaffolding Beneath a Vast Sky-1.png"
+  );
+
   return (
     <section className="w-full bg-[#EBF3FC] py-16 sm:py-20 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -22,7 +27,7 @@ export const AmenitiesSection: React.FC = () => {
           <div>
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-sm bg-zinc-200">
               <Image
-                src="/fidelis-court/Building Under Scaffolding Beneath a Vast Sky-1.png"
+                src={amenitiesImage}
                 alt="Fidelis Court Living Room Interior"
                 fill
                 className="object-cover"

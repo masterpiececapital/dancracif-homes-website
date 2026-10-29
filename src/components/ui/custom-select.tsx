@@ -19,7 +19,7 @@ interface SelectProps {
   className?: string;
   label?: string;
   required?: boolean;
-  variant?: "default" | "fidelis-brown";
+  variant?: "default" | "primary";
 }
 
 export const CustomSelect: React.FC<SelectProps> = ({
@@ -104,13 +104,13 @@ export const CustomSelect: React.FC<SelectProps> = ({
         className={cn(
           "w-full h-11 flex items-center justify-between gap-2",
           "rounded-xl border border-zinc-200 dark:border-zinc-700 px-3.5 text-sm bg-white dark:bg-zinc-900",
-          variant === "fidelis-brown"
-            ? "focus:outline-none focus:border-fidelis-brown focus:ring-2 focus:ring-fidelis-brown/20"
+          variant === "primary"
+            ? "focus:outline-none focus:border-[#00ABF0] focus:ring-2 focus:ring-[#0754C6]/20"
             : "focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15",
           "transition-all cursor-pointer text-left",
           open && (
-            variant === "fidelis-brown"
-              ? "border-fidelis-brown ring-2 ring-fidelis-brown/20"
+            variant === "primary"
+              ? "border-[#00ABF0] ring-2 ring-[#00ABF0]/20"
               : "border-[#0754C6] ring-2 ring-[#0754C6]/15"
           )
         )}
@@ -159,8 +159,8 @@ export const CustomSelect: React.FC<SelectProps> = ({
                     "w-full flex items-center justify-between gap-2 px-4 py-2.5 text-sm text-left",
                     "transition-colors cursor-pointer",
                     isActive
-                      ? variant === "fidelis-brown"
-                        ? "bg-fidelis-brown/10 text-fidelis-brown font-semibold"
+                      ? variant === "primary"
+                        ? "bg-[#00ABF0]/10 text-[#00ABF0] font-semibold"
                         : "bg-[#EAF2FE] text-[#00ABF0] font-semibold"
                       : "text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-800/60"
                   )}
@@ -170,7 +170,7 @@ export const CustomSelect: React.FC<SelectProps> = ({
                     <Check
                       className={cn(
                         "h-3.5 w-3.5 shrink-0",
-                        variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#00ABF0]"
+                        variant === "primary" ? "text-[#00ABF0]" : "text-[#00ABF0]"
                       )}
                     />
                   )}

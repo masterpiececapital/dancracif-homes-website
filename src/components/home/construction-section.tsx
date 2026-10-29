@@ -1,12 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { usePathname } from "next/navigation";
 import { Play, Radio, ExternalLink, Youtube } from "lucide-react";
 
 export const ConstructionSection: React.FC = () => {
-  const pathname = usePathname();
-  const isFidelisCourtPage = pathname === "/fideliscourts" || pathname === "/fidelis-court";
   const [activeTab, setActiveTab] = React.useState<"latest" | "live">("latest");
 
   return (
@@ -15,7 +12,7 @@ export const ConstructionSection: React.FC = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
           <div className="space-y-2.5 max-w-xl">
-            <span className={`text-sm font-semibold uppercase tracking-[0.2em] ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"}`}>
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#00ABF0]">
               From the Site • YouTube
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 tracking-tight">
@@ -44,7 +41,7 @@ export const ConstructionSection: React.FC = () => {
             type="button"
             onClick={() => setActiveTab("latest")}
             className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${activeTab === "latest"
-              ? `${isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"} text-white shadow-sm`
+              ? "bg-[#0754C6] text-white shadow-sm"
               : "border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
               }`}
           >
@@ -56,7 +53,7 @@ export const ConstructionSection: React.FC = () => {
             type="button"
             onClick={() => setActiveTab("live")}
             className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${activeTab === "live"
-              ? `${isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"} text-white shadow-sm`
+              ? "bg-[#0754C6] text-white shadow-sm"
               : "border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
               }`}
           >
@@ -90,7 +87,7 @@ export const ConstructionSection: React.FC = () => {
             href="https://youtu.be/4NjadeZpfN0?si=rckY9siRuMaAYjx_"
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1 font-semibold hover:underline ${isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"}`}
+            className="inline-flex items-center gap-1 font-semibold hover:underline text-[#00ABF0]"
           >
             <span className="">Watch on YouTube</span>
             <ExternalLink className="h-4 w-4" />

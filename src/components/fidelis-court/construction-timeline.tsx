@@ -47,7 +47,7 @@ export const ConstructionTimeline: React.FC = () => {
     <section className="w-full bg-white py-14 sm:py-18 border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-8">
         <div className="space-y-2">
-          <span className={`text-xs font-semibold uppercase tracking-[0.2em] text-fidelis-brown`}>
+          <span className={`text-xs font-semibold uppercase tracking-[0.2em] text-[#00ABF0]`}>
             Construction Timeline
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
@@ -64,9 +64,9 @@ export const ConstructionTimeline: React.FC = () => {
           {milestones.map((m) => (
             <div
               key={m.number}
-              className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-2 hover:border-fidelis-brown/20 hover:shadow-sm transition-all"
+              className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-2 hover:border-[#00ABF0]/20 hover:shadow-sm transition-all"
             >
-              <span className="text-[13px] font-extrabold text-fidelis-brown uppercase tracking-wider">
+              <span className="text-[13px] font-extrabold text-[#00ABF0] uppercase tracking-wider">
                 {String(m.number).padStart(2, "0")} · {m.date}
               </span>
               <p className="text-sm sm:text-base font-semibold text-zinc-900 leading-snug">

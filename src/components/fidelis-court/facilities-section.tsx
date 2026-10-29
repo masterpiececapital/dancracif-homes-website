@@ -37,10 +37,10 @@ const FACILITIES = [
 
 export const FacilitiesSection: React.FC = () => {
   return (
-    <section className="w-full min-h-[93vh] bg-fidelis-brown/10 border-b border-zinc-100 flex items-center py-8">
+    <section className="w-full min-h-[93vh] bg-[#00ABF0]/10 border-b border-zinc-100 flex items-center py-8">
       <div className="w-full px-6 sm:px-10 lg:px-16 space-y-6">
         <div className="space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-fidelis-brown">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#00ABF0]">
             Facilities &amp; Services
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight">
@@ -52,12 +52,12 @@ export const FacilitiesSection: React.FC = () => {
           {FACILITIES.map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="group flex items-center gap-4 bg-white rounded-2xl px-5 py-5 border border-zinc-100 hover:border-fidelis-brown/30 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 ease-out cursor-pointer"
+              className="group flex items-center gap-4 bg-white rounded-2xl px-5 py-5 border border-zinc-100 hover:border-[#00ABF0]/30 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 ease-out cursor-pointer"
             >
-              <div className="h-12 w-12 shrink-0 rounded-xl bg-fidelis-brown flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm shadow-fidelis-brown/20">
+              <div className="h-12 w-12 shrink-0 rounded-xl bg-[#0754C6] flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm shadow-[#0754C6]/20">
                 <Icon className="h-6 w-6 text-white" />
               </div>
-              <span className="text-base font-medium text-zinc-800 group-hover:text-fidelis-brown group-hover:font-bold group-hover:scale-[1.05] origin-left inline-block transition-all duration-300">
+              <span className="text-base font-medium text-zinc-800 group-hover:text-[#00ABF0] group-hover:font-bold group-hover:scale-[1.05] origin-left inline-block transition-all duration-300">
                 {label}
               </span>
             </div>

@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { CalendarCheck, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 interface HeroSectionProps {
   onBookInspectionClick?: () => void;
@@ -14,6 +15,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onBookInspectionClick,
   onReserveClick,
 }) => {
+  const heroImage = useSiteImage(
+    "/fidelis-court/Apartment Building Under Construction.png"
+  );
+
   return (
     <section
       className="relative w-full flex items-center overflow-hidden min-h-[580px] sm:min-h-[620px] lg:min-h-[680px]"
@@ -22,7 +27,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Hero Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/fidelis-court/Apartment Building Under Construction.png"
+          src={heroImage}
           alt="Fidelis Court Estate, Kubwa F01, Abuja"
           fill
           priority

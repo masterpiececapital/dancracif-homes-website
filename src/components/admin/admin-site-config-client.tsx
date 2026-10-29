@@ -2,16 +2,12 @@
 
 import * as React from "react";
 import {
-  SlidersHorizontal,
   Building2,
   Phone,
   BarChart3,
   CalendarCheck,
   Save,
   Loader2,
-  CheckCircle2,
-  Sparkles,
-  Info,
   Youtube,
   Clock,
   Shield,
@@ -19,57 +15,141 @@ import {
   MapPin,
   Mail,
   MessageSquare,
+  Images,
+  FileText,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { saveMultipleSiteConfigs } from "@/app/actions/admin-content";
+import { SITE_IMAGE_GROUPS } from "@/constants/site-images";
+import { ImageUploader } from "./ui/image-uploader";
+import { DocumentUploader } from "./ui/document-uploader";
 
 interface AdminSiteConfigClientProps {
-  initialConfigs: Record<string, any>;
+  initialConfigs: Record<string, unknown>;
+  initialTab?: string;
 }
 
-export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientProps) {
-  const [activeTab, setActiveTab] = React.useState<"estate" | "stats" | "contact" | "open_house">("estate");
+function getConfigGroup(
+  configs: Record<string, unknown>,
+  key: string
+): Record<string, string | boolean> | undefined {
+  const value = configs[key];
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return undefined;
+  }
+
+  const group: Record<string, string | boolean> = {};
+  for (const [field, fieldValue] of Object.entries(value)) {
+    if (typeof fieldValue === "string" || typeof fieldValue === "boolean") {
+      group[field] = fieldValue;
+    }
+  }
+  return group;
+}
+
+function getString(
+  config: Record<string, string | boolean> | undefined,
+  key: string,
+  fallback: string
+) {
+  const value = config?.[key];
+  return typeof value === "string" ? value : fallback;
+}
+
+export function AdminSiteConfigClient({
+  initialConfigs,
+  initialTab,
+}: AdminSiteConfigClientProps) {
+  const [activeTab, setActiveTab] = React.useState<
+    "estate" | "stats" | "contact" | "open_house" | "images"
+  >(initialTab === "images" ? "images" : "estate");
   const [isSaving, setIsSaving] = React.useState(false);
+  const imageConfig = getConfigGroup(initialConfigs, "site_images");
+  const [siteImages, setSiteImages] = React.useState<Record<string, string>>(
+    () => {
+      const images: Record<string, string> = {};
+      for (const [key, value] of Object.entries(imageConfig || {})) {
+        if (typeof value === "string") images[key] = value;
+      }
+      return images;
+    }
+  );
+  const [brochureUrl, setBrochureUrl] = React.useState(
+    typeof initialConfigs.brochure_url === "string"
+      ? initialConfigs.brochure_url
+      : ""
+  );
+  const estateConfig = getConfigGroup(initialConfigs, "estate");
+  const statsConfig = getConfigGroup(initialConfigs, "stats");
+  const contactConfig = getConfigGroup(initialConfigs, "contact");
+  const openHouseConfig = getConfigGroup(initialConfigs, "open_house");
 
   // Estate settings
   const [estate, setEstate] = React.useState({
-    name: initialConfigs.estate?.name || "Fidelis Court",
-    address:
-      initialConfigs.estate?.address ||
-      "21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria",
-    description:
-      initialConfigs.estate?.description ||
-      "A gated residential community on approximately 9,900 sqm.",
-    deliveryDate: initialConfigs.estate?.deliveryDate || "December 2027",
-    youtubeUrl: initialConfigs.estate?.youtubeUrl || "https://youtube.com",
+    name: getString(estateConfig, "name", "Fidelis Court"),
+    address: getString(
+      estateConfig,
+      "address",
+      "21, Josephat Mojeckwu Avenue, Kubwa F01, Abuja, FCT, Nigeria"
+    ),
+    description: getString(
+      estateConfig,
+      "description",
+      "A gated residential community on approximately 9,900 sqm."
+    ),
+    deliveryDate: getString(
+      estateConfig,
+      "deliveryDate",
+      "December 2027"
+    ),
+    youtubeUrl: getString(
+      estateConfig,
+      "youtubeUrl",
+      "https://youtube.com"
+    ),
   });
 
   // Stats settings
   const [stats, setStats] = React.useState({
-    units: initialConfigs.stats?.units || "88",
-    sqm: initialConfigs.stats?.sqm || "9,900",
-    months: initialConfigs.stats?.months || "14",
-    security: initialConfigs.stats?.security || "24/7",
+    units: getString(statsConfig, "units", "88"),
+    sqm: getString(statsConfig, "sqm", "9,900"),
+    months: getString(statsConfig, "months", "14"),
+    security: getString(statsConfig, "security", "24/7"),
   });
 
   // Contact settings
   const [contact, setContact] = React.useState({
-    phone: initialConfigs.contact?.phone || "+234 813 318 7860",
-    email: initialConfigs.contact?.email || "sales@dangracifhomes.com",
-    whatsapp: initialConfigs.contact?.whatsapp || "2348133187860",
-    inspectionHours:
-      initialConfigs.contact?.inspectionHours ||
-      "Inspections hold Monday – Saturday, 9am – 5pm.",
+    phone: getString(contactConfig, "phone", "+234 813 318 7860"),
+    email: getString(
+      contactConfig,
+      "email",
+      "sales@dangracifhomes.com"
+    ),
+    whatsapp: getString(contactConfig, "whatsapp", "2348133187860"),
+    inspectionHours: getString(
+      contactConfig,
+      "inspectionHours",
+      "Inspections hold Monday – Saturday, 9am – 5pm."
+    ),
   });
 
   // Open House settings
   const [openHouse, setOpenHouse] = React.useState({
-    enabled: initialConfigs.open_house?.enabled ?? true,
-    status: initialConfigs.open_house?.status || "Ongoing Event",
-    headline: initialConfigs.open_house?.headline || "Fidelis Court Open House",
-    description:
-      initialConfigs.open_house?.description ||
-      "Visit the estate, meet our sales team and explore your next home.",
+    enabled:
+      typeof openHouseConfig?.enabled === "boolean"
+        ? openHouseConfig.enabled
+        : true,
+    status: getString(openHouseConfig, "status", "Ongoing Event"),
+    headline: getString(
+      openHouseConfig,
+      "headline",
+      "Fidelis Court Open House"
+    ),
+    description: getString(
+      openHouseConfig,
+      "description",
+      "Visit the estate, meet our sales team and explore your next home."
+    ),
   });
 
   const handleSaveAll = async (e: React.FormEvent) => {
@@ -81,10 +161,16 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
         stats,
         contact,
         open_house: openHouse,
+        site_images: siteImages,
+        brochure_url: brochureUrl,
       });
-      toast.success("Site configuration saved and published live!");
-    } catch (err: any) {
-      toast.error(err.message || "Failed to update configuration");
+      toast.success("Site changes saved.");
+    } catch (err: unknown) {
+      toast.error(
+        err instanceof Error
+          ? err.message
+          : "Failed to update configuration"
+      );
     } finally {
       setIsSaving(false);
     }
@@ -95,37 +181,26 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
     { id: "stats", label: "Key Metrics", icon: BarChart3 },
     { id: "contact", label: "Contact & Hours", icon: Phone },
     { id: "open_house", label: "Open House Banner", icon: CalendarCheck },
+    { id: "images", label: "Site Images", icon: Images },
   ] as const;
 
   return (
     <form onSubmit={handleSaveAll} className="space-y-6">
-      {/* Top Banner and Save Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center font-bold">
-            <SlidersHorizontal className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-sm font-bold text-slate-900">
-              Live Website Parameters
-            </h2>
-            <p className="text-xs text-slate-500">
-              Changes made here update the public landing page instantly
-            </p>
-          </div>
-        </div>
-
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-sm text-slate-500">
+          Save your changes to publish them on the website.
+        </p>
         <button
           type="submit"
           disabled={isSaving}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer disabled:opacity-60 self-start sm:self-center"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer disabled:opacity-60 self-start sm:self-center"
         >
           {isSaving ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
             <Save className="w-4 h-4" />
           )}
-          <span>{isSaving ? "Publishing Changes..." : "Save All Changes"}</span>
+          <span>{isSaving ? "Saving..." : "Save changes"}</span>
         </button>
       </div>
 
@@ -139,7 +214,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${isActive
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${isActive
                   ? "bg-[#0754C6] text-white shadow-2xs"
                   : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/70"
                 }`}
@@ -153,7 +228,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
 
       {/* TAB 1: ESTATE INFO */}
       {activeTab === "estate" && (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs p-6 space-y-6">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs p-6 space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h3 className="text-sm font-bold text-slate-900">
@@ -177,7 +252,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                 onChange={(e) =>
                   setEstate((prev) => ({ ...prev, name: e.target.value }))
                 }
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
 
@@ -192,7 +267,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setEstate((prev) => ({ ...prev, deliveryDate: e.target.value }))
                 }
                 placeholder="December 2027"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
           </div>
@@ -209,7 +284,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                 onChange={(e) =>
                   setEstate((prev) => ({ ...prev, address: e.target.value }))
                 }
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
           </div>
@@ -227,7 +302,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setEstate((prev) => ({ ...prev, youtubeUrl: e.target.value }))
                 }
                 placeholder="https://www.youtube.com/watch?v=..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
           </div>
@@ -242,7 +317,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
               onChange={(e) =>
                 setEstate((prev) => ({ ...prev, description: e.target.value }))
               }
-              className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-y"
+              className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-y"
             />
           </div>
         </div>
@@ -250,7 +325,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
 
       {/* TAB 2: KEY METRICS */}
       {activeTab === "stats" && (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs p-6 space-y-6">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs p-6 space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h3 className="text-sm font-bold text-slate-900">
@@ -264,7 +339,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Total Units</span>
                 <Layers className="w-4 h-4 text-[#00ABF0]" />
@@ -276,12 +351,12 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setStats((prev) => ({ ...prev, units: e.target.value }))
                 }
                 placeholder="88"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-md text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
               />
               <p className="text-[10px] text-slate-400">Total residential units planned</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Land Footprint</span>
                 <MapPin className="w-4 h-4 text-[#00ABF0]" />
@@ -293,12 +368,12 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setStats((prev) => ({ ...prev, sqm: e.target.value }))
                 }
                 placeholder="9,900"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-md text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
               />
               <p className="text-[10px] text-slate-400">Total sqm estate area</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Timeline Months</span>
                 <Clock className="w-4 h-4 text-[#00ABF0]" />
@@ -310,12 +385,12 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setStats((prev) => ({ ...prev, months: e.target.value }))
                 }
                 placeholder="14"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-md text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
               />
               <p className="text-[10px] text-slate-400">Construction span in months</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700">Security Guard</span>
                 <Shield className="w-4 h-4 text-[#00ABF0]" />
@@ -327,7 +402,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setStats((prev) => ({ ...prev, security: e.target.value }))
                 }
                 placeholder="24/7"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-md text-sm font-bold text-slate-900 focus:outline-hidden focus:border-[#0754C6]"
               />
               <p className="text-[10px] text-slate-400">Surveillance & gate security</p>
             </div>
@@ -337,7 +412,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
 
       {/* TAB 3: CONTACT & HOURS */}
       {activeTab === "contact" && (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs p-6 space-y-6">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs p-6 space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h3 className="text-sm font-bold text-slate-900">
@@ -363,7 +438,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   onChange={(e) =>
                     setContact((prev) => ({ ...prev, phone: e.target.value }))
                   }
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
             </div>
@@ -380,7 +455,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   onChange={(e) =>
                     setContact((prev) => ({ ...prev, email: e.target.value }))
                   }
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
             </div>
@@ -398,7 +473,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                     setContact((prev) => ({ ...prev, whatsapp: e.target.value }))
                   }
                   placeholder="2348000000000"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
             </div>
@@ -418,7 +493,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                       inspectionHours: e.target.value,
                     }))
                   }
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
                 />
               </div>
             </div>
@@ -428,7 +503,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
 
       {/* TAB 4: OPEN HOUSE BANNER */}
       {activeTab === "open_house" && (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs p-6 space-y-6">
+        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs p-6 space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h3 className="text-sm font-bold text-slate-900">
@@ -441,7 +516,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <CalendarCheck className="w-5 h-5 text-slate-400" />
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+          <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <div>
               <p className="text-xs font-bold text-slate-900">
                 Enable Open House Banner
@@ -475,7 +550,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setOpenHouse((prev) => ({ ...prev, status: e.target.value }))
                 }
                 placeholder="Ongoing Event or Scheduled for Saturday"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
 
@@ -490,7 +565,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                   setOpenHouse((prev) => ({ ...prev, headline: e.target.value }))
                 }
                 placeholder="Fidelis Court Open House"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
               />
             </div>
           </div>
@@ -505,7 +580,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
               onChange={(e) =>
                 setOpenHouse((prev) => ({ ...prev, description: e.target.value }))
               }
-              className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-none"
+              className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white resize-none"
             />
           </div>
 
@@ -514,7 +589,7 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
             <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
               Banner Appearance Preview
             </p>
-            <div className="p-4 rounded-xl bg-gradient-to-r from-[#0754C6] to-[#04337a] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+            <div className="p-4 rounded-lg bg-gradient-to-r from-[#0754C6] to-[#04337a] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
               <div>
                 <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/20 text-white mb-1">
                   {openHouse.status || "Special Event"}
@@ -522,12 +597,69 @@ export function AdminSiteConfigClient({ initialConfigs }: AdminSiteConfigClientP
                 <p className="text-xs font-bold">{openHouse.headline}</p>
                 <p className="text-[11px] text-white/80">{openHouse.description}</p>
               </div>
-              <span className="px-3 py-1.5 rounded-lg bg-white text-[#00ABF0] text-xs font-bold self-start sm:self-center shadow-xs">
+              <span className="px-3 py-1.5 rounded-md bg-white text-[#00ABF0] text-xs font-bold self-start sm:self-center shadow-xs">
                 RSVP Now
               </span>
             </div>
           </div>
         </div>
+      )}
+
+      {activeTab === "images" && (
+        <section className="space-y-4">
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className="mb-4">
+              <h3 className="flex items-center gap-2 font-semibold text-slate-900">
+                <FileText aria-hidden="true" className="h-4 w-4" />
+                Fidelis Court brochure
+              </h3>
+              <p className="mt-1 text-sm text-slate-500">
+                Upload a PDF to Cloudinary. Save changes to publish it on the brochure download button.
+              </p>
+            </div>
+            <DocumentUploader value={brochureUrl} onChange={setBrochureUrl} />
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-slate-900">Website images</h3>
+            <p className="mt-1 text-sm text-slate-500">
+              Upload to Cloudinary or paste a URL. Save changes to publish.
+            </p>
+          </div>
+
+          {SITE_IMAGE_GROUPS.map((group, groupIndex) => (
+            <details
+              key={group.label}
+              open={groupIndex === 0}
+              className="rounded-lg border border-slate-200 bg-white"
+            >
+              <summary className="cursor-pointer px-4 py-3 font-medium text-slate-900">
+                {group.label}
+              </summary>
+              <div className="grid gap-4 border-t border-slate-100 p-4 sm:grid-cols-2 lg:grid-cols-3">
+                {group.images.map((image) => (
+                  <ImageUploader
+                    key={image.src}
+                    label={image.label}
+                    value={siteImages[image.src] || image.src}
+                    folder="site-images"
+                    onChange={(url) =>
+                      setSiteImages((current) => {
+                        const next = { ...current };
+                        if (url && url !== image.src) {
+                          next[image.src] = url;
+                        } else {
+                          delete next[image.src];
+                        }
+                        return next;
+                      })
+                    }
+                  />
+                ))}
+              </div>
+            </details>
+          ))}
+        </section>
       )}
     </form>
   );

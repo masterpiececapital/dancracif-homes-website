@@ -12,8 +12,8 @@ export const FidelisCtaCards: React.FC = () => {
         {/* Become an Agent — white bordered card */}
         <div className="w-full rounded-3xl bg-white border border-zinc-200 px-6 py-8 sm:px-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-start gap-4">
-            <div className="mt-0.5 shrink-0 h-12 w-12 rounded-2xl bg-fidelis-brown/10 flex items-center justify-center">
-              <Handshake className="h-6 w-6 text-fidelis-brown" />
+            <div className="mt-0.5 shrink-0 h-12 w-12 rounded-2xl bg-[#00ABF0]/10 flex items-center justify-center">
+              <Handshake className="h-6 w-6 text-[#00ABF0]" />
             </div>
             <div className="space-y-0.5">
               <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900 tracking-tight">
@@ -25,7 +25,7 @@ export const FidelisCtaCards: React.FC = () => {
             </div>
           </div>
           <Link href="/become-an-agent">
-            <Button variant="fidelis-brown" size="lg" className="shrink-0 font-bold cursor-pointer">
+            <Button variant="primary" size="lg" className="shrink-0 font-bold cursor-pointer">
               Apply now
             </Button>
           </Link>

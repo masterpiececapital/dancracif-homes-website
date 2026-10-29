@@ -26,6 +26,7 @@ import {
   deleteLeadAction,
 } from "@/app/actions/admin-dashboard";
 import { LeadInquiry, InquiryStatus, InquiryType } from "@/lib/db/entities/LeadInquiry";
+import { ConfirmModal } from "./ui/confirm-modal";
 
 interface AdminLeadsClientProps {
   initialLeads: LeadInquiry[];
@@ -37,6 +38,10 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
   const [selectedStatus, setSelectedStatus] = React.useState<string>("all");
   const [searchTerm, setSearchTerm] = React.useState("");
   const [isRefreshing, setIsRefreshing] = React.useState(false);
+  const [deleteTarget, setDeleteTarget] = React.useState<LeadInquiry | null>(
+    null
+  );
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   // Selected lead for detail/notes modal
   const [activeLead, setActiveLead] = React.useState<LeadInquiry | null>(null);
@@ -109,19 +114,21 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
     }
   };
 
-  const handleDeleteLead = async (leadId: string) => {
-    if (!window.confirm("Are you sure you want to permanently remove this inquiry?")) {
-      return;
-    }
+  const handleDeleteLead = async () => {
+    if (!deleteTarget) return;
+    setIsDeleting(true);
     try {
-      await deleteLeadAction(leadId);
-      setLeads((curr) => curr.filter((l) => l.id !== leadId));
-      if (activeLead?.id === leadId) {
+      await deleteLeadAction(deleteTarget.id);
+      setLeads((curr) => curr.filter((lead) => lead.id !== deleteTarget.id));
+      if (activeLead?.id === deleteTarget.id) {
         setActiveLead(null);
       }
+      setDeleteTarget(null);
       toast.success("Inquiry removed");
     } catch {
       toast.error("Failed to delete inquiry");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -162,7 +169,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
   return (
     <div className="space-y-6">
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-4">
+      <div className="bg-white rounded-lg p-5 border border-slate-200/80 shadow-xs space-y-4">
         {/* Search Input */}
         <div className="relative">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -171,7 +178,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
             placeholder="Search by prospect name, email, or phone number..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] transition-all"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] transition-all"
           />
         </div>
 
@@ -194,7 +201,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
               <button
                 key={tab.id}
                 onClick={() => handleTypeChange(tab.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                   selectedType === tab.id
                     ? "bg-[#0754C6] text-white shadow-2xs"
                     : "bg-slate-100/80 text-slate-600 hover:bg-slate-200/70"
@@ -211,7 +218,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
             <select
               value={selectedStatus}
               onChange={(e) => handleStatusFilterChange(e.target.value)}
-              className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#0754C6]"
+              className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#0754C6]"
             >
               <option value="all">All Statuses</option>
               <option value="new">New</option>
@@ -225,7 +232,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
       </div>
 
       {/* Inquiries Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white rounded-lg border border-slate-200/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -331,7 +338,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                             e.target.value as InquiryStatus
                           )
                         }
-                        className={`text-xs font-bold rounded-lg px-2.5 py-1 border transition-all cursor-pointer ${getStatusColor(
+                        className={`text-xs font-bold rounded-md px-2.5 py-1 border transition-all cursor-pointer ${getStatusColor(
                           lead.status
                         )}`}
                       >
@@ -350,7 +357,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                           setActiveLead(lead);
                           setNotesDraft(lead.notes || "");
                         }}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-[#0754C6] hover:text-white text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-[#0754C6] hover:text-white text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
                         title="View details & internal notes"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
@@ -358,8 +365,8 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                       </button>
 
                       <button
-                        onClick={() => handleDeleteLead(lead.id)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                        onClick={() => setDeleteTarget(lead)}
+                        className="p-1.5 rounded-md text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
                         title="Delete inquiry"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -376,7 +383,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
       {/* DETAIL & NOTES MODAL */}
       {activeLead && (
         <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl border border-slate-200 max-w-lg w-full p-6 shadow-xl space-y-5 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-lg border border-slate-200 max-w-lg w-full p-6 shadow-xl space-y-5 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
                 <h3 className="text-base font-bold text-slate-900">
@@ -388,14 +395,14 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
               </div>
               <button
                 onClick={() => setActiveLead(null)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Customer Details Box */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100 text-xs space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <span className="text-slate-400 block">Phone</span>
@@ -450,7 +457,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                   <span className="text-slate-400 block font-medium mb-1">
                     Client Message:
                   </span>
-                  <p className="text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200/80 italic">
+                  <p className="text-slate-700 bg-white p-2.5 rounded-md border border-slate-200/80 italic">
                     &ldquo;{activeLead.message}&rdquo;
                   </p>
                 </div>
@@ -467,7 +474,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
                 placeholder="Log internal follow-up details (e.g., 'Called client on Oct 15, interested in 2-bed penthouse, requested PDF brochure')..."
                 value={notesDraft}
                 onChange={(e) => setNotesDraft(e.target.value)}
-                className="w-full p-3 rounded-xl border border-slate-200 bg-white text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
+                className="w-full p-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
               />
             </div>
 
@@ -482,7 +489,7 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
               <button
                 onClick={handleSaveNotes}
                 disabled={isSavingNotes}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs cursor-pointer transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs cursor-pointer transition-all"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{isSavingNotes ? "Saving..." : "Save Notes"}</span>
@@ -491,6 +498,15 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
           </div>
         </div>
       )}
+      <ConfirmModal
+        isOpen={Boolean(deleteTarget)}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={handleDeleteLead}
+        title="Delete inquiry"
+        description="This inquiry will be permanently removed. This action cannot be undone."
+        itemName={deleteTarget?.fullName}
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

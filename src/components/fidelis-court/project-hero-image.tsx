@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Camera, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 interface ProjectHeroImageProps {
   imageSrc?: string;
@@ -15,12 +16,14 @@ export const ProjectHeroImage: React.FC<ProjectHeroImageProps> = ({
   caption = "Active Construction at Fidelis Court — Structural Framing & Mountain Backdrop",
   location = "Kubwa F01, Abuja",
 }) => {
+  const resolvedImage = useSiteImage(imageSrc);
+
   return (
     <section className="w-full bg-[#FAFCFE] pt-6 sm:pt-10 pb-2">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 group bg-slate-900">
           <Image
-            src={imageSrc}
+            src={resolvedImage}
             alt="Fidelis Court Active Development"
             fill
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"

@@ -5,13 +5,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HOMES_DATA } from "@/constants/homes";
 import { HomeCard } from "./home-card";
-import { HomeModel } from "@/types";
 
-interface HomesSectionProps {
-  onEnquire?: (home: HomeModel) => void;
-}
-
-export const HomesSection: React.FC<HomesSectionProps> = ({ onEnquire }) => {
+export const HomesSection: React.FC = () => {
   return (
     <section id="pricing" className="w-full bg-[#FAFCFE] py-14 sm:py-18 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-8">
@@ -38,7 +33,7 @@ export const HomesSection: React.FC<HomesSectionProps> = ({ onEnquire }) => {
         {/* 3 Homes Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {HOMES_DATA.map((home) => (
-            <HomeCard key={home.id} home={home} onEnquire={onEnquire} />
+            <HomeCard key={home.id} home={home} />
           ))}
         </div>
       </div>

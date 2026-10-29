@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { MapPin, Building, Users2, Handshake } from "lucide-react";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 const HIGHLIGHTS = [
   {
@@ -24,6 +25,10 @@ const HIGHLIGHTS = [
 ];
 
 export const CompanyBackground: React.FC = () => {
+  const backgroundImage = useSiteImage(
+    "/fidelis-court/Sunlit Construction Site Between Scaffolding.png"
+  );
+
   return (
     <section className="w-full bg-white py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -32,7 +37,7 @@ export const CompanyBackground: React.FC = () => {
           <div className="relative">
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src="/fidelis-court/Sunlit Construction Site Between Scaffolding.png"
+                src={backgroundImage}
                 alt="Dangracif Homes property development in Abuja"
                 fill
                 className="object-cover"

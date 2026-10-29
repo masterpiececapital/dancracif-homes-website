@@ -5,7 +5,12 @@ export const metadata = {
   title: "Site Configuration | Dangracif Homes Admin",
 };
 
-export default async function AdminSiteConfigPage() {
+export default async function AdminSiteConfigPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const configs = await getSiteConfigs();
-  return <AdminSiteConfigClient initialConfigs={configs} />;
+  const { tab } = await searchParams;
+  return <AdminSiteConfigClient initialConfigs={configs} initialTab={tab} />;
 }

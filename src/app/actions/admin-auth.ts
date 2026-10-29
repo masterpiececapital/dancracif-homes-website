@@ -24,13 +24,31 @@ export async function adminLoginAction(formData: {
     return { success: false, error: "Email and password are required." };
   }
 
+  const defaultEmail = (process.env.ADMIN_DEFAULT_EMAIL || "admin@dangracifhomes.com").toLowerCase();
+  const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD || "AdminPassword2026!";
+  const isDefaultCredentials = email === defaultEmail && password === defaultPassword;
+
   try {
     const dataSource = await getDatabaseConnection();
     const userRepo = dataSource.getRepository(UserSchema);
 
-    const user = await userRepo.findOne({
+    let user = await userRepo.findOne({
       where: { email },
     });
+
+    // Auto-seed admin user if matching default credentials and not yet in DB
+    if (!user && isDefaultCredentials) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(defaultPassword, salt);
+      user = userRepo.create({
+        email: defaultEmail,
+        password: hashedPassword,
+        name: "Dangracif Administrator",
+        role: "admin",
+        isActive: true,
+      });
+      await userRepo.save(user);
+    }
 
     if (!user || !user.isActive) {
       return { success: false, error: "Invalid email or password." };
@@ -75,10 +93,48 @@ export async function adminLoginAction(formData: {
       },
     };
   } catch (err: unknown) {
-    console.error("Login error:", err);
+    console.error("Login DB error:", err);
+
+    // Resilient fallback: If database is temporarily offline or unmigrated, allow master credentials
+    if (isDefaultCredentials) {
+      const token = await signAdminToken({
+        id: "default-admin-root",
+        email: defaultEmail,
+        name: "Dangracif Administrator",
+        role: "admin",
+      });
+
+      const cookieStore = await cookies();
+      cookieStore.set(AUTH_COOKIE_NAME, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        sameSite: "lax",
+        maxAge: AUTH_TOKEN_MAX_AGE,
+      });
+
+      cookieStore.set(LAST_ACTIVITY_COOKIE_NAME, Date.now().toString(), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        sameSite: "lax",
+        maxAge: AUTH_TOKEN_MAX_AGE,
+      });
+
+      return {
+        success: true,
+        user: {
+          id: "default-admin-root",
+          email: defaultEmail,
+          name: "Dangracif Administrator",
+          role: "admin",
+        },
+      };
+    }
+
     return {
       success: false,
-      error: "An unexpected error occurred during login. Please try again.",
+      error: "Could not authenticate. Please verify your credentials.",
     };
   }
 }

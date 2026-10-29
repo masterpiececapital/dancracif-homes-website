@@ -13,7 +13,7 @@ export const FidelisInspectionSection: React.FC = () => {
           {/* Left Column: Context & Site Details (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-fidelis-brown block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#00ABF0] block">
                 On-Site Visit
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -27,7 +27,7 @@ export const FidelisInspectionSection: React.FC = () => {
             {/* Practical Site Inspection Info Cards */}
             <div className="space-y-3 pt-2">
               <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <MapPin className="w-5 h-5 text-fidelis-brown shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#00ABF0] shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm">
                   <p className="font-bold text-slate-900">Site Location</p>
                   <p className="text-slate-600 mt-0.5">
@@ -37,7 +37,7 @@ export const FidelisInspectionSection: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <Clock className="w-5 h-5 text-fidelis-brown shrink-0 mt-0.5" />
+                <Clock className="w-5 h-5 text-[#00ABF0] shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm">
                   <p className="font-bold text-slate-900">Visiting Hours</p>
                   <p className="text-slate-600 mt-0.5">
@@ -47,7 +47,7 @@ export const FidelisInspectionSection: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <CalendarCheck className="w-5 h-5 text-fidelis-brown shrink-0 mt-0.5" />
+                <CalendarCheck className="w-5 h-5 text-[#00ABF0] shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm">
                   <p className="font-bold text-slate-900">What to Expect</p>
                   <p className="text-slate-600 mt-0.5">
@@ -61,7 +61,7 @@ export const FidelisInspectionSection: React.FC = () => {
           {/* Right Column: Inspection Form (7 cols) */}
           <div className="lg:col-span-7 bg-slate-50/70 p-4 sm:p-6 lg:p-8 rounded-3xl border border-slate-200 shadow-sm">
 
-            <InspectionForm buttonVariant="fidelis-brown" />
+            <InspectionForm buttonVariant="primary" />
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export const LocationSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <span className={`text-xs mb-2 font-semibold uppercase tracking-[0.2em] text-fidelis-brown`}>
+          <span className={`text-xs mb-2 font-semibold uppercase tracking-[0.2em] text-[#00ABF0]`}>
             Where to find us
           </span>
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-zinc-900 leading-tight">
@@ -89,7 +89,7 @@ export const LocationSection: React.FC = () => {
             title="Fidelis Court Location Map"
           />
         </div>
-        <div className="-pt-2 text-fidelis-brown w-full">
+        <div className="-pt-2 text-[#00ABF0] w-full">
           This is the map to the estate
         </div>
       </div>

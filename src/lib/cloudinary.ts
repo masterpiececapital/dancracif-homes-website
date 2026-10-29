@@ -1,6 +1,4 @@
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
-import fs from "fs/promises";
-import path from "path";
 
 // Initialize Cloudinary config
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -18,78 +16,31 @@ if (isCloudinaryConfigured) {
   });
 }
 
-export interface UploadResult {
-  url: string;
-  secureUrl: string;
-  publicId: string;
-  format: string;
-  width: number;
-  height: number;
-  bytes: number;
-  resourceType: string;
-}
-
 export async function uploadMediaBuffer(
   buffer: Buffer,
-  filename: string,
-  folder: string = "dangracif"
-): Promise<UploadResult> {
-  if (isCloudinaryConfigured) {
-    return new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          folder: `dangracif/${folder}`,
-          resource_type: "auto",
-        },
-        (error, result: UploadApiResponse | undefined) => {
-          if (error || !result) {
-            reject(error || new Error("Cloudinary upload failed"));
-            return;
-          }
-          resolve({
-            url: result.url,
-            secureUrl: result.secure_url,
-            publicId: result.public_id,
-            format: result.format || path.extname(filename).replace(".", "") || "jpg",
-            width: result.width || 0,
-            height: result.height || 0,
-            bytes: result.bytes || buffer.length,
-            resourceType: result.resource_type || "image",
-          });
+  folder: string = "dangracif",
+  resourceType: "image" | "raw" = "image",
+  publicId?: string
+): Promise<string> {
+  if (!isCloudinaryConfigured) {
+    throw new Error("Cloudinary is not configured.");
+  }
+
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: `dangracif/${folder}`,
+        resource_type: resourceType,
+        ...(publicId ? { public_id: publicId } : {}),
+      },
+      (error, result: UploadApiResponse | undefined) => {
+        if (error || !result) {
+          reject(error || new Error("Cloudinary upload failed"));
+          return;
         }
-      );
-      uploadStream.end(buffer);
-    });
-  }
-
-  // Graceful local development fallback when Cloudinary keys are not yet provided
-  const cleanFileName = `${Date.now()}-${filename.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-  const uploadsDir = path.join(process.cwd(), "public", "uploads", folder);
-  await fs.mkdir(uploadsDir, { recursive: true });
-  const filePath = path.join(uploadsDir, cleanFileName);
-  await fs.writeFile(filePath, buffer);
-
-  const localUrl = `/uploads/${folder}/${cleanFileName}`;
-  const ext = path.extname(filename).replace(".", "") || "jpg";
-
-  return {
-    url: localUrl,
-    secureUrl: localUrl,
-    publicId: `local_${cleanFileName}`,
-    format: ext,
-    width: 1200,
-    height: 800,
-    bytes: buffer.length,
-    resourceType: ext === "mp4" || ext === "webm" ? "video" : "image",
-  };
-}
-
-export async function deleteFromCloudinary(publicId: string) {
-  if (isCloudinaryConfigured && !publicId.startsWith("local_")) {
-    try {
-      await cloudinary.uploader.destroy(publicId);
-    } catch (e) {
-      console.error("Failed to delete from Cloudinary:", e);
-    }
-  }
+        resolve(result.secure_url);
+      }
+    );
+    uploadStream.end(buffer);
+  });
 }

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/auth";
-import { getDatabaseConnection } from "@/lib/db/data-source";
-import { MediaAssetSchema } from "@/lib/db/entities/MediaAsset";
-import { uploadMediaBuffer } from "@/lib/cloudinary";
+import { isCloudinaryConfigured, uploadMediaBuffer } from "@/lib/cloudinary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,43 +9,77 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    if (!isCloudinaryConfigured) {
+      return NextResponse.json(
+        { error: "Cloudinary is not configured. Add its credentials before uploading." },
+        { status: 503 }
+      );
+    }
+
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
     const folder = (formData.get("folder") as string) || "general";
-    const customName = (formData.get("name") as string) || "";
-    const altText = (formData.get("altText") as string) || "";
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
+    const isPdf = file.type === "application/pdf";
+    const supportedImageTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+      "image/gif",
+    ];
+
+    if (isPdf && folder !== "brochures") {
+      return NextResponse.json(
+        { error: "PDF files can only be uploaded to the brochure folder." },
+        { status: 400 }
+      );
+    }
+
+    if (!isPdf && !supportedImageTypes.includes(file.type)) {
+      return NextResponse.json(
+        { error: "Upload a PNG, JPG, WebP, GIF, or PDF file." },
+        { status: 400 }
+      );
+    }
+
+    const maxFileSize = isPdf ? 20 * 1024 * 1024 : 10 * 1024 * 1024;
+    if (file.size > maxFileSize) {
+      return NextResponse.json(
+        {
+          error: isPdf
+            ? "PDF is too large. Maximum file size is 20MB."
+            : "Image is too large. Maximum file size is 10MB.",
+        },
+        { status: 413 }
+      );
+    }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-
-    const uploadResult = await uploadMediaBuffer(buffer, file.name, folder);
-
-    const ds = await getDatabaseConnection();
-    const mediaRepo = ds.getRepository(MediaAssetSchema);
-
-    const mediaAsset = mediaRepo.create({
-      name: customName || file.name,
-      cloudinaryPublicId: uploadResult.publicId,
-      url: uploadResult.url,
-      secureUrl: uploadResult.secureUrl,
-      resourceType: uploadResult.resourceType,
-      format: uploadResult.format,
-      width: uploadResult.width,
-      height: uploadResult.height,
-      bytes: uploadResult.bytes,
-      folder: folder,
-      altText: altText || customName || file.name,
-    });
-
-    const savedAsset = await mediaRepo.save(mediaAsset);
+    if (
+      isPdf &&
+      buffer.subarray(0, 5).toString("ascii") !== "%PDF-"
+    ) {
+      return NextResponse.json(
+        { error: "The selected file is not a valid PDF." },
+        { status: 400 }
+      );
+    }
+    const safeFolder = folder.replace(/[^a-zA-Z0-9/_-]/g, "");
+    const url = await uploadMediaBuffer(
+      buffer,
+      safeFolder,
+      isPdf ? "raw" : "image",
+      isPdf ? `fidelis-court-brochure-${Date.now()}.pdf` : undefined
+    );
 
     return NextResponse.json({
       success: true,
-      asset: JSON.parse(JSON.stringify(savedAsset)),
+      url,
     });
   } catch (error) {
     console.error("Upload error:", error);

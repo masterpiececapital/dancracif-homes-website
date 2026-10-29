@@ -19,7 +19,6 @@ import {
   FileText,
   HelpCircle,
   CalendarDays,
-  Image as ImageIcon,
   SlidersHorizontal,
 } from "lucide-react";
 import { adminLogoutAction } from "@/app/actions/admin-auth";
@@ -110,14 +109,8 @@ export function AdminShell({ user, children }: AdminShellProps) {
       ],
     },
     {
-      group: "Assets & System",
+      group: "Account",
       items: [
-        {
-          href: "/admin/media",
-          label: "Media Library",
-          icon: ImageIcon,
-          exact: false,
-        },
         {
           href: "/admin/settings",
           label: "Portal Settings",
@@ -136,17 +129,9 @@ export function AdminShell({ user, children }: AdminShellProps) {
     if (pathname.startsWith("/admin/faqs")) return "Frequently Asked Questions";
     if (pathname.startsWith("/admin/timeline")) return "Construction Timeline";
     if (pathname.startsWith("/admin/site-config")) return "Site Configuration";
-    if (pathname.startsWith("/admin/media")) return "Media Library";
     if (pathname.startsWith("/admin/settings")) return "Portal Settings";
     return "Admin Portal";
   };
-
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date());
 
   const getPageSubtitle = () => {
     if (pathname.startsWith("/admin/leads"))
@@ -160,9 +145,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
     if (pathname.startsWith("/admin/timeline"))
       return "Update construction milestones and development phases for Fidelis Court.";
     if (pathname.startsWith("/admin/site-config"))
-      return "Configure key metrics, contact info, estate specs, and open house alerts.";
-    if (pathname.startsWith("/admin/media"))
-      return "Upload and organize photos, renderings, and brochure assets via Cloudinary.";
+      return "Manage website details and section images.";
     if (pathname.startsWith("/admin/settings"))
       return "Manage executive credentials, security configuration, and preferences.";
     return "Real-time pipeline overview for Fidelis Court and customer inquiries.";
@@ -199,7 +182,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
 
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 cursor-pointer"
+            className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 cursor-pointer"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -224,7 +207,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${isActive
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group ${isActive
                       ? "bg-[#0754C6]/10 text-[#00ABF0] font-semibold"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                       }`}
@@ -254,7 +237,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-[#00ABF0] hover:bg-white border border-slate-200/60 bg-white/60 transition-all shadow-2xs group"
+            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-[#00ABF0] hover:bg-white border border-slate-200/60 bg-white/60 transition-all shadow-2xs group"
           >
             <div className="flex items-center gap-2">
               <Building2 className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#00ABF0]" />
@@ -280,7 +263,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
             <button
               onClick={handleLogout}
               disabled={isLoggingOut}
-              className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer shrink-0"
+              className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer shrink-0"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -297,39 +280,29 @@ export function AdminShell({ user, children }: AdminShellProps) {
             <div className="flex items-start gap-3">
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg cursor-pointer shrink-0 mt-0.5"
+                className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md cursor-pointer shrink-0 mt-0.5"
                 aria-label="Open menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
 
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#00ABF0] mb-1">
-                  <span>{formattedDate}</span>
-                </div>
                 <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                   Welcome back, {user.name}
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  Real-time pipeline overview for Fidelis Court and customer inquiries.
+                  Here&apos;s a quick look at your inquiries and units.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 self-start md:self-center shrink-0">
+            <div className="flex items-center self-start md:self-center shrink-0">
               <Link
                 href="/admin/leads"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] text-white text-xs font-bold tracking-wide shadow-xs transition-all"
               >
                 <Users className="w-4 h-4" />
-                <span>Manage Leads</span>
-              </Link>
-              <Link
-                href="/admin/units"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-wide transition-all"
-              >
-                <Home className="w-4 h-4" />
-                <span>Estate Units</span>
+                <span>View inquiries</span>
               </Link>
             </div>
           </header>
@@ -338,7 +311,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg cursor-pointer shrink-0"
+                className="lg:hidden p-2 -ml-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md cursor-pointer shrink-0"
                 aria-label="Open menu"
               >
                 <Menu className="w-5 h-5" />
@@ -354,15 +327,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 shrink-0">
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-wide transition-all"
-              >
-                <LayoutDashboard className="w-3.5 h-3.5" />
-                <span>Executive Overview</span>
-              </Link>
-            </div>
+           
           </header>
         )}
 

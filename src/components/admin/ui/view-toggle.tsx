@@ -10,11 +10,11 @@ interface ViewToggleProps {
 
 export function ViewToggle({ view, onChange }: ViewToggleProps) {
   return (
-    <div className="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/70">
+    <div className="inline-flex items-center p-1 bg-slate-100 rounded-lg border border-slate-200/70">
       <button
         type="button"
         onClick={() => onChange("card")}
-        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
           view === "card"
             ? "bg-white text-[#00ABF0] shadow-2xs font-bold"
             : "text-slate-600 hover:text-slate-900"
@@ -27,7 +27,7 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
       <button
         type="button"
         onClick={() => onChange("list")}
-        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
           view === "list"
             ? "bg-white text-[#00ABF0] shadow-2xs font-bold"
             : "text-slate-600 hover:text-slate-900"

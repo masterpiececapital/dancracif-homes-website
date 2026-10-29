@@ -4,19 +4,21 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { HomeModel } from "@/types";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 interface HomeCardProps {
   home: HomeModel;
-  onEnquire?: (home: HomeModel) => void;
 }
 
-export const HomeCard: React.FC<HomeCardProps> = ({ home, onEnquire }) => {
+export const HomeCard: React.FC<HomeCardProps> = ({ home }) => {
+  const imageSrc = useSiteImage(home.imageSrc);
+
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
       {/* Top Image Container */}
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
         <Image
-          src={home.imageSrc}
+          src={imageSrc}
           alt={home.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -1,12 +1,42 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Clock } from "lucide-react";
 import { adminLoginAction } from "@/app/actions/admin-auth";
 import toast from "react-hot-toast";
+
+const SLIDER_IMAGES = [
+  {
+    src: "/fidelis-court/Building Toward the Mountain Ridge.png",
+    alt: "Fidelis Court Superstructure Toward Mountain Ridge",
+  },
+  {
+    src: "/fidelis-court/Vibrant Mid-Rise Construction Site.png",
+    alt: "Fidelis Court Mid-Rise Structural Framing",
+  },
+  {
+    src: "/fidelis-court/Apartment Building Under Construction.png",
+    alt: "Fidelis Court Apartment Wing Elevation",
+  },
+  {
+    src: "/fidelis-court/Bright Renovation Room with Window Views.png",
+    alt: "Fidelis Court Interior Living Room with Views",
+  },
+  {
+    src: "/fidelis-court/Sunlit Construction Site Under Dramatic Clouds.png",
+    alt: "Fidelis Court Estate Panorama",
+  },
+  {
+    src: "/fidelis-court/Urban Construction Under Dramatic Skies.png",
+    alt: "Fidelis Court Architectural Façade",
+  },
+  {
+    src: "/fidelis-court/Scaffolded Window to Sunny Hillside View.png",
+    alt: "Fidelis Court Hillside View",
+  },
+];
 
 function LoginFormInner() {
   const router = useRouter();
@@ -20,6 +50,16 @@ function LoginFormInner() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 
+  // Slide state for left-hand side images
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -32,7 +72,7 @@ function LoginFormInner() {
         router.push(safeTarget);
         router.refresh();
       } else {
-        setError(res.error || "Invalid credentials");
+        setError(res.error || "Invalid email or password.");
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -42,87 +82,98 @@ function LoginFormInner() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white flex items-center justify-center p-6 sm:p-8 lg:p-10 xl:p-14">
-      {/* SVG ClipPath Definition with Smooth S-Curves matching the Concept */}
-      <svg className="w-0 h-0 absolute pointer-events-none" aria-hidden="true">
-        <defs>
-          <clipPath id="concept-frame-clip" clipPathUnits="objectBoundingBox">
-            <path
-              d="
-                M 0.22, 0
-                L 0.94, 0
-                C 0.975, 0 1.0, 0.025 1.0, 0.06
-                L 1.0, 0.81
-                C 1.0, 0.845 0.975, 0.865 0.94, 0.865
-                L 0.86, 0.865
-                C 0.825, 0.865 0.80, 0.89 0.80, 0.925
-                L 0.80, 0.94
-                C 0.80, 0.975 0.775, 1.0 0.74, 1.0
-                L 0.06, 1.0
-                C 0.025, 1.0 0, 0.975 0, 0.94
-                L 0, 0.19
-                C 0, 0.155 0.025, 0.135 0.06, 0.135
-                L 0.14, 0.135
-                C 0.175, 0.135 0.20, 0.11 0.20, 0.075
-                L 0.20, 0.06
-                C 0.20, 0.025 0.22, 0 0.22, 0
-                Z
-              "
-            />
-          </clipPath>
-        </defs>
-      </svg>
+    <div className="min-h-screen w-full flex">
+      {/* ─── LEFT: SLIDING IMAGES FROM /fidelis-court ─── */}
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden bg-slate-900">
+        {SLIDER_IMAGES.map((img, idx) => {
+          const isActive = idx === currentSlide;
+          return (
+            <div
+              key={img.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                priority={idx === 0}
+                sizes="50vw"
+                className="object-cover"
+              />
+            </div>
+          );
+        })}
 
-      {/* Main Content: Wider Form and Frame brought close together */}
-      <div className="w-full max-w-[1220px] mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10 xl:gap-12">
-        {/* ─── LEFT SIDE: Login Form (Increased to max-w-[500px]) ─── */}
-        <div className="w-full max-w-[480px] lg:max-w-[500px] shrink-0">
-          {/* Brand Logo: Centered */}
-          <div className="flex justify-center">
-            <div className="relative w-48 sm:w-56 h-20 sm:h-24">
+        {/* Subtle bottom gradient overlay for indicator dots */}
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent z-20 pointer-events-none" />
+
+        {/* Slide pagination dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30">
+          {SLIDER_IMAGES.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setCurrentSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`transition-all duration-300 rounded-full h-1.5 cursor-pointer ${
+                idx === currentSlide
+                  ? "w-7 bg-white shadow-sm"
+                  : "w-2 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ─── RIGHT: SIMPLE CLEAN FORM ─── */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-16 bg-white">
+        <div className="w-full max-w-md">
+          {/* Logo (Centered & Large) */}
+          <div className="flex justify-center mb-6">
+            <div className="relative w-56 sm:w-64 h-20 sm:h-22">
               <Image
                 src="/images/logo.png"
-                alt="Dangracif Homes Limited"
+                alt="Dangracif Homes"
                 fill
-                sizes="240px"
-                className="object-contain"
+                className="object-contain object-center"
                 priority
               />
             </div>
           </div>
 
-          {/* Heading & Subtitle: Centered */}
-          <div className="mt-8 mb-8 text-center">
-            <h1 className="text-3xl sm:text-[38px] font-extrabold text-slate-900 tracking-tight leading-tight">
-              Welcome Back
+          {/* Heading */}
+          <div className="mb-8 text-center">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              Welcome back
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-2 font-medium">
-              Let&apos;s login to grab amazing deal
+            <p className="text-sm text-slate-500 mt-1.5">
+              Enter your credentials to access the admin portal.
             </p>
           </div>
 
           {/* Inactivity Notice */}
           {redirectTo && searchParams.get("reason") === "inactivity" && !error && (
-            <div className="mb-5 p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-semibold text-center flex items-center justify-center gap-2">
+            <div className="mb-5 p-3 rounded-lg bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-medium flex items-center gap-2">
               <Clock className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>You were signed out after 30 minutes of inactivity.</span>
+              <span>You were signed out due to inactivity.</span>
             </div>
           )}
 
-          {/* Error Message */}
+          {/* Error */}
           {error && (
-            <div className="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-semibold text-center">
+            <div className="mb-5 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-xs font-medium">
               {error}
             </div>
           )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Field with Inset Label */}
-            <div className="bg-[#F4F5F7] rounded-xl px-4.5 pt-3 pb-3 border border-transparent focus-within:border-[#0754C6] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0754C6]/15 transition-all">
+            <div>
               <label
                 htmlFor="email"
-                className="block text-[11px] font-medium text-slate-400"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
               >
                 Email
               </label>
@@ -133,20 +184,19 @@ function LoginFormInner() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@dangracifhomes.com"
-                className="w-full bg-transparent text-sm font-semibold text-slate-900 placeholder:text-slate-400 outline-none pt-0.5"
+                placeholder="admin@example.com"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15 transition-all"
               />
             </div>
 
-            {/* Password Field with Inset Label & Eye Toggle */}
-            <div className="bg-[#F4F5F7] rounded-xl px-4.5 pt-3 pb-3 border border-transparent focus-within:border-[#0754C6] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0754C6]/15 transition-all flex items-center justify-between">
-              <div className="flex-1 min-w-0 pr-2">
-                <label
-                  htmlFor="password"
-                  className="block text-[11px] font-medium text-slate-400"
-                >
-                  Password
-                </label>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-xs font-semibold text-slate-700 mb-1.5"
+              >
+                Password
+              </label>
+              <div className="relative flex items-center">
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
@@ -155,101 +205,44 @@ function LoginFormInner() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-transparent text-sm font-semibold text-slate-900 placeholder:text-slate-400 outline-none pt-0.5"
+                  className="w-full px-3.5 py-2.5 pr-10 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15 transition-all"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
-
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
-              </button>
             </div>
 
-            {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer select-none text-slate-700 font-medium">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-300 text-[#00ABF0] focus:ring-[#00ABF0] cursor-pointer"
-                />
-                <span>Remember me</span>
-              </label>
+             
 
               <button
                 type="button"
                 onClick={() =>
                   toast(
-                    "Contact portal administrator to reset executive password.",
+                    "Contact the portal administrator to reset your password.",
                     { icon: "ℹ️" }
                   )
                 }
-                className="text-slate-900 font-semibold hover:underline cursor-pointer"
+                className="text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
               >
-                Forgot Password?
+                Forgot password?
               </button>
             </div>
 
-            {/* Login Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-3 py-4 px-4 rounded-xl bg-[#0754C6] hover:bg-[#0648AB] active:bg-[#053D91] text-white font-bold text-sm tracking-wide shadow-md shadow-[#0754C6]/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+              className="w-full mt-2 py-3 px-4 rounded-lg bg-[#0754C6] hover:bg-[#0648AB] active:bg-[#053D91] text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center cursor-pointer disabled:opacity-60"
             >
-              {loading ? "Signing in..." : "Login"}
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </form>
-
-          {/* Footer note: Centered */}
-          <div className="mt-8 text-center text-xs text-slate-400 font-medium">
-            <span>Don&apos;t have an account? </span>
-            <Link
-              href="/"
-              className="text-slate-900 font-bold hover:underline"
-            >
-              Contact Admin
-            </Link>
-          </div>
-        </div>
-
-        {/* ─── RIGHT SIDE: Framed Image (Increased to max-w-[620px]) ─── */}
-        <div className="w-full max-w-[580px] lg:max-w-[620px] shrink-0">
-          <div
-            className="w-full h-[550px] sm:h-[620px] lg:h-[690px] relative overflow-hidden shadow-2xl transition-all duration-300"
-            style={{
-              clipPath: "url(#concept-frame-clip)",
-              WebkitClipPath: "url(#concept-frame-clip)",
-            }}
-          >
-            {/* Framed Image: Ready for your provided image */}
-            <Image
-              src="/images/admin-login-hero.jpg"
-              alt="Dangracif Homes Estate"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-
-            {/* Top-Right Text Overlay: Strictly 2 Lines with whitespace-nowrap */}
-            <div className="absolute top-8 sm:top-10 right-8 sm:right-10 z-10 text-right">
-              <p className="text-white font-extrabold text-[16px] sm:text-[18px] leading-snug tracking-tight drop-shadow-md">
-                <span className="block whitespace-nowrap">Browse thousands of properties to buy, sell,</span>
-                <span className="block whitespace-nowrap">or rent with trusted agents.</span>
-              </p>
-            </div>
-
-            {/* Subtle Gradient Overlays for High-Contrast Text Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/35 pointer-events-none" />
-          </div>
         </div>
       </div>
     </div>

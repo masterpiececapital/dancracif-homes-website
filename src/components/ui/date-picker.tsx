@@ -13,7 +13,7 @@ interface DatePickerProps {
   placeholder?: string;
   minDate?: Date;
   className?: string;
-  variant?: "default" | "fidelis-brown";
+  variant?: "default" | "primary";
 }
 
 const MONTHS = [
@@ -175,13 +175,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         className={cn(
           "w-full h-11 flex items-center justify-between gap-2",
           "rounded-xl border border-zinc-200 dark:border-zinc-700 px-3.5 text-sm bg-white dark:bg-zinc-900",
-          variant === "fidelis-brown"
-            ? "focus:outline-none focus:border-fidelis-brown focus:ring-2 focus:ring-fidelis-brown/20"
+          variant === "primary"
+            ? "focus:outline-none focus:border-[#00ABF0] focus:ring-2 focus:ring-[#0754C6]/20"
             : "focus:outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15",
           "transition-all cursor-pointer text-left",
           open && (
-            variant === "fidelis-brown"
-              ? "border-fidelis-brown ring-2 ring-fidelis-brown/20"
+            variant === "primary"
+              ? "border-[#00ABF0] ring-2 ring-[#00ABF0]/20"
               : "border-[#0754C6] ring-2 ring-[#0754C6]/15"
           )
         )}
@@ -262,18 +262,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                       "flex items-center justify-center",
                       disabled && "text-slate-300 dark:text-zinc-600 cursor-not-allowed",
                       !disabled && !sel && (
-                        variant === "fidelis-brown"
-                          ? "text-slate-700 dark:text-zinc-200 hover:bg-fidelis-brown/10 hover:text-fidelis-brown"
+                        variant === "primary"
+                          ? "text-slate-700 dark:text-zinc-200 hover:bg-[#00ABF0]/10 hover:text-[#00ABF0]"
                           : "text-slate-700 dark:text-zinc-200 hover:bg-[#00ABF0]/10 hover:text-[#00ABF0]"
                       ),
                       tod && !sel && (
-                        variant === "fidelis-brown"
-                          ? "font-bold text-fidelis-brown"
+                        variant === "primary"
+                          ? "font-bold text-[#00ABF0]"
                           : "font-bold text-[#00ABF0]"
                       ),
                       sel && (
-                        variant === "fidelis-brown"
-                          ? "bg-fidelis-brown text-white shadow-sm shadow-fidelis-brown/30"
+                        variant === "primary"
+                          ? "bg-[#0754C6] text-white shadow-sm shadow-[#0754C6]/30"
                           : "bg-[#0754C6] text-white shadow-sm shadow-[#0754C6]/30"
                       )
                     )}
@@ -296,7 +296,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 }}
                 className={cn(
                   "text-xs font-semibold hover:underline cursor-pointer",
-                  variant === "fidelis-brown" ? "text-fidelis-brown" : "text-[#00ABF0]"
+                  variant === "primary" ? "text-[#00ABF0]" : "text-[#00ABF0]"
                 )}
               >
                 Today

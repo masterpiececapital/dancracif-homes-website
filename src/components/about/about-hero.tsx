@@ -4,8 +4,13 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useSiteImage } from "@/components/common/site-images-provider";
 
 export const AboutHero: React.FC = () => {
+  const heroImage = useSiteImage(
+    "/fidelis-court/WhatsApp Image 2026-10-17 at 9.57.51 PM.jpeg"
+  );
+
   return (
     <section className="w-full bg-white pt-10 sm:pt-14 pb-16 sm:pb-20">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -53,7 +58,7 @@ export const AboutHero: React.FC = () => {
           <div className="lg:col-span-6">
             <div className="relative w-full aspect-[16/11] sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100">
               <Image
-                src="/fidelis-court/WhatsApp Image 2026-10-17 at 9.57.51 PM.jpeg"
+                src={heroImage}
                 alt="Fidelis Court 4-bedroom terrace duplex development"
                 fill
                 priority
@@ -62,7 +67,7 @@ export const AboutHero: React.FC = () => {
               />
             </div>
             <p className="text-xs text-slate-500 mt-2.5 font-normal tracking-normal">
-              Artist&apos;s impression · Fidelis Court
+              Actual site photos · Fidelis Court
             </p>
           </div>
         </div>

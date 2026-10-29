@@ -150,7 +150,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
   className,
 }) => {
   const pathname = usePathname();
-  const isFidelisCourtPage = pathname === "/fideliscourts" || pathname === "/fidelis-court";
+
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [input, setInput] = React.useState("");
@@ -230,10 +230,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? "Close assistant" : "Open chat assistant"}
         className={cn(
-          "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full text-white flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-4",
-          isFidelisCourtPage
-            ? "bg-fidelis-brown shadow-fidelis-brown/30 focus:ring-fidelis-brown/20"
-            : "bg-[#0754C6] shadow-[#0754C6]/30 focus:ring-[#0754C6]/20"
+          "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full text-white flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-4 bg-[#0754C6] shadow-[#0754C6]/30 focus:ring-[#0754C6]/20"
         )}
       >
         {isOpen ? (
@@ -253,10 +250,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
           <div className="bg-[#071630] px-5 py-4 flex items-center justify-between border-b border-white/10 shrink-0">
             <div className="flex items-center gap-3">
               <div
-                className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm shrink-0",
-                  isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"
-                )}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm shrink-0 bg-[#0754C6]"
               >
                 <Bot className="w-5 h-5" />
               </div>
@@ -310,9 +304,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                       "px-4 py-2.5 rounded-2xl shadow-sm text-sm leading-relaxed",
                       isBot
                         ? "bg-white text-slate-800 border border-slate-200/80 rounded-tl-sm whitespace-pre-line"
-                        : isFidelisCourtPage
-                          ? "bg-fidelis-brown text-white rounded-tr-sm"
-                          : "bg-[#0754C6] text-white rounded-tr-sm"
+                        : "bg-[#0754C6] text-white rounded-tr-sm"
                     )}
                   >
                     {msg.text}
@@ -322,10 +314,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                         <Link
                           href={msg.link.href}
                           onClick={() => setIsOpen(false)}
-                          className={cn(
-                            "inline-flex items-center gap-1 text-xs font-bold hover:underline",
-                            isFidelisCourtPage ? "text-fidelis-brown" : "text-[#00ABF0]"
-                          )}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#00ABF0] hover:underline"
                         >
                           <span>{msg.link.text}</span>
                           <ExternalLink className="w-3 h-3" />
@@ -342,24 +331,9 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
 
             {isTyping && (
               <div className="flex items-center gap-1.5 bg-white border border-slate-200/80 px-3.5 py-2.5 rounded-2xl rounded-tl-sm w-fit text-slate-400 text-xs shadow-sm">
-                <span
-                  className={cn(
-                    "w-1.5 h-1.5 rounded-full animate-bounce",
-                    isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:0.2s]",
-                    isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:0.4s]",
-                    isFidelisCourtPage ? "bg-fidelis-brown" : "bg-[#0754C6]"
-                  )}
-                />
+                <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#0754C6]" />
+                <span className="w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:0.2s] bg-[#0754C6]" />
+                <span className="w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:0.4s] bg-[#0754C6]" />
               </div>
             )}
 
@@ -373,12 +347,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
                 key={prompt}
                 type="button"
                 onClick={() => handleSend(prompt)}
-                className={cn(
-                  "inline-block text-[11px] font-medium px-2.5 py-1 rounded-full transition-colors shrink-0 cursor-pointer",
-                  isFidelisCourtPage
-                    ? "bg-fidelis-brown/10 hover:bg-fidelis-brown text-fidelis-brown hover:text-white"
-                    : "bg-[#EAF2FE] hover:bg-[#00ABF0] text-[#00ABF0] hover:text-white"
-                )}
+                className="inline-block text-[11px] font-medium px-2.5 py-1 rounded-full transition-colors shrink-0 cursor-pointer bg-[#EAF2FE] hover:bg-[#00ABF0] text-[#00ABF0] hover:text-white"
               >
                 {prompt}
               </button>
@@ -398,20 +367,12 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask a question..."
-              className={cn(
-                "flex-1 bg-slate-100 border border-slate-200 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:bg-white transition-colors",
-                isFidelisCourtPage ? "focus:border-fidelis-brown" : "focus:border-[#0754C6]"
-              )}
+              className="flex-1 bg-slate-100 border border-slate-200 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:bg-white transition-colors focus:border-[#0754C6]"
             />
             <button
               type="submit"
               disabled={!input.trim()}
-              className={cn(
-                "h-10 w-10 rounded-full disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 transition-colors shadow-sm cursor-pointer",
-                isFidelisCourtPage
-                  ? "bg-fidelis-brown hover:brightness-90"
-                  : "bg-[#0754C6] hover:bg-[#0648AB]"
-              )}
+              className="h-10 w-10 rounded-full disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 transition-colors shadow-sm cursor-pointer bg-[#0754C6] hover:bg-[#0648AB]"
             >
               <Send className="w-4 h-4" />
             </button>
