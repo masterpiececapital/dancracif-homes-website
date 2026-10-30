@@ -1,11 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { MessageCircle, Mail, ChevronDown } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import { Header } from "@/components/common/header";
 import { Footer } from "@/components/common/footer";
 import { UNIT_OPTIONS } from "@/constants/navigation";
 import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
+import { CustomSelect } from "@/components/ui/custom-select";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export default function BookInspectionPage() {
   const [fullName, setFullName] = React.useState("");
@@ -118,38 +120,19 @@ export default function BookInspectionPage() {
 
             {/* Unit type & Preferred inspection date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
-                  Unit type
-                </label>
-                <div className="relative">
-                  <select
-                    value={unitType}
-                    onChange={(e) => setUnitType(e.target.value)}
-                    className="w-full appearance-none rounded-xl border border-slate-200/90 bg-white px-4 py-3 pr-10 text-slate-900 text-sm focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors shadow-xs cursor-pointer"
-                  >
-                    {UNIT_OPTIONS.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-4 h-4 text-slate-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                </div>
-              </div>
+              <CustomSelect
+                label="Unit type"
+                value={unitType}
+                onChange={setUnitType}
+                options={UNIT_OPTIONS.map(({ label, value }) => ({ label, value }))}
+              />
 
-              <div>
-                <label className="text-sm font-semibold text-slate-800 mb-1.5 block">
-                  Preferred inspection date
-                </label>
-                <input
-                  type="date"
-                  value={preferredDate}
-                  onChange={(e) => setPreferredDate(e.target.value)}
-                  placeholder="mm/dd/yyyy"
-                  className="w-full rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-[#0754C6] focus:ring-1 focus:ring-[#0754C6] transition-colors shadow-xs cursor-pointer"
-                />
-              </div>
+              <DatePicker
+                label="Preferred inspection date"
+                value={preferredDate}
+                onChange={setPreferredDate}
+                placeholder="Select a date"
+              />
             </div>
 
             {/* Message (optional) */}

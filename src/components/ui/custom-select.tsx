@@ -17,6 +17,7 @@ interface SelectProps {
   options: SelectOption[];
   placeholder?: string;
   className?: string;
+  triggerClassName?: string;
   label?: string;
   required?: boolean;
   variant?: "default" | "primary";
@@ -28,6 +29,7 @@ export const CustomSelect: React.FC<SelectProps> = ({
   options,
   placeholder = "Select an option",
   className,
+  triggerClassName,
   label,
   required,
   variant = "default",
@@ -112,7 +114,8 @@ export const CustomSelect: React.FC<SelectProps> = ({
             variant === "primary"
               ? "border-[#00ABF0] ring-2 ring-[#00ABF0]/20"
               : "border-[#0754C6] ring-2 ring-[#0754C6]/15"
-          )
+          ),
+          triggerClassName
         )}
       >
         <span

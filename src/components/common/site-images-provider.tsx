@@ -7,19 +7,22 @@ type SiteImageOverrides = Record<string, string>;
 const SiteImagesContext = React.createContext<{
   overrides: SiteImageOverrides;
   brochureUrl: string;
-}>({ overrides: {}, brochureUrl: "" });
+  youtubeUrl: string;
+}>({ overrides: {}, brochureUrl: "", youtubeUrl: "" });
 
 export function SiteImagesProvider({
   overrides,
   brochureUrl,
+  youtubeUrl,
   children,
 }: {
   overrides: SiteImageOverrides;
   brochureUrl: string;
+  youtubeUrl: string;
   children: React.ReactNode;
 }) {
   return (
-    <SiteImagesContext.Provider value={{ overrides, brochureUrl }}>
+    <SiteImagesContext.Provider value={{ overrides, brochureUrl, youtubeUrl }}>
       {children}
     </SiteImagesContext.Provider>
   );
@@ -40,5 +43,11 @@ export function useSiteImageResolver() {
 
 export function useBrochureUrl() {
   const { brochureUrl } = React.useContext(SiteImagesContext);
-  return brochureUrl || "/downloads/fidelis-court-brochure.pdf";
+  return brochureUrl
+    ? "/api/brochure"
+    : "/downloads/fidelis-court-brochure.pdf";
+}
+
+export function useYoutubeUrl() {
+  return React.useContext(SiteImagesContext).youtubeUrl;
 }

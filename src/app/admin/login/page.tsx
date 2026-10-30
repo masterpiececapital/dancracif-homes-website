@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Clock } from "lucide-react";
 import { adminLoginAction } from "@/app/actions/admin-auth";
 import toast from "react-hot-toast";
+import { ADMIN_ACTIVITY_STORAGE_KEY } from "@/constants/admin";
 
 const SLIDER_IMAGES = [
   {
@@ -67,6 +68,7 @@ function LoginFormInner() {
     try {
       const res = await adminLoginAction({ email, password });
       if (res.success) {
+        localStorage.setItem(ADMIN_ACTIVITY_STORAGE_KEY, Date.now().toString());
         toast.success("Welcome back.");
         const safeTarget = redirectTo.startsWith("/admin") ? redirectTo : "/admin";
         router.push(safeTarget);

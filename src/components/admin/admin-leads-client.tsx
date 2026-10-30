@@ -27,6 +27,15 @@ import {
 } from "@/app/actions/admin-dashboard";
 import { LeadInquiry, InquiryStatus, InquiryType } from "@/lib/db/entities/LeadInquiry";
 import { ConfirmModal } from "./ui/confirm-modal";
+import { CustomSelect } from "@/components/ui/custom-select";
+
+const INQUIRY_STATUSES: { value: InquiryStatus; label: string }[] = [
+  { value: "new", label: "NEW" },
+  { value: "contacted", label: "CONTACTED" },
+  { value: "scheduled", label: "SCHEDULED" },
+  { value: "closed", label: "CLOSED" },
+  { value: "archived", label: "ARCHIVED" },
+];
 
 interface AdminLeadsClientProps {
   initialLeads: LeadInquiry[];
@@ -215,18 +224,19 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
           {/* Status Filter */}
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-slate-400">Status:</span>
-            <select
+            <CustomSelect
               value={selectedStatus}
-              onChange={(e) => handleStatusFilterChange(e.target.value)}
-              className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#0754C6]"
-            >
-              <option value="all">All Statuses</option>
-              <option value="new">New</option>
-              <option value="contacted">Contacted</option>
-              <option value="scheduled">Scheduled</option>
-              <option value="closed">Closed</option>
-              <option value="archived">Archived</option>
-            </select>
+              onChange={handleStatusFilterChange}
+              options={[
+                { value: "all", label: "All Statuses" },
+                ...INQUIRY_STATUSES.map(({ value, label }) => ({
+                  value,
+                  label: label.charAt(0) + label.slice(1).toLowerCase(),
+                })),
+              ]}
+              triggerClassName="h-8 rounded-md border-slate-200 bg-slate-50 px-2.5 text-xs font-semibold text-slate-700 dark:bg-slate-50 dark:text-slate-700"
+              className="w-36"
+            />
           </div>
         </div>
       </div>
@@ -330,24 +340,21 @@ export function AdminLeadsClient({ initialLeads }: AdminLeadsClientProps) {
 
                     {/* Status Dropdown */}
                     <td className="py-4 px-5">
-                      <select
+                      <CustomSelect
                         value={lead.status}
-                        onChange={(e) =>
-                          handleStatusUpdate(
-                            lead.id,
-                            e.target.value as InquiryStatus
-                          )
-                        }
-                        className={`text-xs font-bold rounded-md px-2.5 py-1 border transition-all cursor-pointer ${getStatusColor(
+                        onChange={(status) => {
+                          const selectedStatus = INQUIRY_STATUSES.find(
+                            (option) => option.value === status
+                          )?.value;
+                          if (selectedStatus) {
+                            void handleStatusUpdate(lead.id, selectedStatus);
+                          }
+                        }}
+                        options={INQUIRY_STATUSES}
+                        triggerClassName={`h-8 rounded-md px-2.5 text-xs font-bold ${getStatusColor(
                           lead.status
                         )}`}
-                      >
-                        <option value="new">NEW</option>
-                        <option value="contacted">CONTACTED</option>
-                        <option value="scheduled">SCHEDULED</option>
-                        <option value="closed">CLOSED</option>
-                        <option value="archived">ARCHIVED</option>
-                      </select>
+                      />
                     </td>
 
                     {/* Actions */}

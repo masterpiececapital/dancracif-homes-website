@@ -4,16 +4,16 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { adminLogoutAction } from "@/app/actions/admin-auth";
 import toast from "react-hot-toast";
+import { ADMIN_ACTIVITY_STORAGE_KEY } from "@/constants/admin";
 
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000; // 30 minutes
-const STORAGE_KEY = "dangracif_admin_last_activity_ts";
 const CHECK_INTERVAL_MS = 15 * 1000; // check every 15 seconds
 const THROTTLE_ACTIVITY_MS = 5 * 1000; // write to localStorage at most once every 5s
 
 export function AdminInactivityTracker() {
   const router = useRouter();
   const isLoggingOutRef = React.useRef(false);
-  const lastWriteRef = React.useRef(Date.now());
+  const lastWriteRef = React.useRef(0);
 
   const triggerLogout = React.useCallback(async () => {
     if (isLoggingOutRef.current) return;
@@ -21,7 +21,7 @@ export function AdminInactivityTracker() {
 
     try {
       if (typeof window !== "undefined") {
-        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(ADMIN_ACTIVITY_STORAGE_KEY);
       }
       await adminLogoutAction();
     } catch (err) {
@@ -40,10 +40,10 @@ export function AdminInactivityTracker() {
     if (typeof window === "undefined") return;
 
     // Initialize or verify current timestamp
-    const existing = localStorage.getItem(STORAGE_KEY);
+    const existing = localStorage.getItem(ADMIN_ACTIVITY_STORAGE_KEY);
     const now = Date.now();
     if (!existing) {
-      localStorage.setItem(STORAGE_KEY, now.toString());
+      localStorage.setItem(ADMIN_ACTIVITY_STORAGE_KEY, now.toString());
     } else {
       const parsed = parseInt(existing, 10);
       if (!isNaN(parsed) && now - parsed >= INACTIVITY_LIMIT_MS) {
@@ -57,7 +57,7 @@ export function AdminInactivityTracker() {
       const currentTime = Date.now();
       if (currentTime - lastWriteRef.current > THROTTLE_ACTIVITY_MS) {
         lastWriteRef.current = currentTime;
-        localStorage.setItem(STORAGE_KEY, currentTime.toString());
+        localStorage.setItem(ADMIN_ACTIVITY_STORAGE_KEY, currentTime.toString());
       }
     };
 
@@ -75,7 +75,7 @@ export function AdminInactivityTracker() {
 
     // Check timer periodically
     const interval = setInterval(() => {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(ADMIN_ACTIVITY_STORAGE_KEY);
       const currentTime = Date.now();
       if (stored) {
         const last = parseInt(stored, 10);
@@ -87,7 +87,7 @@ export function AdminInactivityTracker() {
 
     // Sync across browser tabs
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY && e.newValue) {
+      if (e.key === ADMIN_ACTIVITY_STORAGE_KEY && e.newValue) {
         const last = parseInt(e.newValue, 10);
         if (!isNaN(last) && Date.now() - last >= INACTIVITY_LIMIT_MS) {
           triggerLogout();

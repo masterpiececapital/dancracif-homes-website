@@ -22,6 +22,7 @@ import {
 import { ViewToggle } from "./ui/view-toggle";
 import { ConfirmModal } from "./ui/confirm-modal";
 import { CardSkeletonGrid, ListSkeletonTable } from "./ui/skeleton-loaders";
+import { DateRangePicker } from "@/components/ui/date-picker";
 
 interface AdminTimelineClientProps {
   initialMilestones: ConstructionMilestone[];
@@ -279,7 +280,7 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
             onClick={() => !isSaving && setIsFormOpen(false)}
           />
 
-          <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-150">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-lg shadow-xl border border-slate-200 z-10 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-md bg-[#0754C6]/10 text-[#00ABF0] flex items-center justify-center">
@@ -342,18 +343,14 @@ export function AdminTimelineClient({ initialMilestones }: AdminTimelineClientPr
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Target Timeline / Date *
-                </label>
-                <input
-                  type="text"
+                <DateRangePicker
+                  label="Target Timeline / Date *"
                   required
                   value={formDraft.date || ""}
-                  onChange={(e) =>
-                    setFormDraft((prev) => ({ ...prev, date: e.target.value }))
+                  onChange={(date) =>
+                    setFormDraft((prev) => ({ ...prev, date }))
                   }
-                  placeholder="e.g. Q4 2026 or Dec 2026"
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                  placeholder="Select start and end dates"
                 />
               </div>
 

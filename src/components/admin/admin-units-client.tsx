@@ -15,6 +15,7 @@ import {
 } from "@/app/actions/admin-dashboard";
 import { PropertyUnit } from "@/lib/db/entities/PropertyUnit";
 import { ViewToggle } from "./ui/view-toggle";
+import { CustomSelect } from "@/components/ui/custom-select";
 
 interface AdminUnitsClientProps {
   initialUnits: PropertyUnit[];
@@ -228,20 +229,21 @@ export function AdminUnitsClient({ initialUnits }: AdminUnitsClientProps) {
                         <label className="block font-bold text-slate-700 mb-1">
                           Inventory Status
                         </label>
-                        <select
+                        <CustomSelect
                           value={unitForm.status ?? unit.status}
-                          onChange={(e) =>
+                          onChange={(status) =>
                             setUnitForm((prev) => ({
                               ...prev,
-                              status: e.target.value,
+                              status,
                             }))
                           }
-                          className="w-full p-2.5 rounded-md border border-slate-200 bg-white text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6]"
-                        >
-                          <option value="available">Available</option>
-                          <option value="limited">Limited</option>
-                          <option value="sold_out">Sold Out</option>
-                        </select>
+                          options={[
+                            { value: "available", label: "Available" },
+                            { value: "limited", label: "Limited" },
+                            { value: "sold_out", label: "Sold Out" },
+                          ]}
+                          triggerClassName="h-10 rounded-md px-2.5 text-xs"
+                        />
                       </div>
 
                       <div className="flex items-center justify-end gap-2 pt-2">

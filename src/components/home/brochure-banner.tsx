@@ -1,7 +1,10 @@
 import * as React from "react";
 import { FileText, Download } from "lucide-react";
+import { useBrochureUrl } from "@/components/common/site-images-provider";
 
 export const BrochureBanner: React.FC = () => {
+  const brochureUrl = useBrochureUrl();
+
   return (
     <section className="w-full bg-[#FAFCFE] py-10 sm:py-14">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -23,7 +26,7 @@ export const BrochureBanner: React.FC = () => {
 
           {/* Right Download Button */}
           <a
-            href="/fidelis-court-brochure.pdf"
+            href={brochureUrl}
             download
             className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-white text-[#00ABF0] font-semibold text-sm sm:text-base shadow-sm hover:bg-zinc-50 active:scale-95 transition-all self-start md:self-auto cursor-pointer shrink-0"
           >

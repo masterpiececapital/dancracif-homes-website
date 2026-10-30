@@ -30,6 +30,11 @@ import { ViewToggle } from "./ui/view-toggle";
 import { ConfirmModal } from "./ui/confirm-modal";
 import { ImageUploader } from "./ui/image-uploader";
 import { CardSkeletonGrid, ListSkeletonTable } from "./ui/skeleton-loaders";
+import {
+  DatePicker,
+  formatDatePickerValue,
+  parseDatePickerValue,
+} from "@/components/ui/date-picker";
 
 interface AdminBlogClientProps {
   initialPosts: BlogPost[];
@@ -515,17 +520,21 @@ export function AdminBlogClient({ initialPosts }: AdminBlogClientProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Display Date
-                  </label>
-                  <input
-                    type="text"
-                    value={formDraft.date || ""}
-                    onChange={(e) =>
-                      setFormDraft((prev) => ({ ...prev, date: e.target.value }))
+                  <DatePicker
+                    label="Display Date"
+                    value={parseDatePickerValue(formDraft.date || "")}
+                    onChange={(date) =>
+                      setFormDraft((prev) => ({
+                        ...prev,
+                        date: formatDatePickerValue(date, {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        }),
+                      }))
                     }
-                    placeholder="e.g. Oct 14, 2026"
-                    className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0754C6]/20 focus:border-[#0754C6] focus:bg-white"
+                    minDate={new Date(1900, 0, 1)}
+                    placeholder="Select a display date"
                   />
                 </div>
                 <div>

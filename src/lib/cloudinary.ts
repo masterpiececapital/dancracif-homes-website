@@ -44,3 +44,42 @@ export async function uploadMediaBuffer(
     uploadStream.end(buffer);
   });
 }
+
+export function createBrochureDownloadUrl(url: string): string {
+  if (!isCloudinaryConfigured || !cloudName) {
+    throw new Error("Cloudinary is not configured.");
+  }
+
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(url);
+  } catch {
+    throw new Error("The brochure URL is invalid.");
+  }
+
+  const pathPrefix = `/${cloudName}/raw/upload/`;
+  if (
+    parsedUrl.protocol !== "https:" ||
+    parsedUrl.hostname !== "res.cloudinary.com" ||
+    !parsedUrl.pathname.startsWith(pathPrefix)
+  ) {
+    throw new Error("The brochure must be uploaded to this Cloudinary account.");
+  }
+
+  const assetPath = parsedUrl.pathname.slice(pathPrefix.length);
+  const publicId = assetPath.replace(/^v\d+\//, "");
+  if (!publicId || !publicId.toLowerCase().endsWith(".pdf")) {
+    throw new Error("The Cloudinary brochure URL is missing its asset ID.");
+  }
+
+  return cloudinary.utils.private_download_url(
+    decodeURIComponent(publicId),
+    "pdf",
+    {
+      resource_type: "raw",
+      type: "upload",
+      attachment: true,
+      expires_at: Math.floor(Date.now() / 1000) + 15 * 60,
+    }
+  );
+}

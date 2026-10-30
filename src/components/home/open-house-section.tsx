@@ -3,9 +3,11 @@
 import * as React from "react";
 import Image from "next/image";
 import { useSiteImage } from "@/components/common/site-images-provider";
-import { Users, MapPin, MessageSquare, Mail, ChevronDown } from "lucide-react";
+import { Users, MapPin, MessageSquare, Mail } from "lucide-react";
 import { OpenHouseFormData } from "@/types";
 import { submitLeadInquiry } from "@/app/actions/admin-dashboard";
+import { CustomSelect } from "@/components/ui/custom-select";
+import { UNIT_OPTIONS } from "@/constants/navigation";
 
 export const OpenHouseSection: React.FC = () => {
   const openHouseImage = useSiteImage(
@@ -194,23 +196,12 @@ export const OpenHouseSection: React.FC = () => {
 
               {/* Home of interest & Attendees - stacked on mobile, side-by-side on sm+ */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label className="block text-sm font-semibold text-zinc-900 mb-1.5">
-                    Home of interest
-                  </label>
-                  <div className="relative flex items-center">
-                    <select
-                      value={formData.homeOfInterest}
-                      onChange={(e) => handleChange("homeOfInterest", e.target.value)}
-                      className="w-full h-11 pl-3.5 pr-9 rounded-xl bg-white border border-zinc-200 text-sm text-zinc-900 outline-none focus:border-[#0754C6] focus:ring-2 focus:ring-[#0754C6]/15 transition-all appearance-none cursor-pointer"
-                    >
-                      <option value="2-bed">2-Bedroom Apartment — ₦80,000,000</option>
-                      <option value="1-bed">1-Bedroom Apartment — ₦53,000,000</option>
-                      <option value="4-bed-terrace">4-Bedroom Terrace Duplex — ₦145,000,000</option>
-                    </select>
-                    <ChevronDown className="pointer-events-none absolute right-3 h-4 w-4 text-zinc-400" />
-                  </div>
-                </div>
+                <CustomSelect
+                  label="Home of interest"
+                  value={formData.homeOfInterest}
+                  onChange={(value) => handleChange("homeOfInterest", value)}
+                  options={UNIT_OPTIONS.map(({ label, value }) => ({ label, value }))}
+                />
 
                 <div>
                   <label className="block text-sm font-semibold text-zinc-900 mb-1.5">
